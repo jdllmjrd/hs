@@ -1,0 +1,28 @@
+{
+  "name": "happysmile",
+  "version": "1.0.0",
+  "description": "final project for ADET",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eurus-eastwind/hs.git"
+  },
+  "keywords": [
+    "dental",
+    "clinic",
+    "hs",
+    "project",
+    "ADET",
+    "system",
+    "happysmile"
+  ],
+  "author": "group 4",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eurus-eastwind/hs/issues"
+  },
+  "homepage": "https://github.com/eurus-eastwind/hs#readme"
+}
