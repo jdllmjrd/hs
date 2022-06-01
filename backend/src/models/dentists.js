@@ -75,8 +75,10 @@ module.exports = (sequelize, DataTypes) => {
     }, 
     {
       sequelize,
+      timestamp: true,
+      createdAt: "dentists_created_at",
+      updatedAt: "dentists_updated_at",
       modelName: 'Dentists',
     });
-    
   return Dentists;
 };
