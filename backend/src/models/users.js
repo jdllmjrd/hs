@@ -103,7 +103,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notNull: { args: true, msg: "You must enter password" },
         len: { args: [8,60], msg: 'Password should atleast have 8 characters' },
-    },
+     },
     },
     users_type :{
       type : DataTypes.STRING,
@@ -114,12 +114,12 @@ module.exports = (sequelize, DataTypes) => {
         },
         notNull:{msg: 'Please choose from provided choices'},
         notEmpty:{msg: 'This field is required'}
+      },
     },
-    },
-  users_status :{
-    type : DataTypes.STRING,
-    allowNull: false,
-    defaultValue : 'Active',
+    users_status :{
+      type : DataTypes.STRING,
+      allowNull: false,
+      defaultValue : 'Active',
     },
     
 },
