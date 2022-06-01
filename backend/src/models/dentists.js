@@ -47,6 +47,14 @@ module.exports = (sequelize, DataTypes) => {
         this.dentists_fname+ " "+ this.dentists_mname+ " "+ this.dentists_lname);
       },
     },
+    dentists_specialty :{
+      type : DataTypes.TEXT,
+      allowNull : false,
+      validate: {
+        notNull:{msg: 'Please provide dentists specialty'},
+        notEmpty:{ msg: 'This field is required'}
+      }
+    },
     dentists_description :{
       type : DataTypes.TEXT,
       allowNull : false,
@@ -55,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty:{ msg: 'This field is required'}
       }
     },
-    dentists_profile_pic :{
+    dentists_image :{
       type : DataTypes.STRING,
       allowNull: false,
     },
@@ -68,6 +76,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Dentists',
-   });
+    });
+    
   return Dentists;
 };
