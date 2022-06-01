@@ -72,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull : false,
       validate :{
         isIn :{
-          args :[["Single", "Married", "Divorce", "Widowed"]], // for dropdown or radio button
+          args :[["Single", "Married", "Divorced", "Widowed"]], // for dropdown or radio button
           msg : "Civil status should be Single, Married, Divorce, or Widowed",
         },
         notNull:{msg: 'Please choose from provided choices'},
@@ -92,7 +92,7 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.STRING,
       allowNull : false,
       validate :{
-        isEmail : true,
+        isEmail : {args: true, msg: "Please enter a valid email"},
         notNull: { args: true, msg: "You must enter a valid email" },
       },
       unique : "email",
@@ -116,12 +116,15 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty:{msg: 'This field is required'}
       },
     },
+    users_profile_pic :{
+      type : DataTypes.STRING,
+      allowNull: false,
+    },
     users_status :{
       type : DataTypes.STRING,
       allowNull: false,
       defaultValue : 'Active',
     },
-    
 },
   {
     sequelize,
