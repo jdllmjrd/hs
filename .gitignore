@@ -1,3 +1,35 @@
 node_modules
 package-lock.json
 README.md
+
+.DS_Store
+
+frontend/application/cache/*
+!frontend/application/cache/index.html
+
+frontend/application/logs/*
+!frontend/application/logs/index.html
+
+!frontend/application/*/.htaccess
+
+composer.lock
+
+frontend/user_guide_src/build/*
+frontend/user_guide_src/cilexer/build/*
+frontend/user_guide_src/cilexer/dist/*
+frontend/user_guide_src/cilexer/pycilexer.egg-info/*
+/vendor/
+
+# IDE Files
+#-------------------------
+/nbproject/
+.idea/*
+
+## Sublime Text cache files
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+/tests/tests/
+/tests/results/
