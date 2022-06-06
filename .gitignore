@@ -4,6 +4,8 @@ README.md
 
 .DS_Store
 
+frontend/user_guide
+
 frontend/application/cache/*
 !frontend/application/cache/index.html
 
