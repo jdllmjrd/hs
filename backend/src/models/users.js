@@ -11,6 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(User, {
+        foreignKey: "users_created_at",
+      });
+
+      this.belongsTo(User, {
+        foreignKey: "users_updated_at",
+      });
+      //For branches
+      this.hasMany(models.Branches, {
+        foreignKey: "branches_id",
+      });
     }
   }
   Users.init({
@@ -60,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull : false,
       validate :{
         isIn :{
-          args :[["Male", "Female", "Other", "Prefer not to say"]], // for dropdown or radio button
+          args :[["Male", "Female", "Other", "Prefer not to say"]], 
           msg : "Gender should be Male or Female",
         },
         notNull:{msg: 'Please choose from provided choices'},
