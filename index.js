@@ -1,10 +1,9 @@
 // import modules/packages
 const express = require("express");
-// to access PORT in .env
+// to access .env file
 const dotenv = require("dotenv").config();
 // Import all models
 const db = require("./backend/src/models");
-
 
 //initialize app
 var app = express();
@@ -41,12 +40,20 @@ app.use((req, res, next) => {
     // console.log("Request has been sent!");
     next();
   });
+
 app.get("/", (req, res) =>{
     res.json({message: "HappySmile"});
 });
+/**
+ * ROUTES
+ */
+// app.use(`${process.env.API_VERSION}/home`, require ("./backend/src/routes/home.routes"));
+app.use(`${process.env.API_VERSION}/register`, require ("./backend/src/routes/register.routes"));
+// app.use(`${process.env.API_VERSION}/login`, require ("./backend/src/routes/login.routes"));
+
 
 // Set up PORT
-const PORT = process.env.PORT || 3600;
+const PORT = process.env.PORT || 5600;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
