@@ -30,6 +30,16 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
+// ASSOCIATIONS 
+
+//this is for users_branches
+
+
+
+
+
+
+
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

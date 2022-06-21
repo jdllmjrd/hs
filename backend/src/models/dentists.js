@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey : true, 
       defaultValue : DataTypes.UUIDV4
     },
+    dentists_number: {
+      type : DataTypes.INTEGER,
+    },
     dentists_fname: {
       type : DataTypes.STRING,
       allowNull: false,

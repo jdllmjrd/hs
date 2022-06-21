@@ -11,6 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.Users, {
+        foreignKey: "branches_created_by",
+        onDelete: "Restrict"
+      });
+
+      this.belongsTo(models.Users, {
+        foreignKey: "branches_updated_by",
+        onDelete: "Restrict"
+      });
+      // this.hasMany(models.Users);
     }
   }
   Branches.init({
@@ -37,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   },
   branches_phone_number: {
-    type : DataTypes.INTEGER,
+    type : DataTypes.STRING,
     allowNull: false,
     validate: {
       notNull: { args: true, msg: "You must enter Phone Number" },
@@ -69,11 +79,27 @@ module.exports = (sequelize, DataTypes) => {
       notEmpty:{msg: 'This field is required'}
     }
   },
-  branch_status :{
+  branches_status :{
     type : DataTypes.STRING,
     allowNull: false,
     defaultValue : 'Open' // Open or Close, it depends to the admin
     },
+  branches_created_by: {
+    type: DataTypes.UUID,
+    allowNull:true,
+    references: {
+      model: sequelize.Users,
+      key: "users_id",
+    },
+  },
+  branches_updated_by: {
+    type: DataTypes.UUID,
+    allowNull:true,
+    references: {
+      model: sequelize.Users,
+      key: "users_id",
+    },
+  },
 }, 
 {
   sequelize,

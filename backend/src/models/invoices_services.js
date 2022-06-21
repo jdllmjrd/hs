@@ -21,14 +21,14 @@ module.exports = (sequelize, DataTypes) => {
     defaultValue : DataTypes.UUIDV4
   },
 
-   inser_invoice_id: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    references: {
-      model: 'invoices',
-      key: 'id'
-    }
-  },
+  //  inser_invoice_id: {
+  //   type: DataTypes.STRING,
+  //   allowNull: false,
+  //   references: {
+  //     model: 'invoices',
+  //     key: 'id'
+  //   }
+  // },
    inser_service_name: {
     type : DataTypes.STRING,
     allowNull: false,

@@ -11,19 +11,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(User, {
-        foreignKey: "users_created_at",
+      this.belongsTo(Users, {
+        foreignKey: "users_created_by",
+        onDelete: "Restrict"
       });
 
-      this.belongsTo(User, {
-        foreignKey: "users_updated_at",
+      this.belongsTo(Users, {
+        foreignKey: "users_updated_by",
+        onDelete: "Restrict"
       });
-      //For branches
-      this.hasMany(models.Branches, {
-        foreignKey: "branches_id",
-      });
+
+      // for staff
+      this.hasOne(models.Branches, {
+        foreignKey : "users_branches",
+        onDelete: "Restrict"
+      })
     }
   }
+
   Users.init({
     id: {
       type : DataTypes.UUID,
@@ -31,6 +36,14 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey : true, 
       defaultValue : DataTypes.UUIDV4
     },
+    // users_branches: {
+    //   type : DataTypes.UUID,
+    //   allowNull: true,
+    //   references: {
+    //     model : sequelize.Branches,
+    //     key: "branches_id"
+    //   }
+    // },
     users_fname: {
       type : DataTypes.STRING,
       allowNull: false,
@@ -59,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     users_birthdate: {
-      type : DataTypes.DATE,
+      type : DataTypes.DATEONLY,
       allowNull: false,
       validate: {
         notNull:{msg: 'Please enter your birth date'},
@@ -72,7 +85,7 @@ module.exports = (sequelize, DataTypes) => {
       validate :{
         isIn :{
           args :[["Male", "Female", "Other", "Prefer not to say"]], 
-          msg : "Gender should be Male or Female",
+          msg : "Gender should be Male, Female, Other, Prefer not to say",
         },
         notNull:{msg: 'Please choose from provided choices'},
         notEmpty:{msg: 'This field is required'}
@@ -83,15 +96,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull : false,
       validate :{
         isIn :{
-          args :[["Single", "Married", "Divorced", "Widowed"]], // for dropdown or radio button
-          msg : "Civil status should be Single, Married, Divorce, or Widowed",
+          args :[["Single", "Married", "Divorced", "Widowed"]], // for dropdown
+          msg : "Civil status should be Single, Married, Divorce, or Widowed"
         },
         notNull:{msg: 'Please choose from provided choices'},
         notEmpty:{msg: 'This field is required'}
       },
     },
     users_phone_number : {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: { args: true, msg: "You must enter Phone Number" },
@@ -127,14 +140,28 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty:{msg: 'This field is required'}
       },
     },
-    users_profile_pic :{
-      type : DataTypes.STRING,
-      allowNull: false,
-    },
+    // users_profile_pic :{
+    //   type : DataTypes.STRING,
+    //   allowNull: false,
+    // },
     users_status :{
       type : DataTypes.STRING,
       allowNull: false,
       defaultValue : 'Active',
+    },
+    users_created_by: {
+      type: DataTypes.UUID,
+      references: {
+        model: Users,
+        key: "users_id",
+      },
+    },
+    users_updated_by: {
+      type: DataTypes.UUID,
+      references: {
+        model: Users,
+        key: "users_id",
+      },
     },
 },
   {

@@ -21,35 +21,35 @@ module.exports = (sequelize, DataTypes) => {
     defaultValue : DataTypes.UUIDV4
   },
 
-   invoices_appointments_id: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    references: {
-      model: 'appointments',
-      key: 'id'
-    }
-  },
-  invoices_no: {
-    type : DataTypes.INTEGER,
-    allowNull: false,
-    autoIncrement: true
-  },
-  invoices_users_id: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    references: {
-      model: 'users',
-      key: 'id'
-    }
-  },
-  invoices_issued_to: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    references: {
-      model: 'users',
-      key: 'id'
-    }
-  },
+  //  invoices_appointments_id: {
+  //   type: DataTypes.STRING,
+  //   allowNull: false,
+  //   references: {
+  //     model: 'appointments',
+  //     key: 'id'
+  //   }
+  // },
+  // invoices_no: {
+  //   type : DataTypes.INTEGER,
+  //   allowNull: false,
+  //   autoIncrement: true
+  // },
+  // invoices_users_id: {
+  //   type: DataTypes.STRING,
+  //   allowNull: false,
+  //   references: {
+  //     model: 'users',
+  //     key: 'id'
+  //   }
+  // },
+  // invoices_issued_to: {
+  //   type: DataTypes.STRING,
+  //   allowNull: false,
+  //   references: {
+  //     model: 'users',
+  //     key: 'id'
+  //   }
+  // },
   invoices_description: {
     type : DataTypes.TEXT,
     allowNull: true,
