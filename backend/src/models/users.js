@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const PROTECTED_ATTRIBUTES = ["users_password", "users_birthdate"];
+
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**
@@ -13,19 +15,30 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(Users, {
         foreignKey: "users_created_by",
-        onDelete: "Restrict"
+        
       });
+      // One to Many - Staff-user created by Admin
+      this.belongsTo(models.Users, {
+        foreignKey : 'staff_created_by',
 
+      });
+      // Many to One - Dentist-user created by Admin
+      this.hasMany(models.Users, {
+        foreignKey : 'dentist_created_by',
+      });
+      // One to Many - Admin-user created by Admin
       this.belongsTo(Users, {
-        foreignKey: "users_updated_by",
-        onDelete: "Restrict"
+        foreignKey: "admin_created_by",
       });
 
-      // for staff
-      this.hasOne(models.Branches, {
-        foreignKey : "users_branches",
-        onDelete: "Restrict"
-      })
+    }
+    toJSON(){
+      const attributes = {...this.get()};
+
+      for(const a of PROTECTED_ATTRIBUTES){
+        delete attributes[a];
+      }
+      return attributes;
     }
   }
 
@@ -36,21 +49,15 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey : true, 
       defaultValue : DataTypes.UUIDV4
     },
-    // users_branches: {
-    //   type : DataTypes.UUID,
-    //   allowNull: true,
-    //   references: {
-    //     model : sequelize.Branches,
-    //     key: "branches_id"
-    //   }
-    // },
+
     users_fname: {
       type : DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull:{msg: 'Please enter your first name'},
         notEmpty:{msg: 'This field is required'}
-      }
+      },
+      comment: "This is for user's first name",
     },
     users_mname: {
       type : DataTypes.STRING,
@@ -67,7 +74,7 @@ module.exports = (sequelize, DataTypes) => {
     users_full_name :{
       type : DataTypes.STRING,
       set(value){
-        this.setDataValue("full_name", 
+        this.setDataValue("users_full_name", 
         this.users_fname+ " "+ this.users_mname+ " "+ this.users_lname);
       },
     },
@@ -128,42 +135,37 @@ module.exports = (sequelize, DataTypes) => {
         notNull: { args: true, msg: "You must enter password" },
         len: { args: [8,60], msg: 'Password should atleast have 8 characters' },
      },
+     comment: "This will contain hashed password",
     },
     users_type :{
       type : DataTypes.STRING,
-      allowNull : false,
+      allowNull : true,
+      defaultValue : 'Patient',
       validate: {
         isIn :{
           args :[["Admin", "Staff", "Dentist", "Patient"]], // for dropdown or radio button
         },
-        notNull:{msg: 'Please choose from provided choices'},
-        notEmpty:{msg: 'This field is required'}
       },
+      comment: "This will identify what type of user is",
     },
-    // users_profile_pic :{
-    //   type : DataTypes.STRING,
-    //   allowNull: false,
-    // },
+    users_profile_pic :{
+      type : DataTypes.STRING,
+      allowNull: false,
+      comment: "This will put be where profile pic will save",
+    },
     users_status :{
       type : DataTypes.STRING,
       allowNull: false,
       defaultValue : 'Active',
-    },
-    users_created_by: {
-      type: DataTypes.UUID,
-      references: {
-        model: Users,
-        key: "users_id",
+      validate: {
+        isIn :{
+          args :[["Active", "Deactivated"]], 
+        },
       },
+      comment: 'This contains if the user is deactivated or not',
     },
-    users_updated_by: {
-      type: DataTypes.UUID,
-      references: {
-        model: Users,
-        key: "users_id",
-      },
-    },
-},
+  },
+   
   {
     sequelize,
     timestamp: true,

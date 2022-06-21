@@ -13,14 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.Users, {
         foreignKey: "branches_created_by",
-        onDelete: "Restrict"
       });
 
       this.belongsTo(models.Users, {
         foreignKey: "branches_updated_by",
-        onDelete: "Restrict"
       });
-      // this.hasMany(models.Users);
     }
   }
   Branches.init({
@@ -65,11 +62,7 @@ module.exports = (sequelize, DataTypes) => {
   },
   branches_google_map: {
     type : DataTypes.TEXT,
-    allowNull: false,
-    validate: {
-      notNull:{msg: 'Please enter google map link for the branch address'},
-      notEmpty:{msg: 'This field is required'}
-    }
+    allowNull: true,
   },
   branches_image: {
     type : DataTypes.STRING,

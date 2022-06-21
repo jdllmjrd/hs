@@ -9,7 +9,7 @@ const db = require("./backend/src/models");
 var app = express();
 
 // parse requests of content-type - application/json
-app.use(express.json()); //we don't have to install body parser
+app.use(express.json()); 
 
 app.use(
     express.urlencoded({
@@ -26,18 +26,15 @@ db.sequelize
   })
 
   if (process.env.ALLOW_SYNC === "true"){
-    // para ma-sync sa database table
+    // database synch
     db.sequelize.sync({alter: true })
       .then(() => console.log('Done adding/updating database based on the models'))
-    // get config variables
-    //dotenv.config();
   }
 
 // all request will go here first (middleware)
 app.use((req, res, next) => {
     // Check SESSION or JWT
     console.log("Request has been sent to " + req.url);
-    // console.log("Request has been sent!");
     next();
   });
 
@@ -49,7 +46,7 @@ app.get("/", (req, res) =>{
  */
 // app.use(`${process.env.API_VERSION}/home`, require ("./backend/src/routes/home.routes"));
 app.use(`${process.env.API_VERSION}/register`, require ("./backend/src/routes/register.routes"));
-// app.use(`${process.env.API_VERSION}/login`, require ("./backend/src/routes/login.routes"));
+app.use(`${process.env.API_VERSION}/login`, require ("./backend/src/routes/login.routes"));
 
 
 // Set up PORT
