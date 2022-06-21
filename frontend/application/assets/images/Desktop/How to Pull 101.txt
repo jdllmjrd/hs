@@ -1,0 +1,4 @@
+git clone (url)
+git init
+git remote add origin (url)
+git pull origin master
