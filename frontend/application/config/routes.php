@@ -49,6 +49,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+
+//Access Files
+$route['default_controller'] = 'landing';
+$route['login'] = 'Access/login';
+$route['register'] = 'Register/RegisterPage';
+$route['service'] = 'service/ServicePage';
+
+//Admin Files
+$route['admin'] = 'Admin_SystemSetup/UI';
+$route['admin/users'] = 'Admin_Users/UserPage';
+$route['admin/add-patient'] = 'Admin_Add_Patient/AddPatient';
+$route['admin/services'] = 'Admin_Services/ServicePage';
+$route['admin/add-service'] = 'Admin_Add_Service/AddService';
+$route['admin/calendar'] = 'Admin_Calendar/CalendarPage';
+$route['admin/dentists'] = 'Admin_Dentist/DentistPage';
+$route['admin/add-dentist'] = 'Admin_Add_Dentist/AddDentist';
+$route['admin/branches'] = 'Admin_Branch/BranchPage';
+$route['admin/add-branch'] = 'Admin_Add_Branch/AddBranch';
+
+//Staff Files
+$route['staff'] = 'Staff_SystemSetup/UI';
+$route['staff/appointment'] = 'Staff_Appointment/AppointmentPage';
+$route['staff/add-appointment'] = 'Staff_Add_Appointment/AddAppointment';
+$route['staff/calendar'] = 'Staff_Calendar/CalendarPage';
+$route['staff/invoices'] = 'Staff_Invoices/InvoicePage';
+
+//Reserved Routes
 $route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route['translate_uri_dashes'] = TRUE;
+
+
+// dapat mawala ung index.php sa url eh
+// pero naaccess na ung login update nyo nalang ung mga url sa assets
+// dapat ung assets nyo nasa labas ng application folder

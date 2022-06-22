@@ -1,14 +1,4 @@
-﻿<?php
-include("left_sidebar.php");
-include("right_sidebar.php");
-include("top_bar.php");
-include("../partials/footer.php");
-include("admin-view-user.php");
-include("admin-modify-user.php");
-include("admin-delete-user.php");
-?>
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
     <html lang="en">
 
@@ -19,17 +9,17 @@ include("admin-delete-user.php");
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
         <meta content="Happy Smile" name="Author">
         <!-- App favicon -->
-        <link rel="shortcut icon" href="../../../assets/images/favicon.ico">
+        <link rel="shortcut icon" href="<?php echo base_url('frontend/assets')?>/images/favicon.ico">
 
         <!-- third party css -->
-        <link href="../../../assets/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css">
-        <link href="../../../assets/css/vendor/responsive.bootstrap5.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url('frontend/assets')?>/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url('frontend/assets')?>/css/vendor/responsive.bootstrap5.css" rel="stylesheet" type="text/css">
         <!-- third party css end -->
 
         <!-- App css -->
-        <link href="../../../assets/css/icons.min.css" rel="stylesheet" type="text/css">
-        <link href="../../../assets/css/app.min.css" rel="stylesheet" type="text/css" id="light-style">
-        <link href="../../../assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
+        <link href="<?php echo base_url('frontend/assets')?>/css/icons.min.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url('frontend/assets')?>/css/app.min.css" rel="stylesheet" type="text/css" id="light-style">
+        <link href="<?php echo base_url('frontend/assets')?>/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
 
     </head>
 
@@ -42,6 +32,10 @@ include("admin-delete-user.php");
             <!-- ============================================================== -->
             <!-- Start Page Content here -->
             <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
 
                     <!-- Start Content-->
                     <div class="container-fluid">
@@ -69,7 +63,7 @@ include("admin-delete-user.php");
                                     <div class="card-body">
                                         <div class="row mb-2">
                                             <div class="col-sm-4">
-                                                <a href="admin-add-patient.php" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Patient</a>
+                                                <a href="add-patient" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Patient</a>
                                             </div><!-- end col-->
                                         </div>
                 
@@ -101,7 +95,7 @@ include("admin-delete-user.php");
                                                             </div>
                                                         </td>
                                                         <td class="table-user">
-                                                            <img src="../../../assets/images/users/avatar-4.jpg" alt="table-user" class="me-2 rounded-circle">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-4.jpg" alt="table-user" class="me-2 rounded-circle">
                                                             <a href="javascript:void(0);" class="text-body fw-semibold">Paul J. Friend</a>
                                                         </td>
                                                         <td>
@@ -135,7 +129,7 @@ include("admin-delete-user.php");
                                                             </div>
                                                         </td>
                                                         <td class="table-user">
-                                                            <img src="../../../assets/images/users/avatar-3.jpg" alt="table-user" class="me-2 rounded-circle">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-3.jpg" alt="table-user" class="me-2 rounded-circle">
                                                             <a href="javascript:void(0);" class="text-body fw-semibold">Bryan J. Luellen</a>
                                                         </td>
                                                         <td>
@@ -168,7 +162,7 @@ include("admin-delete-user.php");
                                                             </div>
                                                         </td>
                                                         <td class="table-user">
-                                                            <img src="../../../assets/images/users/avatar-3.jpg" alt="table-user" class="me-2 rounded-circle">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-3.jpg" alt="table-user" class="me-2 rounded-circle">
                                                             <a href="javascript:void(0);" class="text-body fw-semibold">Kathryn S. Collier</a>
                                                         </td>
                                                         <td>
@@ -201,7 +195,7 @@ include("admin-delete-user.php");
                                                             </div>
                                                         </td>
                                                         <td class="table-user">
-                                                            <img src="../../../assets/images/users/avatar-1.jpg" alt="table-user" class="me-2 rounded-circle">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-1.jpg" alt="table-user" class="me-2 rounded-circle">
                                                             <a href="javascript:void(0);" class="text-body fw-semibold">Timothy Kauper</a>
                                                         </td>
                                                         <td>
@@ -234,7 +228,7 @@ include("admin-delete-user.php");
                                                             </div>
                                                         </td>
                                                         <td class="table-user">
-                                                            <img src="../../../assets/images/users/avatar-5.jpg" alt="table-user" class="me-2 rounded-circle">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-5.jpg" alt="table-user" class="me-2 rounded-circle">
                                                             <a href="javascript:void(0);" class="text-body fw-semibold">Zara Raws</a>
                                                         </td>
                                                         <td>
@@ -267,7 +261,7 @@ include("admin-delete-user.php");
                                                             </div>
                                                         </td>
                                                         <td class="table-user">
-                                                            <img src="../../../assets/images/users/avatar-6.jpg" alt="table-user" class="me-2 rounded-circle">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-6.jpg" alt="table-user" class="me-2 rounded-circle">
                                                             <a href="javascript:void(0);" class="text-body fw-semibold">Annette P. Kelsch</a>
                                                         </td>
                                                         <td>
@@ -300,7 +294,7 @@ include("admin-delete-user.php");
                                                             </div>
                                                         </td>
                                                         <td class="table-user">
-                                                            <img src="../../../assets/images/users/avatar-7.jpg" alt="table-user" class="me-2 rounded-circle">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-7.jpg" alt="table-user" class="me-2 rounded-circle">
                                                             <a href="javascript:void(0);" class="text-body fw-semibold">Jenny C. Gero</a>
                                                         </td>
                                                         <td>
@@ -333,7 +327,7 @@ include("admin-delete-user.php");
                                                             </div>
                                                         </td>
                                                         <td class="table-user">
-                                                            <img src="../../../assets/images/users/avatar-8.jpg" alt="table-user" class="me-2 rounded-circle">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-8.jpg" alt="table-user" class="me-2 rounded-circle">
                                                             <a href="javascript:void(0);" class="text-body fw-semibold">Edward Roseby</a>
                                                         </td>
                                                         <td>
@@ -366,7 +360,7 @@ include("admin-delete-user.php");
                                                             </div>
                                                         </td>
                                                         <td class="table-user">
-                                                            <img src="../../../assets/images/users/avatar-9.jpg" alt="table-user" class="me-2 rounded-circle">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-9.jpg" alt="table-user" class="me-2 rounded-circle">
                                                             <a href="javascript:void(0);" class="text-body fw-semibold">Anna Ciantar</a>
                                                         </td>
                                                         <td>
@@ -399,7 +393,7 @@ include("admin-delete-user.php");
                                                             </div>
                                                         </td>
                                                         <td class="table-user">
-                                                            <img src="../../../assets/images/users/avatar-10.jpg" alt="table-user" class="me-2 rounded-circle">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-10.jpg" alt="table-user" class="me-2 rounded-circle">
                                                             <a href="javascript:void(0);" class="text-body fw-semibold">Dean Smithies</a>
                                                         </td>
                                                         <td>
@@ -432,7 +426,7 @@ include("admin-delete-user.php");
                                                             </div>
                                                         </td>
                                                         <td class="table-user">
-                                                            <img src="../../../assets/images/users/avatar-1.jpg" alt="table-user" class="me-2 rounded-circle">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-1.jpg" alt="table-user" class="me-2 rounded-circle">
                                                             <a href="javascript:void(0);" class="text-body fw-semibold">Labeeb Ghali</a>
                                                         </td>
                                                         <td>
@@ -465,7 +459,7 @@ include("admin-delete-user.php");
                                                             </div>
                                                         </td>
                                                         <td class="table-user">
-                                                            <img src="../../../assets/images/users/avatar-2.jpg" alt="table-user" class="me-2 rounded-circle">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-2.jpg" alt="table-user" class="me-2 rounded-circle">
                                                             <a href="javascript:void(0);" class="text-body fw-semibold">Rory Seekamp</a>
                                                         </td>
                                                         <td>
@@ -515,19 +509,19 @@ include("admin-delete-user.php");
         <!-- END wrapper -->
 
         <!-- bundle -->
-        <script src="../../../assets/js/vendor.min.js"></script>
-        <script src="../../../assets/js/app.min.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/vendor.min.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/app.min.js"></script>
 
         <!-- third party js -->
-        <script src="../../../assets/js/vendor/jquery.dataTables.min.js"></script>
-        <script src="../../../assets/js/vendor/dataTables.bootstrap5.js"></script>
-        <script src="../../../assets/js/vendor/dataTables.responsive.min.js"></script>
-        <script src="../../../assets/js/vendor/responsive.bootstrap5.min.js"></script>
-        <script src="../../../assets/js/vendor/dataTables.checkboxes.min.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/vendor/jquery.dataTables.min.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/vendor/dataTables.bootstrap5.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/vendor/dataTables.responsive.min.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/vendor/responsive.bootstrap5.min.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/vendor/dataTables.checkboxes.min.js"></script>
         <!-- third party js ends -->
 
         <!-- demo app -->
-        <script src="../../../assets/js/pages/demo.customers.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/pages/demo.customers.js"></script>
         <!-- end demo js-->
 
     </body>
