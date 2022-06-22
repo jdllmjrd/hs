@@ -17,20 +17,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "users_created_by",
         
       });
-      // One to Many - Staff-user created by Admin
-      this.belongsTo(models.Users, {
-        foreignKey : 'staff_created_by',
-
-      });
-      // Many to One - Dentist-user created by Admin
-      this.hasMany(models.Users, {
-        foreignKey : 'dentist_created_by',
-      });
-      // One to Many - Admin-user created by Admin
       this.belongsTo(Users, {
-        foreignKey: "admin_created_by",
+        foreignKey: "users_updated_by",
       });
-
+      
+   
     }
     toJSON(){
       const attributes = {...this.get()};
@@ -47,9 +38,9 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.UUID,
       field: 'users_id',
       primaryKey : true, 
-      defaultValue : DataTypes.UUIDV4
+      defaultValue : DataTypes.UUIDV4,
+      comment: "This will cbe the ID for users"
     },
-
     users_fname: {
       type : DataTypes.STRING,
       allowNull: false,
@@ -57,11 +48,12 @@ module.exports = (sequelize, DataTypes) => {
         notNull:{msg: 'Please enter your first name'},
         notEmpty:{msg: 'This field is required'}
       },
-      comment: "This is for user's first name",
+      comment: "This will be the users' first name",
     },
     users_mname: {
       type : DataTypes.STRING,
       allowNull: true,
+      comment: "This will be the middle name",
     },
     users_lname: {
       type : DataTypes.STRING,
@@ -69,7 +61,8 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notNull:{msg: 'Please enter your last name'},
         notEmpty:{ msg: 'This field is required'}
-      }
+      },
+      comment: "This will contain the users last name",
     },
     users_full_name :{
       type : DataTypes.STRING,
@@ -77,14 +70,16 @@ module.exports = (sequelize, DataTypes) => {
         this.setDataValue("users_full_name", 
         this.users_fname+ " "+ this.users_mname+ " "+ this.users_lname);
       },
+      comment: "This will be the full name part",
     },
     users_birthdate: {
-      type : DataTypes.DATEONLY,
-      allowNull: false,
-      validate: {
-        notNull:{msg: 'Please enter your birth date'},
+      type      : DataTypes.DATEONLY,
+      allowNull : false,
+      validate  : {
+        notNull :{msg: 'Please enter your birth date'},
         notEmpty:{msg: 'This field is required' }
-      }
+      },
+      comment: "This will be the birth date column",
     },
     users_gender :{
       type : DataTypes.STRING,
@@ -97,6 +92,7 @@ module.exports = (sequelize, DataTypes) => {
         notNull:{msg: 'Please choose from provided choices'},
         notEmpty:{msg: 'This field is required'}
       },
+      comment: "This will be the gender column for the users",
     },
     users_civil_status :{
       type : DataTypes.STRING,
@@ -109,15 +105,17 @@ module.exports = (sequelize, DataTypes) => {
         notNull:{msg: 'Please choose from provided choices'},
         notEmpty:{msg: 'This field is required'}
       },
+      comment: "This will contain the civil status of the users",
     },
     users_phone_number : {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notNull: { args: true, msg: "You must enter Phone Number" },
         len: { args: [11,11], msg: 'Phone Number is invalid should be 11 numbers' },
         isInt: { args: true, msg: "You must enter Phone Number" },
-      }
+      },
+      comment: "This will contain hashed password",
     },
     users_email :{
       type : DataTypes.STRING,
@@ -127,6 +125,7 @@ module.exports = (sequelize, DataTypes) => {
         notNull: { args: true, msg: "You must enter a valid email" },
       },
       unique : "email",
+      comment: "This will contain the unique email of the users",
     },
     users_password :{
       type : DataTypes.STRING,
@@ -161,11 +160,10 @@ module.exports = (sequelize, DataTypes) => {
         isIn :{
           args :[["Active", "Deactivated"]], 
         },
-      },
-      comment: 'This contains if the user is deactivated or not',
+      comment: "This contains if the user is deactivated or not",
     },
   },
-   
+},
   {
     sequelize,
     timestamp: true,
