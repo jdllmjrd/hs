@@ -3,6 +3,7 @@ package-lock.json
 README.md
 
 .DS_Store
+readme.rst
 
 frontend/user_guide
 
