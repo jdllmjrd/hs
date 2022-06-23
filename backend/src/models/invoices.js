@@ -11,6 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // Association to Appointment table
+      // One to Many
+      this.belongsTo(models.Appointments, {
+        foreignKey : 'invoices_appointments'
+      });
+      // Association to Users table
+      // One to Many
+      this.belongsTo(models.Users, {
+        foreignKey : 'invoices_issued_to',
+      });
+      this.hasMany(models.Invoices_Services);
     }
   }
   Invoices.init({
@@ -21,35 +32,30 @@ module.exports = (sequelize, DataTypes) => {
     defaultValue : DataTypes.UUIDV4
   },
 
-  //  invoices_appointments_id: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false,
-  //   references: {
-  //     model: 'appointments',
-  //     key: 'id'
-  //   }
-  // },
+  // Create an invoice only for those patients
+  // that has a successful appointment
+   invoices_appointments: {
+    type: DataTypes.UUID,
+    allowNull: false,
+    references: {
+      model: sequelize.Appointments,
+      key: 'appointments_id'
+    }
+  },
   // invoices_no: {
   //   type : DataTypes.INTEGER,
   //   allowNull: false,
   //   autoIncrement: true
   // },
-  // invoices_users_id: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false,
-  //   references: {
-  //     model: 'users',
-  //     key: 'id'
-  //   }
-  // },
-  // invoices_issued_to: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false,
-  //   references: {
-  //     model: 'users',
-  //     key: 'id'
-  //   }
-  // },
+  // Issued to Users-patient by admin or Staff
+  invoices_issued_to: {
+    type: DataTypes.UUID,
+    allowNull: false,
+    references: {
+      model: sequelize.Users,
+      key: 'users_id'
+    }
+  },
   invoices_description: {
     type : DataTypes.TEXT,
     allowNull: true,
@@ -74,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
     allowNull : false,
     validate: {
       isIn :{
-        args :[["Unpaid", "Paid", "Deleted"]], // for dropdown or radio button
+        args :[["Unpaid", "Paid", "Deleted"]], // for dropdown 
       },
       notNull:{msg: 'Please choose from provided choices'},
       notEmpty:{msg: 'This field is required'}

@@ -19,7 +19,8 @@ exports.checkAuthorization = (req, res, userType) => {
     if(!validUserType) return res.status(500).send('The value for `userType` parameter is invalid');
     
     // Check if user is not authorized
-    if(!(req.user != null && req.user.users_type === userType)) return res.status(401).send('Oops! You are unauthorized to view your request');
+    if(!(req.user != null && req.user.users_type === userType)) 
+        return res.status(401).send('Oops! You are unauthorized to view your request');
 }
 
 
@@ -38,7 +39,6 @@ exports.errResponse = (res, err) => {
     });
 }
 
-
 /**
  * This will return an OK (200) response regardless if doesn't have data.
  * 
@@ -49,7 +49,6 @@ exports.errResponse = (res, err) => {
  * @returns 
  */
 exports.dataResponse = (res, data, withDataMsg, nullDataMsg) => {
-    
     // If no data return empty response
     if(data.length === 0 || data == null) return res.send({
         error: false,

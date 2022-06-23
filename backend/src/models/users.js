@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+
 const PROTECTED_ATTRIBUTES = ["users_password", "users_birthdate"];
 
 module.exports = (sequelize, DataTypes) => {
@@ -13,16 +14,29 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
+      // Only the admin can create a user account; thus,
+      // An Admin can add many user account
+      // But a user account can only added by one admin
+      // One to Many, This is fix because admin-user only have 
+      // the power to add/update user. 
       this.belongsTo(Users, {
         foreignKey: "users_created_by",
-        
       });
       this.belongsTo(Users, {
         foreignKey: "users_updated_by",
       });
-      
-   
+      // Association to Use_counter
+      // One to One
+      this.hasOne(models.Users_counter);
+
+      // Association to Branches by staff
+      // this.belongsTo(models.Branches, {
+      //   foreignKey: "users_branches",
+      // });
     }
+
+    // This part will protect some attributes
     toJSON(){
       const attributes = {...this.get()};
 
@@ -33,6 +47,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
+  
   Users.init({
     id: {
       type : DataTypes.UUID,
@@ -103,7 +118,7 @@ module.exports = (sequelize, DataTypes) => {
           msg : "Civil status should be Single, Married, Divorce, or Widowed"
         },
         notNull:{msg: 'Please choose from provided choices'},
-        notEmpty:{msg: 'This field is required'}
+        notEmpty:{msg: 'This field is required'},
       },
       comment: "This will contain the civil status of the users",
     },
@@ -142,14 +157,14 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue : 'Patient',
       validate: {
         isIn :{
-          args :[["Admin", "Staff", "Dentist", "Patient"]], // for dropdown or radio button
+          args :[["Admin", "Staff", "Dentist", "Patient"]], // for dropdown
         },
       },
       comment: "This will identify what type of user is",
     },
     users_profile_pic :{
       type : DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       comment: "This will put be where profile pic will save",
     },
     users_status :{
@@ -160,16 +175,49 @@ module.exports = (sequelize, DataTypes) => {
         isIn :{
           args :[["Active", "Deactivated"]], 
         },
-      comment: "This contains if the user is deactivated or not",
+    },
+    comment: "This contains if the user is deactivated or not",
+    },
+    // // This is for staff only
+    // users_branches: {
+    //   type: DataTypes.UUID,
+    //   references: {
+    //     model: sequelize.Branches,
+    //     key: "branches_id",
+    //   },
+    // },
+    users_created_by: {
+    type: DataTypes.UUID,
+    references: {
+      model: Users,
+      key: "users_id",
+    },
+  },
+    users_updated_by: {
+    type: DataTypes.UUID,
+    references: {
+      model: Users,
+      key: "users_id",
     },
   },
 },
+
   {
     sequelize,
-    timestamp: true,
+    timestamps: true,
     createdAt: "users_created_at",
     updatedAt: "users_updated_at",
     modelName: 'Users',
+
+    // Ask QUESTION NA
+    hooks: {
+      afterCreate : (user, options) => {
+        models.Users_counter.create({
+          UserId: user.users_id
+        })
+      },
+    },
+    
   });
 
   return Users;

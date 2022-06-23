@@ -4,8 +4,9 @@
 
 const db = require('../models');
 const Users = db.Users; // user model
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+// const { dataResponse, errResponse, emptyDataResponse } = require('../../helpers/controller.helper');
+const nodemailer = require('nodemailer');
+
 
 //create and save new user
 exports.register = async (req, res) => {
@@ -13,7 +14,7 @@ exports.register = async (req, res) => {
 
     req.body.users_password = await bcrypt.hash(
         req.body.users_password, parseInt(process.env.SALT_ROUND),
-     // Store password into hash.
+    // Store password into hash.
     );
     Users.create(req.body)
     .then((data) => {   // Goal is to register as user
@@ -30,4 +31,7 @@ exports.register = async (req, res) => {
         message: err.errors.map((e) => e.message),
       });
     });
+
+    
 };
+

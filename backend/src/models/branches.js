@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+
+
 module.exports = (sequelize, DataTypes) => {
   class Branches extends Model {
     /**
@@ -11,14 +13,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
+      // Many to One 
       this.belongsTo(models.Users, {
         foreignKey: "branches_created_by",
       });
 
+      // Many to One 
       this.belongsTo(models.Users, {
         foreignKey: "branches_updated_by",
       });
+      // One to many - Appointments table
+      this.hasMany(models.Appointments);
+      // // Association to Branches by staff
+      // this.hasOne(models.Users);
     }
+    // This part will protect some attributes
   }
   Branches.init({
   id: {
@@ -66,37 +76,21 @@ module.exports = (sequelize, DataTypes) => {
   },
   branches_image: {
     type : DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      notNull:{msg: 'Please enter branch image'},
-      notEmpty:{msg: 'This field is required'}
-    }
+    allowNull: true,
+    // validate: {
+    //   notNull:{msg: 'Please enter branch image'},
+    //   notEmpty:{msg: 'This field is required'}
+    // }
   },
   branches_status :{
     type : DataTypes.STRING,
     allowNull: false,
     defaultValue : 'Open' // Open or Close, it depends to the admin
     },
-  branches_created_by: {
-    type: DataTypes.UUID,
-    allowNull:true,
-    references: {
-      model: sequelize.Users,
-      key: "users_id",
-    },
-  },
-  branches_updated_by: {
-    type: DataTypes.UUID,
-    allowNull:true,
-    references: {
-      model: sequelize.Users,
-      key: "users_id",
-    },
-  },
 }, 
 {
   sequelize,
-  timestamp: true,
+  timestamps: true,
   createdAt: "branches_created_at",
   updatedAt: "branches_updated_at",
   modelName: 'Branches',

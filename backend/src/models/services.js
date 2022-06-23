@@ -11,6 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      /**
+       * We will use belongTo or belongsToMany, where FK column is.
+       */
+
+      // User can create many services
+      // but a service can only have one user
+      // One to One
+      this.belongsTo(models.Users, {
+        foreignKey: "services_created_by",
+      });
+
+      // User can update many services
+      // but a service can only have one user
+      // One to One
+      this.belongsTo(models.Users, {
+        foreignKey: "services_updated_by",
+      });
     }
   }
   Services.init({
@@ -18,7 +35,8 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.UUID,
       field: 'services_id',
       primaryKey : true, 
-      defaultValue : DataTypes.UUIDV4
+      defaultValue : DataTypes.UUIDV4,
+      comment: 'This contains UUIDV4 for service ID',
     },
     services_name: {
       type : DataTypes.STRING,
@@ -26,7 +44,9 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notNull:{msg: 'Please enter service name'},
         notEmpty:{msg: 'This field is required'}
-      }
+      },
+      comment: "This column is for "
+      
     },
     services_description: {
       type : DataTypes.TEXT,
@@ -44,16 +64,18 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty:{msg: 'This field is required'}
       }
     },
+    
     services_status :{
       type : DataTypes.STRING,
       allowNull: false,
       defaultValue : 'Active'
-      },
-  }, 
+      }
+    },
+  
   {
     sequelize,
-    timestamp: true,
-    createdAt: "services_created_at",
+    timestamps: true,
+    createdAt: 'services_created_at',
     updatedAt: "services_updated_at",
     modelName: 'Services',
   });

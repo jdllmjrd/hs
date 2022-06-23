@@ -4,18 +4,14 @@
  * This controller is for user login
  */
 
-
 // Import Required Modules/Packages
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require("../../src/models");
 const { errResponse, emptyDataResponse } = require('../helpers/helper.controller');
 
-// Dotenv Configuration
 require('dotenv').config();
 
-
-// Generate token
 const generateToken = (data) => { 
     return jwt.sign(data, process.env.TOKEN_SECRET, { expiresIn: '12h' }); 
 }

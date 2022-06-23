@@ -38,6 +38,7 @@ app.use((req, res, next) => {
     next();
   });
 
+  // Example part but will be change into home page
 app.get("/", (req, res) =>{
     res.json({message: "HappySmile"});
 });
