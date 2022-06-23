@@ -1,11 +1,4 @@
-﻿<?php
-include("left_sidebar.php");
-include("right_sidebar.php");
-include("top_bar.php");
-include("../partials/footer.php");
-?>
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
     <html lang="en">
 
@@ -16,12 +9,12 @@ include("../partials/footer.php");
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
         <meta content="Happy Smile" name="Author">
         <!-- App favicon -->
-        <link rel="shortcut icon" href="../../../assets/images/favicon.ico">
+        <link rel="shortcut icon" href="<?php echo base_url('frontend/assets')?>/images/favicon.ico">
 
         <!-- App css -->
-        <link href="../../../assets/css/icons.min.css" rel="stylesheet" type="text/css">
-        <link href="../../../assets/css/app.min.css" rel="stylesheet" type="text/css" id="light-style">
-        <link href="../../../assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
+        <link href="<?php echo base_url('frontend/assets')?>/css/icons.min.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url('frontend/assets')?>/css/app.min.css" rel="stylesheet" type="text/css" id="light-style">
+        <link href="<?php echo base_url('frontend/assets')?>/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
 
     </head>
 
@@ -33,6 +26,10 @@ include("../partials/footer.php");
             <!-- ============================================================== -->
             <!-- Start Page Content here -->
             <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
 
                     <!-- Start Content-->
                     <div class="container-fluid">
@@ -56,7 +53,7 @@ include("../partials/footer.php");
 
                         <div class="row mb-2">
                             <div class="col-sm-4">
-                                <a href="admin-add-service.php" class="btn btn-danger btn-rounded mb-3"><i class="mdi mdi-plus"></i> Services Offered</a>
+                                <a href="add-service" class="btn btn-danger btn-rounded mb-3"><i class="mdi mdi-plus"></i> Services Offered</a>
                             </div>
                             <!-- end col-->
                         </div> 
@@ -104,15 +101,15 @@ include("../partials/footer.php");
                                         </p>
                                         <div id="tooltip-container">
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-6.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-6.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-7.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-7.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="James Anderson" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-8.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-8.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
                                             <a href="javascript:void(0);" class="d-inline-block text-muted fw-bold ms-2">
                                                 +7 more
@@ -173,15 +170,15 @@ include("../partials/footer.php");
                                         </p>
                                         <div id="tooltip-container1">
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-1.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-1.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-2.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-2.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="top" title="James Anderson" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-3.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-3.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
                                             <a href="javascript:void(0);" class="d-inline-block text-muted fw-bold ms-2">
                                                 +3 more
@@ -241,11 +238,11 @@ include("../partials/footer.php");
                                         </p>
                                         <div id="tooltip-container2">
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container2" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-4.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-4.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container2" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-5.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-5.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
                                         </div>
                                     </div> <!-- end card-body-->
@@ -303,15 +300,15 @@ include("../partials/footer.php");
                                         </p>
                                         <div id="tooltip-container3">
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container3" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-10.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-10.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container3" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-5.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-5.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container3" data-bs-toggle="tooltip" data-bs-placement="top" title="James Anderson" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-6.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-6.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
                                             <a href="javascript:void(0);" class="d-inline-block text-muted fw-bold ms-2">
                                                 +2 more
@@ -338,7 +335,7 @@ include("../partials/footer.php");
                                 <!-- project card -->
                                 <div class="card d-block">
                                     <!-- project-thumbnail -->
-                                    <img class="card-img-top" src="../../../assets/images/projects/periodontics.jpg" alt="project image cap">
+                                    <img class="card-img-top" src="<?php echo base_url('frontend/assets')?>/images/projects/periodontics.jpg" alt="project image cap">
                                     <div class="card-img-overlay">
                                         <div class="badge bg-secondary text-light p-1">Ongoing</div>
                                     </div>
@@ -362,15 +359,15 @@ include("../partials/footer.php");
                                         </p>
                                         <div class="mb-3" id="tooltip-container4">
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container4" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-3.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-3.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container4" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-5.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-5.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container4" data-bs-toggle="tooltip" data-bs-placement="top" title="James Anderson" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-9.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-9.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
                                         </div>
 
@@ -388,7 +385,7 @@ include("../partials/footer.php");
                                 <!-- project card -->
                                 <div class="card d-block">
                                     <!-- project-thumbnail -->
-                                    <img class="card-img-top" src="../../../assets/images/projects/oral_surgery.jpg" alt="project image cap">
+                                    <img class="card-img-top" src="<?php echo base_url('frontend/assets')?>/images/projects/oral_surgery.jpg" alt="project image cap">
                                     <div class="card-img-overlay">
                                         <div class="badge bg-success p-1">Finished</div>
                                     </div>
@@ -412,15 +409,15 @@ include("../partials/footer.php");
                                         </p>
                                         <div class="mb-3" id="tooltip-container5">
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container5" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-10.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-10.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container5" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-5.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-5.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container5" data-bs-toggle="tooltip" data-bs-placement="top" title="James Anderson" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-7.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-7.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
                                             <a href="javascript:void(0);" class="d-inline-block text-muted fw-bold ms-2">
                                                 +2 more
@@ -441,7 +438,7 @@ include("../partials/footer.php");
                                 <!-- project card -->
                                 <div class="card d-block">
                                     <!-- project-thumbnail -->
-                                    <img class="card-img-top" src="../../../assets/images/projects/dental_bg.jpg" alt="project image cap">
+                                    <img class="card-img-top" src="<?php echo base_url('frontend/assets')?>/images/projects/dental_bg.jpg" alt="project image cap">
                                     <div class="card-img-overlay">
                                         <div class="badge bg-secondary text-light p-1">Ongoing</div>
                                     </div>
@@ -465,15 +462,15 @@ include("../partials/footer.php");
                                         </p>
                                         <div class="mb-3" id="tooltip-container6">
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container6" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-6.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-6.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container6" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-7.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-7.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container6" data-bs-toggle="tooltip" data-bs-placement="top" title="James Anderson" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-8.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-8.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
                                             <a href="javascript:void(0);" class="d-inline-block text-muted fw-bold ms-2">
                                                 +5 more
@@ -494,7 +491,7 @@ include("../partials/footer.php");
                                 <!-- project card -->
                                 <div class="card d-block">
                                     <!-- project-thumbnail -->
-                                    <img class="card-img-top" src="../../../assets/images/projects/dental_products.jpg" alt="project image cap">
+                                    <img class="card-img-top" src="<?php echo base_url('frontend/assets')?>/images/projects/dental_products.jpg" alt="project image cap">
                                     <div class="card-img-overlay">
                                         <div class="badge bg-secondary text-light p-1">Ongoing</div>
                                     </div>
@@ -518,11 +515,11 @@ include("../partials/footer.php");
                                         </p>
                                         <div class="mb-3" id="tooltip-container7">
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container7" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-2.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-2.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
     
                                             <a href="javascript:void(0);" data-bs-container="#tooltip-container7" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
-                                                <img src="../../../assets/images/users/avatar-3.jpg" class="rounded-circle avatar-xs" alt="friend">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-3.jpg" class="rounded-circle avatar-xs" alt="friend">
                                             </a>
                                         </div>
 
@@ -554,8 +551,8 @@ include("../partials/footer.php");
         <!-- END wrapper -->
 
         <!-- bundle -->
-        <script src="../../../assets/js/vendor.min.js"></script>
-        <script src="../../../assets/js/app.min.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/vendor.min.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/app.min.js"></script>
         
     </body>
 </html>

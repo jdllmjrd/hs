@@ -1,12 +1,4 @@
-﻿<?php
-include("left_sidebar.php");
-include("right_sidebar.php");
-include("top_bar.php");
-include("../partials/footer.php");
-include("staff-add-appointment.php");
-?>
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -20,14 +12,14 @@ include("staff-add-appointment.php");
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
         <!-- Quill css -->
-        <link href="../../../assets/css/vendor/quill.bubble.css" rel="stylesheet" type="text/css">
-        <link href="../../../assets/css/vendor/quill.core.css" rel="stylesheet" type="text/css">
-        <link href="../../../assets/css/vendor/quill.snow.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url('frontend/assets')?>/css/vendor/quill.bubble.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url('frontend/assets')?>/css/vendor/quill.core.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url('frontend/assets')?>/css/vendor/quill.snow.css" rel="stylesheet" type="text/css">
 
         <!-- App css -->
-        <link href="../../../assets/css/icons.min.css" rel="stylesheet" type="text/css">
-        <link href="../../../assets/css/app.min.css" rel="stylesheet" type="text/css" id="light-style">
-        <link href="../../../assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
+        <link href="<?php echo base_url('frontend/assets')?>/css/icons.min.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url('frontend/assets')?>/css/app.min.css" rel="stylesheet" type="text/css" id="light-style">
+        <link href="<?php echo base_url('frontend/assets')?>/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
 
     </head>
 
@@ -39,6 +31,10 @@ include("staff-add-appointment.php");
             <!-- Start Page Content here -->
             <!-- ============================================================== -->
 
+            <div class="content-page">
+                    <div class="content">
+
+                    
                     <!-- Start Content-->
                     <div class="container-fluid">
 
@@ -64,7 +60,84 @@ include("staff-add-appointment.php");
                                             </form>
                                         </div>
                                     </div>
-                                    <h4 class="page-title">Tasks <a href="javascript:void(0);" class="btn btn-success btn-sm ms-3" data-bs-toggle="modal" data-bs-target="#add-new-task-modal">Add New</a></h4>
+                                    <!--  Add new task modal -->
+                                    <div class="modal fade task-modal-content" id="add-new-task-modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="NewTaskModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="NewTaskModalLabel">Create New Task</h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form class="p-2">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Service</label>
+                                                                    <select class="form-select form-control-light">
+                                                                        <option>Select</option>
+                                                                        <option>Tooth Cleaning</option>
+                                                                        <option>Oral Surgery</option>
+                                                                        <option>Simple Extraction</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-md-8">
+                                                                        <div class="mb-3">
+                                                                            <label for="task-title" class="form-label">Patient Name</label>
+                                                                            <input type="text" class="form-control form-control-light" id="task-title" placeholder="Patient Name">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-4">
+                                                                        <div class="mb-3">
+                                                                            <label for="task-priority2" class="form-label">Priority</label>
+                                                                            <select class="form-select form-control-light" id="task-priority2">
+                                                                                <option>Low</option>
+                                                                                <option>Medium</option>
+                                                                                <option>High</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label for="task-description" class="form-label">Description</label>
+                                                                    <textarea class="form-control form-control-light" id="task-description" rows="3"></textarea>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="task-title" class="form-label">Assigned Dentist</label>
+                                                                            <select class="form-select form-control-light" id="task-priority">
+                                                                                <option>Happy Smile Dentist</option>
+                                                                                <option>Doctor Quack Quack</option>
+                                                                                <option>Louis Allen</option>
+                                                                                <option>Sean White</option>
+                                                                                <option>Riley Steele</option>
+                                                                                <option>Zak Turnbull</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="task-priority" class="form-label">Appointment Date</label>
+                                                                            <input type="text" class="form-control form-control-light" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="text-end">
+                                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="button" class="btn btn-primary">Create</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+                                    <h4 class="page-title">Tasks <a href="javascript: void(0);" class="btn btn-success btn-sm ms-3" data-bs-toggle="modal" data-bs-target="#add-new-task-modal">Add New</a></h4>
                                 </div>
                                 <!-- end page title -->
 
@@ -92,7 +165,7 @@ include("staff-add-appointment.php");
                                                     <div class="col-sm-6">
                                                         <div class="d-flex justify-content-between">
                                                             <div id="tooltip-container">
-                                                                <img src="../../../assets/images/users/avatar-9.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to Arya S">
+                                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-9.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to Arya S">
                                                             </div>
                                                             <div>
                                                                 <ul class="list-inline font-13 text-end">
@@ -128,7 +201,7 @@ include("staff-add-appointment.php");
                                                     <div class="col-sm-6">
                                                         <div class="d-flex justify-content-between">
                                                             <div id="tooltip-container1">
-                                                                <img src="../../../assets/images/users/avatar-2.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to James B">
+                                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-2.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to James B">
                                                             </div>
                                                             <div>
                                                                 <ul class="list-inline font-13 text-end">
@@ -164,7 +237,7 @@ include("staff-add-appointment.php");
                                                     <div class="col-sm-6">
                                                         <div class="d-flex justify-content-between">
                                                             <div id="tooltip-container2">
-                                                                <img src="../../../assets/images/users/avatar-4.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to Kevin C">
+                                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-4.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to Kevin C">
                                                             </div>
                                                             <div>
                                                                 <ul class="list-inline font-13 text-end mb-0">
@@ -216,7 +289,7 @@ include("staff-add-appointment.php");
                                                     <div class="col-sm-6">
                                                         <div class="d-flex justify-content-between">
                                                             <div id="tooltip-container3">
-                                                                <img src="../../../assets/images/users/avatar-2.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container3" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to James B">
+                                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-2.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container3" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to James B">
                                                             </div>
                                                             <div>
                                                                 <ul class="list-inline font-13 text-end">
@@ -252,7 +325,7 @@ include("staff-add-appointment.php");
                                                     <div class="col-sm-6">
                                                         <div class="d-flex justify-content-between">
                                                             <div id="tooltip-container4">
-                                                                <img src="../../../assets/images/users/avatar-2.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to James B">
+                                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-2.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to James B">
                                                             </div>
                                                             <div>
                                                                 <ul class="list-inline font-13 text-end">
@@ -288,7 +361,7 @@ include("staff-add-appointment.php");
                                                     <div class="col-sm-6">
                                                         <div class="d-flex justify-content-between">
                                                             <div id="tooltip-container5">
-                                                                <img src="../../../assets/images/users/avatar-7.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container5" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to Edward S">
+                                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-7.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container5" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to Edward S">
                                                             </div>
                                                             <div>
                                                                 <ul class="list-inline font-13 text-end mb-0">
@@ -340,7 +413,7 @@ include("staff-add-appointment.php");
                                                     <div class="col-sm-6">
                                                         <div class="d-flex justify-content-between">
                                                             <div id="tooltip-container6">
-                                                                <img src="../../../assets/images/users/avatar-9.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container6" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to Arya S">
+                                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-9.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container6" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to Arya S">
                                                             </div>
                                                             <div>
                                                                 <ul class="list-inline font-13 text-end">
@@ -376,7 +449,7 @@ include("staff-add-appointment.php");
                                                     <div class="col-sm-6">
                                                         <div class="d-flex justify-content-between">
                                                             <div id="tooltip-container7">
-                                                                <img src="../../../assets/images/users/avatar-2.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container7" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to James B">
+                                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-2.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container7" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to James B">
                                                             </div>
                                                             <div>
                                                                 <ul class="list-inline font-13 text-end">
@@ -412,7 +485,7 @@ include("staff-add-appointment.php");
                                                     <div class="col-sm-6">
                                                         <div class="d-flex justify-content-between">
                                                             <div id="tooltip-container8">
-                                                                <img src="../../../assets/images/users/avatar-5.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container8" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to Gary H">
+                                                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-5.jpg" alt="image" class="avatar-xs rounded-circle me-1" data-bs-container="#tooltip-container8" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Assigned to Gary H">
                                                             </div>
                                                             <div>
                                                                 <ul class="list-inline font-13 text-end mb-0">
@@ -488,7 +561,7 @@ include("staff-add-appointment.php");
                                                         <!-- assignee -->
                                                         <p class="mt-2 mb-1 text-muted">Assigned To</p>
                                                         <div class="d-flex">
-                                                            <img src="../../../assets/images/users/avatar-9.jpg" alt="Arya S" class="rounded-circle me-2" height="24">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-9.jpg" alt="Arya S" class="rounded-circle me-2" height="24">
                                                             <div>
                                                                 <h5 class="mt-1 font-14">
                                                                     Arya Stark
@@ -594,7 +667,7 @@ include("staff-add-appointment.php");
                                                     <div class="p-1">
                                                         <div class="row align-items-center">
                                                             <div class="col-auto">
-                                                                <img src="../../../assets/images/projects/project-1.jpg" class="avatar-sm rounded" alt="file-image">
+                                                                <img src="<?php echo base_url('frontend/assets')?>/images/projects/project-1.jpg" class="avatar-sm rounded" alt="file-image">
                                                             </div>
                                                             <div class="col ps-0">
                                                                 <a href="javascript:void(0);" class="text-muted fw-bold">new-contarcts.docx</a>
@@ -620,7 +693,7 @@ include("staff-add-appointment.php");
                                                         <h5 class="mb-2 font-16">Comments</h5>
 
                                                         <div class="d-flex mt-3 p-1">
-                                                            <img src="../../../assets/images/users/avatar-9.jpg" class="me-2 rounded-circle" height="36" alt="Arya Stark">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-9.jpg" class="me-2 rounded-circle" height="36" alt="Arya Stark">
                                                             <div class="w-100">
                                                                 <h5 class="mt-0 mb-0">
                                                                     <span class="float-end text-muted font-12">4:30am</span>
@@ -635,7 +708,7 @@ include("staff-add-appointment.php");
                                                         <hr>
 
                                                         <div class="d-flex mt-2 p-1">
-                                                            <img src="../../../assets/images/users/avatar-5.jpg" class="me-2 rounded-circle" height="36" alt="Dominc B">
+                                                            <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-5.jpg" class="me-2 rounded-circle" height="36" alt="Dominc B">
                                                             <div class="w-100">
                                                                 <h5 class="mt-0 mb-0">
                                                                     <span class="float-end text-muted font-12">3:30am</span>
@@ -694,13 +767,13 @@ include("staff-add-appointment.php");
         <!-- END wrapper -->
 
         <!-- bundle -->
-        <script src="../../../assets/js/vendor.min.js"></script>
-        <script src="../../../assets/js/app.min.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/vendor.min.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/app.min.js"></script>
 
         <!-- quill js -->
-        <script src="../../../assets/js/vendor/quill.min.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/vendor/quill.min.js"></script>
         <!-- Init js-->
-        <script src="../../../assets/js/pages/demo.tasks.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/pages/demo.tasks.js"></script>
 
     </body>
 

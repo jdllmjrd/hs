@@ -12,7 +12,7 @@
                     <div class="card">
                         <div class="card-body">
                             <span class="float-start m-4 me-8">
-                                <img src="../../../assets/images/users/avatar-2.jpg" style="height: 200px;" alt="" class="rounded-circle img-thumbnail">
+                                <img src="<?php echo base_url('frontend/assets')?>/images/users/avatar-2.jpg" style="height: 200px;" alt="" class="rounded-circle img-thumbnail">
                             </span>
                             <div class="">
                                 <h4 class="mt-1 mb-1">Paul J. Friend</h4>

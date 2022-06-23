@@ -1,11 +1,4 @@
-﻿<?php
-include("left_sidebar.php");
-include("right_sidebar.php");
-include("top_bar.php");
-include("../partials/footer.php");
-?>
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
     <html lang="en">
     
     <head>
@@ -16,22 +9,27 @@ include("../partials/footer.php");
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
         <meta content="Happy Smile" name="Author">
         <!-- App favicon -->
-        <link rel="shortcut icon" href="../../../assets/images/favicon.ico">
+        <link rel="shortcut icon" href="<?php echo base_url('frontend/assets')?>/images/favicon.ico">
 
         <!-- App css -->
-        <link href="../../../assets/css/icons.min.css" rel="stylesheet" type="text/css">
-        <link href="../../../assets/css/app.min.css" rel="stylesheet" type="text/css" id="light-style">
-        <link href="../../../assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
+        <link href="<?php echo base_url('frontend/assets')?>/css/icons.min.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url('frontend/assets')?>/css/app.min.css" rel="stylesheet" type="text/css" id="light-style">
+        <link href="<?php echo base_url('frontend/assets')?>/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
 
     </head>
 
     <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
         
         <!-- Begin page -->
-
+        <div class="wrapper">
+            
             <!-- ============================================================== -->
             <!-- Start Page Content here -->
             <!-- ============================================================== -->
+
+                <div class="content-page">
+                    <div class="content">
+
 
                     <!-- Start Content-->
                     <div class="container-fluid">
@@ -61,7 +59,7 @@ include("../partials/footer.php");
                                         <!-- Invoice Logo-->
                                         <div class="clearfix">
                                             <div class="float-start mb-3">
-                                                <img src="../../../assets/images/HSBW.png" alt="" height="100">
+                                                <img src="<?php echo base_url('frontend/assets')?>/images/HSBW.png" alt="" height="100">
                                             </div>
                                             <div class="float-end">
                                                 <h4 class="m-0 d-print-none">Invoices</h4>
@@ -110,7 +108,7 @@ include("../partials/footer.php");
             
                                             <div class="col-sm-4">
                                                 <div class="text-sm-end">
-                                                    <img src="../../../assets/images/barcode.png" alt="barcode-image" class="img-fluid me-2">
+                                                    <img src="<?php echo base_url('frontend/assets')?>/images/barcode.png" alt="barcode-image" class="img-fluid me-2">
                                                 </div>
                                             </div> <!-- end col-->
                                         </div>    
@@ -221,8 +219,8 @@ include("../partials/footer.php");
         <!-- END wrapper -->
 
         <!-- bundle -->
-        <script src="../../../assets/js/vendor.min.js"></script>
-        <script src="../../../assets/js/app.min.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/vendor.min.js"></script>
+        <script src="<?php echo base_url('frontend/assets')?>/js/app.min.js"></script>
         
     </body>
 </html>
