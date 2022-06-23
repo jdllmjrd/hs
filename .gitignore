@@ -1,6 +1,5 @@
 node_modules
 package-lock.json
-README.md
 
 .DS_Store
 readme.rst
