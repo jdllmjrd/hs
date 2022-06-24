@@ -45,10 +45,11 @@ app.get("/", (req, res) =>{
 /**
  * ROUTES
  */
-// app.use(`${process.env.API_VERSION}/home`, require ("./backend/src/routes/home.routes"));
+app.use(`${process.env.API_VERSION}/home`, require ("./backend/src/routes/home.routes"));
 app.use(`${process.env.API_VERSION}/register`, require ("./backend/src/routes/register.routes"));
 app.use(`${process.env.API_VERSION}/login`, require ("./backend/src/routes/login.routes"));
 
+// FOR FOUR USER TYPES ROUTE
 
 // Set up PORT
 const PORT = process.env.PORT || 5600;

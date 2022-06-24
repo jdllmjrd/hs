@@ -14,8 +14,8 @@ const dentistsController = require('../controllers/home/index.controller');
 router.get('/', dentistsController.getAllDentist);
 
 // For contact us, Test this one after connection of frontend
-const contactUsController = require('../controllers/home/contactUs.controller');
-router.post('/send', contactUsController.send);
+const contactUsController = require('../controllers/home/index.controller');
+router.post('/', contactUsController.send);
 
 
 
