@@ -4,7 +4,7 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 // Import all models
 const db = require("./backend/src/models");
-
+const jwt = require("jsonwebtoken");
 //initialize app
 var app = express();
 
@@ -16,6 +16,9 @@ app.use(
         extended: true,
     })
 );
+// For token secret
+// console.log(require("crypto").randomBytes(64).toString("hex"));
+
 //This is to check if db connects 
 db.sequelize
   .authenticate()
@@ -38,18 +41,56 @@ app.use((req, res, next) => {
     next();
   });
 
-  // Example part but will be change into home page
+  // Example part
 app.get("/", (req, res) =>{
     res.json({message: "HappySmile"});
 });
+
+// Authentication for TOKEN
+// next - is for next function to run
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers["authorization"]; // Bearer
+  const token = authHeader && authHeader.split(" ") [1]
+
+   // If token is null then send unauthorized response
+   if (token == null) return res.status(401).send('No access token is detected.');
+    
+   // Verify the token, if not verified then forbidden
+   jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+
+       // If token is not verified then send forbidden response
+       if (err) {
+           if(process.env.ENABLE_ACCESS_TOKEN_LOG === 'true') console.log(`${err}\n`);
+           return res.sendStatus(403);
+       }
+       
+       // Save token data to req.user
+       req.user = user;
+       if(process.env.ENABLE_ACCESS_TOKEN_LOG === 'true') console.log('Access Granted\n')
+       next();
+   });
+};
+
 /**
  * ROUTES
  */
+// Home page
 app.use(`${process.env.API_VERSION}/home`, require ("./backend/src/routes/home.routes"));
+// Register Page
 app.use(`${process.env.API_VERSION}/register`, require ("./backend/src/routes/register.routes"));
+// For log in page
 app.use(`${process.env.API_VERSION}/login`, require ("./backend/src/routes/login.routes"));
+//Service page
+app.use(`${process.env.API_VERSION}/services`, require ("./backend/src/routes/service.routes"));
 
-// FOR FOUR USER TYPES ROUTE
+/** FOR FOUR USER TYPES ROUTEs */
+// Authenticated Routes
+//app.use(`${process.env.API_VERSION}/patient`, authenticateToken , require("./backend/src/routes/patient.routes"));
+//app.use(`${process.env.API_VERSION}/staff`, authenticateToken , require("./backend/src/routes/staff.routes"));
+//app.use(`${process.env.API_VERSION}/dentist`, authenticateToken , require("./backend/src/routes/dentist.routes"));
+
+/** Admin user route*/
+app.use(`${process.env.API_VERSION}/admin`, authenticateToken , require("./backend/src/routes/admin.routes"));
 
 // Set up PORT
 const PORT = process.env.PORT || 5600;

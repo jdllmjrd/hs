@@ -6,6 +6,7 @@ const nodemailer = require("nodemailer");
 exports.render = (req, res) => res.send('Home page');
 
 // Get All Featured Dentist
+// For Featured Dentist section
 exports.getAllDentist = (req, res) => {
     db.Dentists.getAllDentist({
       where: { status: "Active" },
@@ -21,14 +22,10 @@ exports.getAllDentist = (req, res) => {
         res.status(500).send({
           error: true,
           data: [],
-          message:
-            err.errors.map((e) => e.message) || process.env.GENERAL_ERROR_MSG,
         });
       });
   };
-
-// This will send an email controller
-
+// This will send an email for contact us section
 exports.send = (req, res) => {
     // res.send();
     const output = `
@@ -72,7 +69,6 @@ async function main() {
   // Preview only available when sending through an Ethereal account
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
-
 main().catch(console.error);
 
 } 

@@ -17,23 +17,22 @@ module.exports = (sequelize, DataTypes) => {
 
       // Only the admin can create a user account; thus,
       // An Admin can add many user account
-      // But a user account can only added by one admin
+      // But a user account can only be added by one admin
       // One to Many, This is fix because admin-user only have 
-      // the power to add/update user. 
+      // the power to add/update to other user excludes password. 
+
       this.belongsTo(Users, {
+        as: "created",
         foreignKey: "users_created_by",
       });
       this.belongsTo(Users, {
+        as: "updated",
         foreignKey: "users_updated_by",
       });
-      // Association to Use_counter
-      // One to One
-      this.hasOne(models.Users_counter);
-
-      // Association to Branches by staff
-      // this.belongsTo(models.Branches, {
-      //   foreignKey: "users_branches",
-      // });
+      this.hasMany(models.Services, {
+        as: "admin_added_service",
+        foreignKey: "services_created_by",
+      });
     }
 
     // This part will protect some attributes
@@ -46,7 +45,6 @@ module.exports = (sequelize, DataTypes) => {
       return attributes;
     }
   }
-
   
   Users.init({
     id: {
@@ -54,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
       field: 'users_id',
       primaryKey : true, 
       defaultValue : DataTypes.UUIDV4,
-      comment: "This will cbe the ID for users"
+      comment: "This contains IDs for users"
     },
     users_fname: {
       type : DataTypes.STRING,
@@ -173,19 +171,11 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue : 'Active',
       validate: {
         isIn :{
-          args :[["Active", "Deactivated"]], 
+          args :[["Active", "Inactive"]], 
         },
     },
     comment: "This contains if the user is deactivated or not",
     },
-    // // This is for staff only
-    // users_branches: {
-    //   type: DataTypes.UUID,
-    //   references: {
-    //     model: sequelize.Branches,
-    //     key: "branches_id",
-    //   },
-    // },
     users_created_by: {
     type: DataTypes.UUID,
     references: {
@@ -209,14 +199,6 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: "users_updated_at",
     modelName: 'Users',
 
-    // Ask QUESTION NA
-    hooks: {
-      afterCreate : (user, options) => {
-        models.Users_counter.create({
-          UserId: user.users_id
-        })
-      },
-    },
     
   });
 

@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       // but a service can only have one user
       // One to One
       this.belongsTo(models.Users, {
+        as: "created",
         foreignKey: "services_created_by",
       });
 
@@ -26,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       // but a service can only have one user
       // One to One
       this.belongsTo(models.Users, {
+        as: "updated",
         foreignKey: "services_updated_by",
       });
     }
@@ -64,12 +66,25 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty:{msg: 'This field is required'}
       }
     },
-    
     services_status :{
       type : DataTypes.STRING,
       allowNull: false,
       defaultValue : 'Active'
-      }
+    },
+    services_created_by: {
+      type: DataTypes.UUID,
+      references: {
+        model: sequelize.Users,
+        key: "users_id",
+      },
+    },
+    services_updated_by: {
+      type: DataTypes.UUID,
+      references: {
+        model: sequelize.Users,
+        key: "users_id",
+      },
+    },
     },
   
   {
