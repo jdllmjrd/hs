@@ -3,8 +3,8 @@ var router = require('express').Router();
 
 const invoicesController = require("../controllers/invoices.controller");
 
-router.post("/", invoicesController.create);
-router.put("/", invoicesController.update);
-router.get("/:id", invoicesController.findOne);
+router.post("/", invoicesController.create); //insert
+router.put("/", invoicesController.update); //update
+router.get("/invoices_id", invoicesController.findOne); //find specific id
 
 module.exports = router;
