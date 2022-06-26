@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       // One to Many
       this.belongsTo(models.Users, {
         foreignKey : 'invoices_issued_to',
+        otherKey: "invoices_created_by",
       });
       this.hasMany(models.Invoices_Services);
     }

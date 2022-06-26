@@ -3,7 +3,7 @@
 const db = require('../../models');
 const nodemailer = require("nodemailer");
 
-exports.render = (req, res) => res.send('Home page');
+exports.render = (req, res, next) => res.send('Home page');
 
 // Get All Featured Dentist
 // For Featured Dentist section

@@ -7,39 +7,44 @@ var router = require("express").Router();
 
 // For Dashboard
 // Counter
+const adminInfoController = require("../controllers/admin/admin_info.controller");
+router.get('/info' , adminInfoController.getAdminInfo);
+router.put('/info' , adminInfoController.updateAdminInfo);
 
 /** For Registered Users CRUD */ 
  const usersController = require("../controllers/admin/users.controller");
 
-router.post("/", usersController.createAccount); // insert
+router.post("/add-users", usersController.createAccount); // insert
 router.put("/:users_id", usersController.updatePassword); // update
-router.get("/", usersController.getAllAccounts);
+router.get("/retrieve-users", usersController.getAllAccounts);
 router.delete("/:users_id", usersController.deleteAccount); // deactivate user
 
 /** For Featured Dentist CRUD */ 
-// const dentistController = require("../controllers/dentists.controller");
+const dentistController = require("../controllers/admin/dentists.controller");
 
-// router.post("/", dentistController.create); // insert
-// router.put("/:dentist_id", dentistController.update); // update
-// router.get("/", dentistController.findAll);
-// router.delete("/:dentist_id", dentistController.delete);
+router.post("/add-featured-dentist", dentistController.createDentist); // insert
+router.put("/:dentist_id", dentistController.updateDentist); // update
+router.get("/retrieved-featured-dentist", dentistController.getAll);
+router.delete("/:dentist_id", dentistController.deleteDentist);
 
 /** For Services CRUD */ 
-// router.post("/", serviceController.create); // insert
-// router.put("/:service_id", serviceController.update); // update
-// router.get("/", serviceController.findAll);
-// router.delete("/:service_id", serviceController.delete); // deactivate user
+const serviceController = require("../controllers/admin/services.controller");
+router.post("/add-service", serviceController.createService); // insert
+router.put("/:service_id", serviceController.updateService); // update
+router.get("/get-all-services", serviceController.getAllService);
+router.delete("/:service_id", serviceController.deleteService); // destroy
 
-/** Appointments LISTS */
-// router.post("/", appointmentController.create); // insert
-// router.put("/:appointment_id", appointmentController.update); // update
-// router.get("/", appointmentController.findAll);
-// router.delete("/:appointment_id", appointmentController.delete); // deactivate user
+// /** Appointments LISTS */
+// const appointmentController = require("../controllers/admin/appointments.controller");
+// router.post("/add-appointment", appointmentController.createAppointment); // insert
+// router.put("/:appointment_id", appointmentController.updateAppointment); // update // Can approve appoin
+// router.get("/get-all-appointment", appointmentController.findAllAppointment);
+// router.delete("/:appointment_id", appointmentController.deleteAppointment); // deactivate appointment
 
 /** Schedules of Dentists */
-// router.post("/", scheduleController.create); // insert
-// router.put("/:schedule_id", scheduleController.update); // update
-// router.get("/", scheduleController.findAll);
-// router.delete("/:schedule_id", scheduleController.delete); // deactivate user
+// router.post("/appointment", scheduleController.createAppointment); // insert
+// router.put("/:schedule_id", scheduleController.updateAppointment); // update
+// router.get("/get-all-appointment", scheduleController.findAllAppointment);
+// router.delete("/:schedule_id", scheduleController.deleteAppointment); // delete as in delete
 
 module.exports = router;

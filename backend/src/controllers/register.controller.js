@@ -14,7 +14,10 @@ const bcrypt = require("bcrypt");
 exports.register = async (req, res) => {
     req.body.users_full_name = "";
 
-    req.body.users_created_by = "req.users.users_id" ;
+    //req.body.users_created_by = req.user.users_id;
+    // for image
+    // console.log(req.file.filename);
+    // req.body.profile_pic = req.file != undefined ? req.file.filename : "";
 
     // Store password into hash.
     req.body.users_password = await bcrypt.hash(

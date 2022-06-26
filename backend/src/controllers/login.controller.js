@@ -20,59 +20,59 @@ const generateToken = (data) => {
     return jwt.sign(data, process.env.TOKEN_SECRET, { expiresIn: '10h' }); 
 }
 
-// Login Controller
 exports.login = (req, res) => {
-    
-    // Check if email and password field is empty
-    if (String(req.body.users_email) === '' || String(req.body.users_password) === '') {
-        return res.status(500).send({
-            error   : true,
-            message : "Details and Password cannot be empty",
-        });
-    } 
-    Users
-        .findOne({
-            where: { 
-                users_email  : req.body.users_email,
-                users_status : "Active",
-            },      
-        })
-        .then((data) => {
-
-            // If no data then send empty response
-            if (data == null) return emptyDataResponse(res, 'That user does not exist');
-
-            // Else validate password
-            bcrypt.compare(req.body.users_password, data.users_password, (err, hasResult) => {
-
-                // Display error if exists
-                if(err) console.log(err);
-                
-                // If no result then send empty reponse
-                if(!hasResult) return emptyDataResponse(res, 'Invalid details or password');
-                
-                // Else send reponse with data
-                const users_id = data.users_id;
-                const users_type = data.users_type;
-                const users_status = data.users_status;
-                const users_full_name = data.users_full_name;
-                
+    if (String(req.body.users_email) === "" || String(req.body.users_password) === "") {
+      res.status(500).send({
+        error: true,
+        data: [],
+        message: ["Username or Password is empty."],
+      });
+    }
+  
+    Users.findOne({ where: { users_email: req.body.users_email, users_status: "Active" } })
+      .then((data) => {
+        if (data) {
+          // compare password
+          bcrypt.compare(req.body.users_password,data.users_password,
+            function (err, result) {
+              if (result) {
+                // same password
                 res.send({
-                    error: false,
-                    data: {
-                        users_id: users_id,
-                        users_type: users_type,
-                        users_full_name: users_full_name,
-                        token: generateToken({ 
-                            users_id   : users_id, 
-                            users_type : users_type, 
-                            users_status: users_status
-                        }),
-                    },
-                    message: "A user has been successfully identified",
+                  error: false,
+                  data: data,
+                  token: generateToken({
+                    users_id: data.users_id,
+                    users_full_name: data.users_full_name,
+                    users_email: data.users_email,
+                    users_type: data.users_type
+                  }),
+                  message: [process.env.SUCCESS_RETRIEVED],
                 });
-            })
-        })
-        .catch((err) => errResponse(res, err));
+              } else {
+                // invalid password
+                res.status(500).send({
+                  error: true,
+                  data: [],
+                  message: ["Invalid username and Password."],
+                });
+              }
+            }
+          );
+        } else {
+          res.status(500).send({
+            error: true,
+            data: [],
+            message: ["Username does not exists."],
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+          res.status(500).send({
+            error: true,
+            data: [],
+            message:
+              err.errors.map((e) => e.message) || process.env.GENERAL_ERROR_MSG,
+          });
+      });
 }
-

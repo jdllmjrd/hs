@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       // the power to add/update to other user excludes password. 
 
       this.belongsTo(Users, {
-        as: "created",
+        as: "created" ,
         foreignKey: "users_created_by",
       });
       this.belongsTo(Users, {
@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
         as: "admin_added_service",
         foreignKey: "services_created_by",
       });
+      // this.hasMany(Users, {
+      //   as: "user_added_by_admin",
+      //   foreignKey: "users_created_by",
+      // });
     }
 
     // This part will protect some attributes
@@ -178,6 +182,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     users_created_by: {
     type: DataTypes.UUID,
+    allowNull: true,
     references: {
       model: Users,
       key: "users_id",

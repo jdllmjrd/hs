@@ -64,9 +64,7 @@ const authenticateToken = (req, res, next) => {
            return res.sendStatus(403);
        }
        
-       // Save token data to req.user
        req.user = user;
-       if(process.env.ENABLE_ACCESS_TOKEN_LOG === 'true') console.log('Access Granted\n')
        next();
    });
 };
