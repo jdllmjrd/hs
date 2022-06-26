@@ -9,13 +9,14 @@ var router = require("express").Router();
 // Counter
 const adminInfoController = require("../controllers/admin/admin_info.controller");
 router.get('/info' , adminInfoController.getAdminInfo);
-router.put('/info' , adminInfoController.updateAdminInfo);
+router.put('/info' , adminInfoController.updateAdminInfo); 
+router.put('/admin-update-password' , adminInfoController.updateAdminPassword);
 
 /** For Registered Users CRUD */ 
  const usersController = require("../controllers/admin/users.controller");
 
 router.post("/add-users", usersController.createAccount); // insert
-router.put("/:users_id", usersController.updatePassword); // update
+router.put("/:users_id", usersController.updateAccount); // update
 router.get("/retrieve-users", usersController.getAllAccounts);
 router.delete("/:users_id", usersController.deleteAccount); // deactivate user
 

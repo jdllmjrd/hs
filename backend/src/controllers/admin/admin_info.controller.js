@@ -39,7 +39,7 @@ exports.updateAdminInfo = (req, res, next) => {
 
     // Check if user ID is existed in database
     Users
-        .findByPk(req.user.user_ID)
+        .findByPk(req.user.users_id)
         .then((result) => {
 
             // If no result return empty response
@@ -62,3 +62,38 @@ exports.updateAdminInfo = (req, res, next) => {
     })
     .catch((err) => helper.errResponse(res, err));
 }
+
+// Update Password ADmin
+exports.updateAdminPassword = async (req, res) =>  {
+
+    req.body.users_full_name = "";
+
+    req.body.users_updated_by = req.user.users_id ;
+    // Check authorization first, only the admin can update passwords to other users
+    checkAuthorization(req, res, 'Admin');
+      
+    const new_password = bcrypt.hashSync(req.body.new_password, 10) ;
+
+        Users
+        .findByPk(req.user.users_id, { attributes: ["users_id", "users_password"] })
+        .then(result => {
+            console.log(req.body);
+            if(result) {
+                bcrypt.compare(req.body.current_password, result.users_password, (err, hasResult) => {
+
+                    // Display error if exists
+                    if(err) console.log(err);
+                    
+                    // If no result then send empty reponse
+                    if(!hasResult) return emptyDataResponse(res, 'Invalid details or password');
+                    
+                    // Else update user password
+                    Users
+                        .update({ users_password: new_password }, { where: { users_id: req.user.users_id }})
+                        .then(data => dataResponse(res, data, 'Password has been changed successfully', 'Password has been changed successfully'))
+                        .catch(err => errResponse(res, err));
+                });
+            }
+        })
+        .catch(err => errResponse(res, err));
+};
