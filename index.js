@@ -5,6 +5,7 @@ const dotenv = require("dotenv").config();
 // Import all models
 const db = require("./backend/src/models");
 const jwt = require("jsonwebtoken");
+const path = require("path");
 //initialize app
 var app = express();
 
@@ -65,6 +66,7 @@ const authenticateToken = (req, res, next) => {
        }
        
        req.user = user;
+       console.log(user);
        next();
    });
 };

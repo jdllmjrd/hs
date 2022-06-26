@@ -65,7 +65,7 @@ exports.createAccount = async (req, res) => {
     );
     Users.create(req.body, { include: ["created"] })
         .then((data) => {
-        Users.findByPk(data.users_id, { include: ["created"] }).then(
+        Users.findByPk(data.id, { include: ["created"], }).then(
             (result) => {
             res.send({
                 error: false,
@@ -79,6 +79,7 @@ exports.createAccount = async (req, res) => {
         res.status(500).send(err);
         });
 };
+
 // Delete Account
 exports.deleteAccount = (req, res) => {
     const body = { users_status: "Inactive" };
