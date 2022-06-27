@@ -19,10 +19,12 @@ exports.getAllAccounts = (req, res, next) => {
 // Create new account - checked
 exports.createAccount = async (req, res) => {
     checkAuthorization(req, res, "Admin")
+    console.log(req.file.filename);
     req.body.users_full_name = "";
     req.body.users_created_by = req.user.users_id;
-        //console.log(req.file.filename);
-        //req.body.profile_pic = req.file != undefined ? req.file.filename : "";
+    // req.file != undefined ? req.file.filename :
+    req.body.users_profile_pic = req.file != undefined ? req.file.filename : "";
+
     req.body.users_password = await bcrypt.hash(
         req.body.users_password,
         parseInt(process.env.SALT_ROUNDS),
@@ -61,12 +63,15 @@ exports.deleteAccount = (req, res) => {
 }
 // updateAccount - checked
 exports.updateAccount = async (req, res) => {
+
+    // Check authorization first
+   checkAuthorization(req, res, "Admin");
     const users_id = req.params.users_id;
     req.body.users_full_name = "";
     req.body.users_updated_by = req.user.users_id;
 
-    // Check authorization first
-    checkAuthorization(req, res, "Admin");
+    console.log(req.file.filename);
+    req.body.profile_pic = req.file != undefined ? req.file.filename : "";
   
     if (req.body.users_password) {
       req.body.users_password = await bcrypt.hash(

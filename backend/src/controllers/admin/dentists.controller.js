@@ -13,23 +13,22 @@ exports.createDentist = (req, res) => {
    // Check users-type if valid
    checkAuthorization(req, res, "Admin");
 
-   featuredDentist
-       .findOne({ where: { dentists_id: req.body.dentists_id, dentists_full_name: req.body.dentists_full_name }})
-       .then(result => {
-           if(result) emptyDataResponse(res, "")
-           else {
-               // Set id
-               req.body.dentists_id = req.dentists_id
-               
-               // Create featured dentist
-               featuredDentist
-                   .create(req.body)
-                   .then((data) => dataResponse(res, data, "Featured dentist has been added", "Featured Dentist is not added"))
-                   .catch((err) => errResponse(res, err)); 
-           }
-       })
-       .catch(err => errResponse(res, err));
-};
+   featuredDentist.create(req.body, { include: ["created"] })
+    .then((data) => {
+        featuredDentist.findByPk(data.id, { include: ["created"], }).then(
+        (result) => {
+        res.send({
+            error: false,
+            data: result,
+            message: [process.env.SUCCESS_CREATE],
+         });
+        }
+    );
+})
+   .catch((err) => {
+   res.status(500).send(err);
+   });
+}
 // Update featured Dentist
 exports.updateDentist = (req, res) => {
 
@@ -53,7 +52,7 @@ exports.getAll = (req, res, next) => {
     checkAuthorization(req, res, "Admin")
 
     featuredDentist
-        .findAll({ where: { dentists_id: req.dentists_id }})
+        .findAll({})
         .then(data => dataResponse(res, data, "Featured Dentist Retrieved Successfully", "No featured dentist has been retrieved"))
         .catch(err => errResponse(res, err));
 }

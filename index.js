@@ -74,6 +74,8 @@ const authenticateToken = (req, res, next) => {
 /**
  * ROUTES
  */
+// Images
+app.use("/public", express.static(path.join(__dirname + "./backend/src/public/uploads")));
 // Home page
 app.use(`${process.env.API_VERSION}/home`, require ("./backend/src/routes/home.routes"));
 // Register Page
@@ -98,6 +100,4 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
 
-//**Invoices Route */
-const invoicesRoute = require("./backend/src/routes/invoices.routes");
 
