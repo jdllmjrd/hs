@@ -5,8 +5,6 @@ const Users = db.Users;
 const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = require('../../helpers/helper.controller');
 const bcrypt = require('bcrypt');
 
-
-
 // Get all accounts - checked
 exports.getAllAccounts = (req, res, next) => {
     
@@ -18,7 +16,7 @@ exports.getAllAccounts = (req, res, next) => {
         .then(data => dataResponse(res, data, 'User accounts are retrieved successfully', 'No user account has been retrieved'))
         .catch(err => errResponse(res, err));
 }
-// Create new account
+// Create new account - checked
 exports.createAccount = async (req, res) => {
     checkAuthorization(req, res, "Admin")
     req.body.users_full_name = "";
@@ -45,7 +43,7 @@ exports.createAccount = async (req, res) => {
         res.status(500).send(err);
         });
 };
-// Delete Account
+// Delete Account - checked
 exports.deleteAccount = (req, res) => {
     const body = { users_status: "Inactive" };
     const users_id = req.params.users_id;
@@ -61,8 +59,7 @@ exports.deleteAccount = (req, res) => {
         })
         .catch(err => errResponse(res, err));
 }
-
-// updateAccount
+// updateAccount - checked
 exports.updateAccount = async (req, res) => {
     const users_id = req.params.users_id;
     req.body.users_full_name = "";
@@ -100,4 +97,4 @@ exports.updateAccount = async (req, res) => {
       .catch((err) => {
         res.status(500).send(err);
       });
-  };
+};

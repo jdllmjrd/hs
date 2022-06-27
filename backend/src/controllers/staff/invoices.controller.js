@@ -1,5 +1,5 @@
 //Invoices Controller
-const db = require("../models");
+const db = require("../../models");
 const Invoices = db.Invoices;
 
 // Create an invoice only for those patients

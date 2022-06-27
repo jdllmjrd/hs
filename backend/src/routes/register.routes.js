@@ -10,6 +10,4 @@ router.post("/", registerController.register);
 
 
 
-// Route for checking if the account already exist
-
 module.exports = router;

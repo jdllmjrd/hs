@@ -1,13 +1,12 @@
 /**
  * LOGIN CONTROLLER
-
  * This controller is for user login
  */
 
 // Import Required Modules/Packages
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const db = require("../../src/models");
+const db = require("../models");
 const Users = db.Users;
 const { errResponse, emptyDataResponse } = require('../helpers/helper.controller');
 
