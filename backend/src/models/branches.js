@@ -16,13 +16,13 @@ module.exports = (sequelize, DataTypes) => {
 
       // Many to One 
       this.belongsTo(models.Users, {
-        as: branches_users_created,
+        as: "branches_users_created" ,
         foreignKey: "branches_created_by",
       });
 
       // Many to One 
       this.belongsTo(models.Users, {
-        as: branches_users_updated,
+        as: "branches_users_updated",
         foreignKey: "branches_updated_by",
       });
       // One to many - Appointments table

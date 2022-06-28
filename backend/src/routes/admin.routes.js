@@ -176,9 +176,8 @@ upload(req, res, function (err) {
 // For Dashboard
 // Counter
 const adminInfoController = require("../controllers/admin/admin_info.controller");
-router.get('/info' , adminInfoController.getAdminInfo);
-router.put('/info' , adminInfoController.updateAdminInfo); 
-router.put('/admin-update-password' , adminInfoController.updateAdminPassword);
+router.get('/get-info' , adminInfoController.getAdminInfo);
+router.put('/:update-info' , adminInfoController.updateAdminInfo); 
 
 /** For Registered Users CRUD */ 
  const usersController = require("../controllers/admin/users.controller");

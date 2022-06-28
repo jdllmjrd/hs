@@ -15,7 +15,7 @@ require('dotenv').config();
 
 // Generate token
 const generateToken = (data) => { 
-    return jwt.sign(data, process.env.TOKEN_SECRET, { expiresIn: '10h' }); 
+    return jwt.sign(data, process.env.TOKEN_SECRET, { expiresIn: '30h' }); 
 }
 
 exports.login = (req, res) => {

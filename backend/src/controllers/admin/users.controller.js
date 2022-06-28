@@ -81,9 +81,10 @@ exports.updateAccount = async (req, res) => {
   
     Users.update(req.body, { where: { users_id: users_id }}, { include: ["updated"] })
       .then((result) => {
+        console.log(req.body);
         if (result) {
           // retrieve updated details
-          Users.findByPk(users_id, { include: ["updated"] }).then((data) => {
+          Users.findByPk(users_id, { include: ["updated"] }).then((result) => {
             res.send({
               error: false,
               data: result,
