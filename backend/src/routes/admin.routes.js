@@ -116,7 +116,6 @@ upload(req, res, function (err) {
 };
 
 // This part is for Featured Dentists
-
 const storageDentist = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, path.join(__dirname, "../public/featured_dentist"));
@@ -129,7 +128,7 @@ const storageDentist = multer.diskStorage({
         file.fieldname + "-" + Date.now() + path.extname(file.originalname)
       );
     },
-  });
+});
   
 const uploadImageDentist = (req, res, next) => {
 let upload = multer({
@@ -171,13 +170,11 @@ upload(req, res, function (err) {
 };
 
 
-
-
 // For Dashboard
 // Counter
 const adminInfoController = require("../controllers/admin/admin_info.controller");
 router.get('/get-info' , adminInfoController.getAdminInfo);
-router.put('/:update-info' , adminInfoController.updateAdminInfo); 
+router.put("/:update-info" , adminInfoController.updateAdminInfo); 
 
 /** For Registered Users CRUD */ 
  const usersController = require("../controllers/admin/users.controller");
@@ -205,7 +202,7 @@ router.delete("/:service_id", serviceController.deleteService); // destroy
 // /** Appointments LISTS */
 // const appointmentController = require("../controllers/admin/appointments.controller");
 // router.post("/add-appointment", appointmentController.createAppointment); // insert
-// router.put("/:appointment_id", appointmentController.updateAppointment); // update // Can approve appoin
+// router.put("/:appointment_id", appointmentController.updateAppointment); // update // Can approve appointment
 // router.get("/get-all-appointment", appointmentController.findAllAppointment);
 // router.delete("/:appointment_id", appointmentController.deleteAppointment); // deactivate appointment
 
