@@ -12,6 +12,8 @@ const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = req
 exports.createDentist = (req, res) => {
    // Check users-type if valid
    checkAuthorization(req, res, "Admin");
+   
+   req.body.dentists_image = req.file != undefined ? req.file.filename : "";
 
    featuredDentist.create(req.body, { include: ["created"] })
     .then((data) => {

@@ -22,7 +22,6 @@ exports.createAccount = async (req, res) => {
     console.log(req.file.filename);
     req.body.users_full_name = "";
     req.body.users_created_by = req.user.users_id;
-    // req.file != undefined ? req.file.filename :
     req.body.users_profile_pic = req.file != undefined ? req.file.filename : "";
 
     req.body.users_password = await bcrypt.hash(

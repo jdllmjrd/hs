@@ -16,17 +16,18 @@ module.exports = (sequelize, DataTypes) => {
 
       // Many to One 
       this.belongsTo(models.Users, {
+        as: branches_users_created,
         foreignKey: "branches_created_by",
       });
 
       // Many to One 
       this.belongsTo(models.Users, {
+        as: branches_users_updated,
         foreignKey: "branches_updated_by",
       });
       // One to many - Appointments table
       this.hasMany(models.Appointments);
       // // Association to Branches by staff
-      // this.hasOne(models.Users);
     }
     // This part will protect some attributes
   }
@@ -73,6 +74,7 @@ module.exports = (sequelize, DataTypes) => {
   branches_google_map: {
     type : DataTypes.TEXT,
     allowNull: true,
+    isUrl: true
   },
   branches_image: {
     type : DataTypes.STRING,
@@ -87,7 +89,23 @@ module.exports = (sequelize, DataTypes) => {
     allowNull: false,
     defaultValue : 'Open' // Open or Close, it depends to the admin
     },
+  branches_created_by: {
+    type: DataTypes.UUID,
+    allowNull: true,
+    references: {
+      model: sequelize.Users,
+      key: "users_id",
+    },
+  },
+  branches_updated_by: {
+    type: DataTypes.UUID,
+    references: {
+      model: sequelize.Users,
+      key: "users_id",
+    },
+  },
 }, 
+
 {
   sequelize,
   timestamps: true,

@@ -2,7 +2,6 @@
  * LOGIN CONTROLLER
  * This controller is for user login
  */
-
 // Import Required Modules/Packages
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
