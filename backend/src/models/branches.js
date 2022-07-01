@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
       // One to many - Appointments table
       this.hasMany(models.Appointments);
       // // Association to Branches by staff
+
+      //One to Many -- DentistSched to users_dentist
+      this.hasMany(models.Dentists_schedules,{
+      })
     }
     // This part will protect some attributes
   }

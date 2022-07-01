@@ -10,10 +10,23 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      /**
-       * We will use belongTo or belongsToMany, where FK column is.
-       */
+       // Many to One 
+      this.belongsTo(models.Users, {
+        as: "sched_dentist" ,
+        foreignKey: "schedule_dentist",
+      });
+      this.belongsTo(models.Branches, {
+        as: "sched_branch" ,
+        foreignKey: "schedule_branch",
+      });
+      this.belongsTo(models.Users, {
+        as: "created" ,
+        foreignKey: "users_created_by",
+      });
+      this.belongsTo(models.Users, {
+        as: "updated",
+        foreignKey: "users_updated_by",
+      });
 
     }
   }
@@ -49,16 +62,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     // If this is 0, only mean that this is not 
     // available or not seen on patient side
-    schedule_no: {
-      type : DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull:{msg: 'Please select your preferred dentist'},
-        notEmpty:{msg: 'This field is required'}
-      },
-      defaultValue : 1,
-      comment: "This is an indicator if schedule is already taken"
-    },
+    // schedule_no: {
+    //   type : DataTypes.STRING,
+    //   allowNull: false,
+    //   validate: {
+    //     notNull:{msg: 'Please select your preferred dentist'},
+    //     notEmpty:{msg: 'This field is required'}
+    //   },
+    //   defaultValue : 1,
+    //   comment: "This is an indicator if schedule is already taken"
+    // },
     
     schedule_date: {
         type : DataTypes.DATEONLY,
@@ -115,12 +128,27 @@ module.exports = (sequelize, DataTypes) => {
       },
       comment: "This contains if the schedule is approved or disapproved by the dentist",
     },
+    schedule_created_by: {
+      type: DataTypes.UUID,
+      allowNull: true,
+      references: {
+        model: sequelize.Users,
+        key: "users_id",
+      },
+    },
+    schedule_updated_by: {
+      type: DataTypes.UUID,
+      references: {
+        model: sequelize.Users,
+        key: "users_id",
+      },
+    },
 },
  {
     sequelize,
     timestamps: true,
-    createdAt: 'dentist_created_at',
-    updatedAt: "dentist_updated_at",
+    createdAt: 'dentist_sched_created_at',
+    updatedAt: "dentist_sched_updated_at",
     modelName: 'Dentists_schedules',
   });
   return Dentists_schedules;

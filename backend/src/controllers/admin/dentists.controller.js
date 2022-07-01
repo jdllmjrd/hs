@@ -14,6 +14,7 @@ exports.createDentist = (req, res) => {
    checkAuthorization(req, res, "Admin");
    
    req.body.dentists_image = req.file != undefined ? req.file.filename : "";
+   req.body.dentists_full_name = "";
 
    featuredDentist.create(req.body, { include: ["created"] })
     .then((data) => {
@@ -37,11 +38,13 @@ exports.updateDentist = (req, res) => {
     // Check if user-status is valid
     // note: always check authorization using users_type
     checkAuthorization(req, res, "Admin")
+    req.body.dentists_image = req.file != undefined ? req.file.filename : "";
+    req.body.dentists_full_name = "";
 
     featuredDentist
         .update(req.body, {
             where: {
-                dentist_id: req.params.dentist_id
+                dentists_id: req.params.dentists_id
             }
         })
         .then(data => dataResponse(res, data, "Updated Successfully", "No updates happened"))
@@ -54,7 +57,7 @@ exports.getAll = (req, res, next) => {
     checkAuthorization(req, res, "Admin")
 
     featuredDentist
-        .findAll({})
+        .findAll()
         .then(data => dataResponse(res, data, "Featured Dentist Retrieved Successfully", "No featured dentist has been retrieved"))
         .catch(err => errResponse(res, err));
 }

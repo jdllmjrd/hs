@@ -134,7 +134,7 @@ const uploadImageDentist = (req, res, next) => {
 let upload = multer({
     storage: storageDentist,
     fileFilter: helpers.imageFilter,
-}).single("services_image");
+}).single("dentists_image");
 
 upload(req, res, function (err) {
     // req.file contains information of uploaded file
@@ -180,7 +180,7 @@ router.put("/:update-info" , adminInfoController.updateAdminInfo);
  const usersController = require("../controllers/admin/users.controller");
 
 router.post("/add-users", uploadImage, usersController.createAccount); // insert
-router.put("/:users_id", uploadImage, usersController.updateAccount); // update
+router.put("/:users_id", uploadImage,usersController.updateAccount); // update
 router.get("/retrieve-users", usersController.getAllAccounts);
 router.delete("/:users_id", usersController.deleteAccount); // deactivate user
 
@@ -199,6 +199,14 @@ router.put("/:service_id", uploadImageService, serviceController.updateService);
 router.get("/get-all-services", serviceController.getAllService);
 router.delete("/:service_id", serviceController.deleteService); // destroy
 
+
+/** For Branches CRUD */ 
+const branchesController = require("../controllers/admin/branches.controller");
+router.post("/add-branch",branchesController.createBranches); // insert
+router.put("/:branch_id", branchesController.updateBranches); // update
+router.get("/get-all-branches", branchesController.getAllBranches);
+router.delete("/:branches_id", branchesController.deleteBranch); // destroy
+
 // /** Appointments LISTS */
 // const appointmentController = require("../controllers/admin/appointments.controller");
 // router.post("/add-appointment", appointmentController.createAppointment); // insert
@@ -207,9 +215,10 @@ router.delete("/:service_id", serviceController.deleteService); // destroy
 // router.delete("/:appointment_id", appointmentController.deleteAppointment); // deactivate appointment
 
 /** Schedules of Dentists */
-// router.post("/appointment", scheduleController.createAppointment); // insert
-// router.put("/:schedule_id", scheduleController.updateAppointment); // update
-// router.get("/get-all-appointment", scheduleController.findAllAppointment);
-// router.delete("/:schedule_id", scheduleController.deleteAppointment); // delete as in delete
+const scheduleController = require("../controllers/admin/sched.controller");
+router.post("/schedule", scheduleController.createSchedule); // insert
+router.put("/:schedule_id", scheduleController.updateSchedule); // update
+router.get("/get-all-schedule", scheduleController.findAllSchedule);
+router.delete("/:schedule_id", scheduleController.deleteSchedule); // delete as in delete
 
 module.exports = router;

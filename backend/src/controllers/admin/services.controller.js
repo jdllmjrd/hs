@@ -2,19 +2,21 @@
  * 
  * CONTROLLER SERVICE FOR ADMIN
  */
- const db = require('../../models');
+ const db = require("../../models");
  const Services = db.Services;
- const Users = db.Users;
+ const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = require('../../helpers/helper.controller');
+
  
  //create and save new Service
  exports.createService = (req, res) => {
 
-    req.body.services_created_by = req.users.users_id;
+    req.body.services_created_by = req.user.users_id;
+    req.body.services_image = req.file != undefined ? req.file.filename : "";
     // Check users-type if valid
     checkAuthorization(req, res, "Admin");
  
     Services
-        .findOne({ where: { services_id: req.body.services_id}})
+        .findOne({ where: { services_name: req.body.services_name}})
         .then(result => {
             if(result) emptyDataResponse(res, "")
             else {
@@ -40,7 +42,7 @@
      Services
          .update(req.body, {
              where: {
-                 dentist_id: req.params.dentist_id
+                services_id: req.params.services_id
              }
          })
          .then(data => dataResponse(res, data, "Updated Successfully", "No updates happened"))
@@ -53,7 +55,7 @@
      checkAuthorization(req, res, "Admin")
  
      Services
-         .findAll({ where: { dentists_id: req.dentists_id }})
+         .findAll({ where: { services_status: "Available"}})
          .then(data => dataResponse(res, data, "Featured Dentist Retrieved Successfully", "No featured dentist has been retrieved"))
          .catch(err => errResponse(res, err));
  }

@@ -1,8 +1,7 @@
 const router = require("express").Router();
 
-// // import service controller
-// const servicesController = require('../controllers/services.controller');
-// router.post('/services', servicesController.service);
-
+// import service controller
+const servicesController = require('../controllers/service.controller');
+router.get('/', servicesController.getServices);
 
 module.exports = router;

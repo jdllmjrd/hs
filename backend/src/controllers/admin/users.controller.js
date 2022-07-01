@@ -12,7 +12,7 @@ exports.getAllAccounts = (req, res, next) => {
     checkAuthorization(req, res, 'Admin')
 
     Users
-        .findAll()
+        .findAll({where: { users_status: "Active" }})
         .then(data => dataResponse(res, data, 'User accounts are retrieved successfully', 'No user account has been retrieved'))
         .catch(err => errResponse(res, err));
 }

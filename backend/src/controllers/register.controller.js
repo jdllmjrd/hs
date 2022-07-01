@@ -1,7 +1,6 @@
 /**
  * PATIENT REGISTRATION CONTROLLER
  */
-
  const db = require('../models');
  const Users = db.Users;
  // const nodemailer = require('nodemailer');
@@ -13,11 +12,10 @@
  // Register a user and by default is a patient
  exports.register = async (req, res) => {
      req.body.users_full_name = "";
- 
-     //req.body.users_created_by = req.user.users_id;
-     // for image
-     // console.log(req.file.filename);
-     // req.body.profile_pic = req.file != undefined ? req.file.filename : "";
+
+    // for image
+     console.log(req.file.filename);
+     req.body.users_profile_pic = req.file != undefined ? req.file.filename : "";
  
      // Store password into hash.
      req.body.users_password = await bcrypt.hash(
