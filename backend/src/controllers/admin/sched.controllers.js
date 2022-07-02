@@ -1,9 +1,6 @@
-/** Schedules of Dentists */
-// router.post("/appointment", scheduleController.createAppointment); // insert
-// router.put("/:schedule_id", scheduleController.updateAppointment); // update
-// router.get("/get-all-appointment", scheduleController.findAllAppointment);
-// router.delete("/:schedule_id", scheduleController.deleteAppointment); // delete as in delete
-
+/**
+ * CONTROLLERS FOR SCHEDULE DENTIST
+ */
 const db = require('../../models');
 const Users = db.Users;
 const Schedule = db.Dentists_schedules;
@@ -17,7 +14,7 @@ exports.findAllSchedule= (req, res, next) => {
 
     Schedule
         .findAll()
-        .then(data => dataResponse(res, data, 'Schedules are retrieved successfully', 'No user account has been retrieved'))
+        .then(data => dataResponse(res, data, "Schedules are retrieved successfully", "No Schedule Available"))
         .catch(err => errResponse(res, err));
 }
 // Create Schedule for dentist
@@ -56,7 +53,7 @@ exports.deleteSchedule = (req, res) => {
             if(result) emptyDataResponse(res, "User record is successfully deactivated")
         })
         .catch(err => errResponse(res, err));
-}
+};
 // updateAccount
 exports.updateSchedule = async (req, res) => {
 
@@ -65,16 +62,7 @@ exports.updateSchedule = async (req, res) => {
     const users_id = req.params.users_id;
     req.body.users_full_name = "";
     req.body.users_updated_by = req.user.users_id;
-
-    console.log(req.file.filename);
-    req.body.profile_pic = req.file != undefined ? req.file.filename : "";
   
-    if (req.body.users_password) {
-      req.body.users_password = await bcrypt.hash(
-        req.body.users_password,
-        parseInt(process.env.SALT_ROUNDS)
-      );
-    }
   
     Users.update(req.body, { where: { users_id: users_id }}, { include: ["updated"] })
       .then((result) => {
