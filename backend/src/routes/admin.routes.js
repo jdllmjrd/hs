@@ -201,7 +201,7 @@ router.delete("/:service_id", serviceController.deleteService); // destroy
 
 
 /** For Branches CRUD */ 
-const branchesController = require("../controllers/admin/branches.controller");
+const branchesController = require("../controllers/admin/branches_controller");
 router.post("/add-branch",branchesController.createBranches); // insert
 router.put("/:branch_id", branchesController.updateBranches); // update
 router.get("/get-all-branches", branchesController.getAllBranches);
