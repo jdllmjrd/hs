@@ -71,12 +71,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     services_created_by: {
       type: DataTypes.UUID,
+      allowNull: true,
       references: {
         model: sequelize.Users,
         key: "users_id",
       },
     },
     services_updated_by: {
+      allowNull: true,
       type: DataTypes.UUID,
       references: {
         model: sequelize.Users,

@@ -25,13 +25,13 @@ module.exports = (sequelize, DataTypes) => {
         as: "branches_users_updated",
         foreignKey: "branches_updated_by",
       });
-      // One to many - Appointments table
-      this.hasMany(models.Appointments);
-      // // Association to Branches by staff
+      //One to many - Appointments table
+      // this.hasMany(models.Appointments);
+      // // // Association to Branches by staff
 
-      //One to Many -- DentistSched to users_dentist
-      this.hasMany(models.Dentists_schedules,{
-      })
+      // //One to Many -- DentistSched to users_dentist
+      // this.hasMany(models.Dentists_schedules,{
+      // })
     }
     // This part will protect some attributes
   }
@@ -95,7 +95,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   branches_created_by: {
     type: DataTypes.UUID,
-    allowNull: true,
+    // allowNull: true,
     references: {
       model: sequelize.Users,
       key: "users_id",

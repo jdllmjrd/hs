@@ -6,7 +6,7 @@ const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = req
 //create and save new branch
 exports.createBranches = (req, res) => {
 
-   req.body.services_created_by = req.user.users_id;
+   req.body.branches_created_by = req.user.users_id;
    // Check users-type if valid
    checkAuthorization(req, res, "Admin");
 
@@ -16,7 +16,7 @@ exports.createBranches = (req, res) => {
            if(result) emptyDataResponse(res, "")
            else {
                // Set id
-               req.body.branches_id = req.branches_id
+               req.body.branches_id = req.branches_id;
                
                // Create Branch
                Branches
@@ -28,13 +28,13 @@ exports.createBranches = (req, res) => {
        .catch(err => errResponse(res, err));
 };
 // Update Branches
-exports.updateBranch = (req, res) => {
+exports.updateBranches = (req, res) => {
 
     // Check if user-status is valid
     // note: always check authorization using users_type
     checkAuthorization(req, res, "Admin")
 
-    Services
+    Branches
         .update(req.body, {
             where: {
                branches_id: req.params.branches_id
@@ -58,11 +58,12 @@ exports.getAllBranches = (req, res, next) => {
 
 exports.deleteBranch = (req, res) => {
     const body = { branches_status: "Close" };
+    const branches_id = req.params.branches_id;
     // Check authorization first
     checkAuthorization(req, res, "Admin");
 
-    Services
-        .update(body, { where: { branches_id: req.params.branches_id }})
+    Branches
+        .update(body, { where: { branches_id: branches_id }})
         .then(result => {
             if(result) emptyDataResponse(res, "Service Successfully Deactivated")
         })

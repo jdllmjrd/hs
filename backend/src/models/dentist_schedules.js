@@ -20,12 +20,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "schedule_branch",
       });
       this.belongsTo(models.Users, {
-        as: "created" ,
-        foreignKey: "users_created_by",
+        as: "sched_created" ,
+        foreignKey: "schedule_created_by",
       });
       this.belongsTo(models.Users, {
-        as: "updated",
-        foreignKey: "users_updated_by",
+        as: "sched_updated",
+        foreignKey: "schedule_updated_by",
       });
 
     }

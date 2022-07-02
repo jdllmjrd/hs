@@ -184,7 +184,7 @@ router.put("/:users_id", uploadImage,usersController.updateAccount); // update
 router.get("/retrieve-users", usersController.getAllAccounts);
 router.delete("/:users_id", usersController.deleteAccount); // deactivate user
 
-/** For Featured Dentist CRUD */ 
+// /** For Featured Dentist CRUD */ 
 const dentistController = require("../controllers/admin/dentists.controller");
 
 router.post("/add-featured-dentist",uploadImageDentist, dentistController.createDentist); // insert
@@ -215,10 +215,10 @@ router.delete("/:branches_id", branchesController.deleteBranch); // destroy
 // router.delete("/:appointment_id", appointmentController.deleteAppointment); // deactivate appointment
 
 /** Schedules of Dentists */
-const scheduleController = require("../controllers/admin/sched.controller");
-router.post("/schedule", scheduleController.createSchedule); // insert
-router.put("/:schedule_id", scheduleController.updateSchedule); // update
-router.get("/get-all-schedule", scheduleController.findAllSchedule);
-router.delete("/:schedule_id", scheduleController.deleteSchedule); // delete as in delete
+// const scheduleController = require("../controllers/admin/sched.controller");
+// router.post("/schedule", scheduleController.createSchedule); // insert
+// router.put("/:schedule_id", scheduleController.updateSchedule); // update
+// router.get("/get-all-schedule", scheduleController.findAllSchedule);
+// router.delete("/:schedule_id", scheduleController.deleteSchedule); // delete as in delete
 
 module.exports = router;

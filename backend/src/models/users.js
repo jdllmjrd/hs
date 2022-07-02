@@ -41,6 +41,11 @@ module.exports = (sequelize, DataTypes) => {
       //One to Many -- DentistSced to users_dentist
       this.hasMany(models.Dentists_schedules,{
       });
+      this.hasMany(models.Branches, {
+        as: "admin_added_branch",
+        foreignKey: "services_created_by",
+      });
+      
     }
 
     // This part will protect some attributes
