@@ -45,9 +45,7 @@ exports.updateDentist = (req, res) => {
         .update(req.body, {
             where: {
                 dentists_id: req.params.dentists_id
-            },
-            include: ["created_dentists"] 
-    
+            },    
         })
         .then(data => dataResponse(res, data, "Updated Successfully", "No updates happened"))
         .catch(err => errResponse(res, err))
