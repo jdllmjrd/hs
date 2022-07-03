@@ -34,6 +34,8 @@
  };
  // Update Services
  exports.updateService = (req, res) => {
+    req.body.services_created_by = req.params.users_id;
+    req.body.services_image = req.file != undefined ? req.file.filename : "";
  
      // Check if user-status is valid
      // note: always check authorization using users_type

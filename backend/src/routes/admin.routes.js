@@ -82,6 +82,7 @@ let upload = multer({
     fileFilter: helpers.imageFilter,
 }).single("services_image");
 
+
 upload(req, res, function (err) {
     // req.file contains information of uploaded file
     // req.body contains information of text fields, if there were any
@@ -195,7 +196,7 @@ router.delete("/:dentist_id", dentistController.deleteDentist);
 /** For Services CRUD */ 
 const serviceController = require("../controllers/admin/services.controller");
 router.post("/add-service",uploadImageService, serviceController.createService); // insert
-router.put("/:service_id", uploadImageService, serviceController.updateService); // update
+router.put("/:service_id",uploadImageService, serviceController.updateService); // update
 router.get("/get-all-services", serviceController.getAllService);
 router.delete("/:service_id", serviceController.deleteService); // destroy
 

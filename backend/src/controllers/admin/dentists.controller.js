@@ -50,6 +50,8 @@ exports.updateDentist = (req, res) => {
         .then(data => dataResponse(res, data, "Updated Successfully", "No updates happened"))
         .catch(err => errResponse(res, err))
 }
+
+
 // Get all featured Dentist
 exports.getAll = (req, res, next) => {
     

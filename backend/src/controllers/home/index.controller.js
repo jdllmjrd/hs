@@ -3,8 +3,6 @@
 const db = require('../../models');
 const nodemailer = require("nodemailer");
 
-exports.render = (req, res, next) => res.send('Home page');
-
 // Get All Featured Dentist
 // For Featured Dentist section
 exports.getAllDentist = (req, res) => {
@@ -27,30 +25,18 @@ exports.getAllDentist = (req, res) => {
   };
 // This will send an email for contact us section
 exports.send = (req, res) => {
-    // res.send();
-    const output = `
-    <p> You have sent a message to HappySmile Dental Clinic </p>
-    <h3> Message Details: </h3>
-    <ul>
-        <li>Name: ${req.body.name} </li> 
-        <li>Name: ${req.body.subject} </li>
-        <li>Name: ${req.body.body} </li> 
-    </ul>
-
-    `;
-
 // async..await is not allowed in global scope, must use a wrapper
 async function main() {
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
     // CHANGE THE HOST AFTER DEPLOYMENT 
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, // true for 465, false for other ports
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true, // true for 465, false for other ports
     auth: {
         // You can modify this after deployment please
-      user: testAccount.user, // generated ethereal user
-      pass: testAccount.pass, // generated ethereal password
+      user: "happysmile14324@gmail.com"
+      pass: a
     },
   });
 
