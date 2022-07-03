@@ -7,7 +7,7 @@ const router = require("express").Router();
 // GET all the featured doctor from DB with images section
 // contact us using nodemailer controller, bottom section
 const homeController = require('../controllers/home/index.controller');
-router.get('/', homeController.getAllDentist);
+router.get('/', homeController.getALLDentist);
 // router.post('/', homeController.send);
 
 

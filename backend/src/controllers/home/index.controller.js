@@ -1,27 +1,17 @@
 // This will render the controller
 // to home page
-const db = require('../../models');
+const db = require('../../models/');
+const Dentist = db.Dentists;
 const nodemailer = require("nodemailer");
+const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = require('../../helpers/helper.controller');
 
 // Get All Featured Dentist
 // For Featured Dentist section
-exports.getAllDentist = (req, res) => {
-    db.Dentists.getAllDentist({
-      where: { status: "Active" },
-    })
-      .then((data) => {
-        res.send({
-          error: false,
-          data: data,
-          message: [process.env.SUCCESS_RETRIEVED],
-        });
-      })
-      .catch((err) => {
-        res.status(500).send({
-          error: true,
-          data: [],
-        });
-      });
+exports.getALLDentist = (req, res, next) => {
+  Dentist
+    .findAll({ where: { dentists_status: "Active"}})
+    .then(data => dataResponse(res, data, "Featured Dentist Retrieved Successfully", "No featured dentist has been retrieved"))
+    .catch(err => errResponse(res, err));
   };
 // This will send an email for contact us section
 // exports.send = (req, res) => {
