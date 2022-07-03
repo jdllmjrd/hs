@@ -98,14 +98,12 @@ module.exports = (sequelize, DataTypes) => {
       },
     dentists_created_by: {
       type: DataTypes.UUID,
-      allowNull: true,
       references: {
         model: sequelize.Users,
         key: "users_id",
       },
     },
     dentists_updated_by: {
-      allowNull: true,
       type: DataTypes.UUID,
       references: {
         model: sequelize.Users,

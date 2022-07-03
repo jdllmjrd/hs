@@ -16,9 +16,9 @@ exports.createDentist = (req, res) => {
    req.body.dentists_image = req.file != undefined ? req.file.filename : "";
    req.body.dentists_full_name = "";
 
-   featuredDentist.create(req.body, { include: ["created"] })
+   featuredDentist.create(req.body, { include: ["created_dentists"] })
     .then((data) => {
-        featuredDentist.findByPk(data.id, { include: ["created"], }).then(
+        featuredDentist.findByPk(data.id, { include: ["created_dentists"], }).then(
         (result) => {
         res.send({
             error: false,
@@ -45,7 +45,9 @@ exports.updateDentist = (req, res) => {
         .update(req.body, {
             where: {
                 dentists_id: req.params.dentists_id
-            }
+            },
+            include: ["created_dentists"] 
+    
         })
         .then(data => dataResponse(res, data, "Updated Successfully", "No updates happened"))
         .catch(err => errResponse(res, err))
