@@ -16,24 +16,32 @@ module.exports = (sequelize, DataTypes) => {
 
       // Many to One 
       this.belongsTo(models.Users, {
-        as: "branches_users_created" ,
+        as: "created" ,
         foreignKey: "branches_created_by",
+        onDelete: 'RESTRICT'
       });
-
       // Many to One 
       this.belongsTo(models.Users, {
-        as: "branches_users_updated",
+        as: "updated",
         foreignKey: "branches_updated_by",
+        onDelete : 'RESTRICT'
       });
       //One to many - Appointments table
-      // this.hasMany(models.Appointments);
-      // // // Association to Branches by staff
+      this.hasMany(models.Appointments, {
+        as: "app_branch",
+        foreignKey: "appointments_branch_id",
+        onDelete: 'RESTRICT'
+      });
 
-      // //One to Many -- DentistSched to users_dentist
-      // this.hasMany(models.Dentists_schedules,{
-      // })
+      //One to many - Appointments table
+      this.hasMany(models.Dentists_schedules, {
+        as: "sched_branch",
+        foreignKey: "schedule_branch",
+        onDelete: 'RESTRICT'
+      });
+
     }
-    // This part will protect some attributes
+    
   }
   Branches.init({
   id: {

@@ -29,9 +29,36 @@ module.exports = (sequelize, DataTypes) => {
         as: "updated",
         foreignKey: "users_updated_by",
       });
+      // users - service created
       this.hasMany(models.Services, {
         as: "admin_added_service",
         foreignKey: "services_created_by",
+      });
+      // users - service updated
+      this.hasMany(models.Services, {
+        as: "admin_updated_service",
+        foreignKey: "services_updated_by",
+      });
+       // users - branch created
+       this.hasMany(models.Branches, {
+        as: "admin_added_branch",
+        foreignKey: "branches_created_by",
+      });
+      // users - branch updated
+      this.hasMany(models.Branches, {
+        as: "admin_updated_branch",
+        foreignKey: "branches_updated_by",
+      });
+
+      // users - Dentist created
+      this.hasMany(models.Dentists, {
+        as: "admin_added_dentist",
+        foreignKey: "dentists_created_by",
+      });
+      // users - Dentist updated
+      this.hasMany(models.Dentists, {
+        as: "admin_updated_dentist",
+        foreignKey: "dentists_updated_by",
       });
       // this.hasMany(Users, {
       //   as: "user_added_by_admin",
@@ -39,12 +66,8 @@ module.exports = (sequelize, DataTypes) => {
       // });
 
       //One to Many -- DentistSced to users_dentist
-      this.hasMany(models.Dentists_schedules,{
-      });
-      this.hasMany(models.Branches, {
-        as: "admin_added_branch",
-        foreignKey: "services_created_by",
-      });
+      // this.hasMany(models.Dentists_schedules,{
+      // });
       
     }
 

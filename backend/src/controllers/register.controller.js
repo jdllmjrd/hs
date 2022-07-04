@@ -3,11 +3,7 @@
  */
  const db = require('../models');
  const Users = db.Users;
- // const nodemailer = require('nodemailer');
  const bcrypt = require("bcrypt");
- // const datatable = require("sequelize-datatables");
- 
- 
  
  // Register a user and by default is a patient
  exports.register = async (req, res) => {

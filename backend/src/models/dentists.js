@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       // but featured dentist can only have one user
       // One To Many
       this.belongsTo(models.Users, {
-        as: "created_dentists",
+        as: "created",
         foreignKey: "dentists_created_by",
       });
 
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       // but featured dentist can only have one user
       // One to Many
       this.belongsTo(models.Users, {
-        as: "updated_dentists",
+        as: "updated",
         foreignKey: "dentists_updated_by",
       });
 
@@ -87,7 +87,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     dentists_image :{
       type : DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       comment: "This will be the the featured dentist created"
     },
     dentists_status :{

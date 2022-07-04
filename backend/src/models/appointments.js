@@ -14,12 +14,17 @@ module.exports = (sequelize, DataTypes) => {
       /**
        * We will use belongTo or belongsToMany, where FK column is.
        */
-        // Association to Invoices table
-       this.hasOne(models.Invoices);
         // Association to Branch
         // One to Many
        this.belongsTo(models.Branches, {
-        foreignKey: 'appointments_branch_id'
+        as: "appointment_branch",
+        foreignKey: 'appointments_branch',
+        onDelete   : 'RESTRICT'
+       });
+       this.belongsTo(models.Dentists_schedules, {
+        as: "appointment_sched",
+        foreignKey: 'appointments_sched',
+        onDelete   : 'RESTRICT'
        });
     }
 
@@ -33,34 +38,22 @@ module.exports = (sequelize, DataTypes) => {
       comment: 'This contains UUIDV4 for appointments ID',
     },
     // Foreign Key -- BRANCH table
-    appointments_branch_id: {
-      type : DataTypes.UUID,
-      allowNull: false,
-      validate: {
-        notNull:{msg: 'Please enter service name'},
-        notEmpty:{msg: 'This field is required'}
+    appointments_branch: {
+      type: DataTypes.UUID,
+      references: {
+        model: sequelize.Branches,
+        key: "branches_id",
       },
       comment: "This column is for branch selected by the user"
-      
-    },
-    appointments_date: {
-      type : DataTypes.DATEONLY,
-      allowNull: false,
-      validate: {
-        notNull:{msg: 'Please select your prefer appointment date'},
-        notEmpty:{msg: 'This field is required'}
-      },
-      comment: "This column is for user preferred appointment date"
     },
     // Foreign Key -- Dentists Schedules Table
-    appointments_dentist: {
-      type : DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull:{msg: 'Please select your preferred dentist'},
-        notEmpty:{msg: 'This field is required'}
+    appointments_sched: {
+      type: DataTypes.UUID,
+      references: {
+        model: sequelize.Dentists_schedules,
+        key: "schedules_id",
       },
-      comment: "This contain the preferred dentist for user"
+      comment: "This contain the preferred schedule base on branch"
     },
     appointments_purpose: {
         type : DataTypes.TEXT,

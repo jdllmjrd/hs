@@ -60,6 +60,59 @@ const uploadImage = (req, res, next) => {
     next();
   });
 };
+// This part is for Featured Dentists
+const storageDentist = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../public/featured_dentist"));
+  },
+
+  // By default, multer removes file extensions so let's add them back
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const uploadDentist = (req, res, next) => {
+let upload = multer({
+  storage: storageDentist,
+  fileFilter: helpers.imageFilter,
+}).single("dentists_image");
+
+upload(req, res, function (err) {
+  // req.file contains information of uploaded file
+  // req.body contains information of text fields, if there were any
+
+  if (req.fileValidationError) {
+  return res.status(500).send({
+      error: true,
+      data: [],
+      message: [req.fileValidationError],
+  });
+  } else if (!req.file) {
+  return res.status(500).send({
+      error: true,
+      data: [],
+      message: ["Please select an image to upload"],
+  });
+  } else if (err instanceof multer.MulterError) {
+  return res.status(500).send({
+      error: true,
+      data: [],
+      message: [err],
+  });
+  } else if (err) {
+  return res.status(500).send({
+      error: true,
+      data: [],
+      message: [err],
+  });
+  }
+  next();
+});
+};
 
 // This part is for features dentist
 const storageService = multer.diskStorage({
@@ -116,63 +169,10 @@ upload(req, res, function (err) {
 });
 };
 
-// This part is for Featured Dentists
-const storageDentist = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, path.join(__dirname, "../public/featured_dentist"));
-    },
-  
-    // By default, multer removes file extensions so let's add them back
-    filename: function (req, file, cb) {
-      cb(
-        null,
-        file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-      );
-    },
-});
-  
-const uploadImageDentist = (req, res, next) => {
-let upload = multer({
-    storage: storageDentist,
-    fileFilter: helpers.imageFilter,
-}).single("dentists_image");
-
-upload(req, res, function (err) {
-    // req.file contains information of uploaded file
-    // req.body contains information of text fields, if there were any
-
-    if (req.fileValidationError) {
-    return res.status(500).send({
-        error: true,
-        data: [],
-        message: [req.fileValidationError],
-    });
-    } else if (!req.file) {
-    return res.status(500).send({
-        error: true,
-        data: [],
-        message: ["Please select an image to upload"],
-    });
-    } else if (err instanceof multer.MulterError) {
-    return res.status(500).send({
-        error: true,
-        data: [],
-        message: [err],
-    });
-    } else if (err) {
-    return res.status(500).send({
-        error: true,
-        data: [],
-        message: [err],
-    });
-    }
-    next();
-});
-};
 
 
 // For Dashboard
-// Counter
+// // Counter
 const adminInfoController = require("../controllers/admin/admin_info.controller");
 router.get('/get-info' , adminInfoController.getAdminInfo);
 router.put("/:update-info" , adminInfoController.updateAdminInfo); 
@@ -180,33 +180,33 @@ router.put("/:update-info" , adminInfoController.updateAdminInfo);
 /** For Registered Users CRUD */ 
  const usersController = require("../controllers/admin/users.controller");
 
-router.post("/add-users", uploadImage, usersController.createAccount); // insert
-router.put("/:users_id", uploadImage,usersController.updateAccount); // update
-router.get("/retrieve-users", usersController.getAllAccounts);
-router.delete("/:users_id", usersController.deleteAccount); // deactivate user
+router.post("/user/add-users", uploadImage, usersController.createAccount); // insert
+router.put("/user/:users_id", uploadImage,usersController.updateAccount); // update
+router.get("/user/retrieve-users", usersController.getAllAccounts);
+router.delete("/user/:users_id", usersController.deleteAccount); // deactivate user
 
 // /** For Featured Dentist CRUD */ 
 const dentistController = require("../controllers/admin/dentists.controller");
 
-router.post("/add-featured-dentist",uploadImageDentist, dentistController.createDentist); // insert
-router.put("/:dentist_id", uploadImageDentist, dentistController.updateDentist); // update
-router.get("/retrieved-featured-dentist", dentistController.getAll);
-router.delete("/:dentist_id", dentistController.deleteDentist);
+router.post("/dentist/add-featured-dentist",uploadDentist, dentistController.createDentist); // insert
+router.put("/dentist/:dentists_id", uploadDentist, dentistController.updateDentist); // update
+router.get("/dentist/retrieved-featured-dentist", dentistController.getAll);
+router.delete("/dentist/:dentists_id", dentistController.deleteDentist);
 
 /** For Services CRUD */ 
 const serviceController = require("../controllers/admin/services.controller");
-router.post("/add-service",uploadImageService, serviceController.createService); // insert
-router.put("/:service_id",uploadImageService, serviceController.updateService); // update
-router.get("/get-all-services", serviceController.getAllService);
-router.delete("/:service_id", serviceController.deleteService); // destroy
+router.post("/service/add-service",uploadImageService, serviceController.createService); // insert
+router.put("/service/:services_id",uploadImageService, serviceController.updateService); // update
+router.get("/service/get-all-services", serviceController.getAllService);
+router.delete("/service/:services_id", serviceController.deleteService); // destroy
 
 
 /** For Branches CRUD */ 
 const branchesController = require("../controllers/admin/branches_controller");
-router.post("/add-branch",branchesController.createBranches); // insert
-router.put("/:branch_id", branchesController.updateBranches); // update
-router.get("/get-all-branches", branchesController.getAllBranches);
-router.delete("/:branches_id", branchesController.deleteBranch); // destroy
+router.post("/branch/add-branch",branchesController.createBranches); // insert
+router.put("/branch/:branches_id", branchesController.updateBranches); // update
+router.get("/branch/get-all-branches", branchesController.getAllBranches);
+router.delete("/branch/:branches_id", branchesController.deleteBranch); // destroy
 
 // /** Appointments LISTS */
 // const appointmentController = require("../controllers/admin/appointments.controller");

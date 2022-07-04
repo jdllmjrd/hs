@@ -20,12 +20,11 @@ exports.createBranches = (req, res) => {
                
                // Create Branch
                Branches
-                   .create(req.body)
+                   .create(req.body,{ include: ["created"] })
                    .then((data) => dataResponse(res, data, "A new record has been added", "Record is not added"))
                    .catch((err) => errResponse(res, err)); 
            }
-       })
-       .catch(err => errResponse(res, err));
+       }) .catch(err => helper.errResponse(res, err));
 };
 // Update Branches
 exports.updateBranches = (req, res) => {
@@ -38,7 +37,7 @@ exports.updateBranches = (req, res) => {
         .update(req.body, {
             where: {
                branches_id: req.params.branches_id
-            }
+            },
         })
         .then(data => dataResponse(res, data, "Updated Successfully", "No updates happened"))
         .catch(err => errResponse(res, err))
@@ -65,7 +64,7 @@ exports.deleteBranch = (req, res) => {
     Branches
         .update(body, { where: { branches_id: branches_id }})
         .then(result => {
-            if(result) emptyDataResponse(res, "Service Successfully Deactivated")
+            if(result) emptyDataResponse(res, "Branch Successfully Deactivated")
         })
         .catch(err => errResponse(res, err));
 }

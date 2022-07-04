@@ -22,7 +22,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey : 'invoices_issued_to',
         otherKey: "invoices_created_by",
       });
-      this.hasMany(models.Invoices_Services);
+      this.hasMany(models.Invoices_Services, {
+        as: "dump_invoice",
+        foreignKey: "inser_invoice_id"
+      });
     }
   }
   Invoices.init({

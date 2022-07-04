@@ -14,18 +14,29 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Users, {
         as: "sched_dentist" ,
         foreignKey: "schedule_dentist",
+        onDelete   : 'RESTRICT'
       });
       this.belongsTo(models.Branches, {
         as: "sched_branch" ,
         foreignKey: "schedule_branch",
+        onDelete   : 'RESTRICT'
       });
       this.belongsTo(models.Users, {
         as: "sched_created" ,
         foreignKey: "schedule_created_by",
+        onDelete   : 'RESTRICT'
       });
       this.belongsTo(models.Users, {
         as: "sched_updated",
         foreignKey: "schedule_updated_by",
+        onDelete   : 'RESTRICT'
+      });
+      // Association to Branches
+      //One to Many -- DentistSched to users_dentist
+      this.hasMany(models.Appointments, {
+        as: "app_sched",
+        foreignKey: "appointments_sched",
+        onDelete   : 'RESTRICT'
       });
 
     }
@@ -41,24 +52,23 @@ module.exports = (sequelize, DataTypes) => {
     // Foreign Key - DENTIST 
     // ID but can view name of dentists
     schedule_dentist: {
-      type : DataTypes.UUID,
-      allowNull: false,
-      validate: {
-        notNull:{msg: 'Please select dentist schedule'},
-        notEmpty:{msg: 'This field is required'}
+      type: DataTypes.UUID,
+      allowNull: true,
+      references: {
+        model: sequelize.Users,
+        key: "users_id",
       },
       comment: "This column is for available dentist selected by user-staff and admin"
       
     },
     // Foreign key -- BRANCH    
     schedule_branch: {
-      type : DataTypes.UUID,
-      allowNull: false,
-      validate: {
-        notNull:{msg: 'Please select branch'},
-        notEmpty:{msg: 'This field is required'}
+      type: DataTypes.UUID,
+      references: {
+        model: sequelize.Branches,
+        key: "branches_id",
       },
-      comment: "This column is for where the dentist will be for the specific day"
+      comment: "This column is for branch selected by the staff"
     },
     // If this is 0, only mean that this is not 
     // available or not seen on patient side

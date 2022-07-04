@@ -12,7 +12,7 @@ exports.getAllAccounts = (req, res, next) => {
     checkAuthorization(req, res, 'Admin')
 
     Users
-        .findAll({where: { users_status: "Active" }})
+        .findAll()
         .then(data => dataResponse(res, data, 'User accounts are retrieved successfully', 'No user account has been retrieved'))
         .catch(err => errResponse(res, err));
 }
@@ -30,18 +30,18 @@ exports.createAccount = async (req, res) => {
     );
     Users.create(req.body, { include: ["created"] })
         .then((data) => {
-        Users.findByPk(data.id, { include: ["created"], }).then(
+        Users.findByPk(data.users_id, { include: ["created"], }).then(
             (result) => {
             res.send({
                 error: false,
                 data: result,
                 message: [process.env.SUCCESS_CREATE],
             });
-            }
+          }
         );
         })
         .catch((err) => {
-        res.status(500).send(err);
+          res.status(500).send(err);
         });
 };
 // Delete Account - checked
@@ -58,19 +58,19 @@ exports.deleteAccount = (req, res) => {
         .then(result => {
             if(result) emptyDataResponse(res, "User record is successfully deactivated")
         })
-        .catch(err => errResponse(res, err));
-}
+        .catch(err => errResponse(res, err)
+)}     
 // updateAccount - checked
-exports.updateAccount = async (req, res) => {
+exports.updateAccount = async (req, res) => { 
 
     // Check authorization first
    checkAuthorization(req, res, "Admin");
     const users_id = req.params.users_id;
-    req.body.users_full_name = "";
     req.body.users_updated_by = req.user.users_id;
+    req.body.users_full_name = "";
 
     console.log(req.file.filename);
-    req.body.profile_pic = req.file != undefined ? req.file.filename : "";
+    req.body.users_profile_pic = req.file != undefined ? req.file.filename : "";
   
     if (req.body.users_password) {
       req.body.users_password = await bcrypt.hash(
@@ -78,7 +78,7 @@ exports.updateAccount = async (req, res) => {
         parseInt(process.env.SALT_ROUNDS)
       );
     }
-  
+
     Users.update(req.body, { where: { users_id: users_id }}, { include: ["updated"] })
       .then((result) => {
         console.log(req.body);
@@ -100,6 +100,11 @@ exports.updateAccount = async (req, res) => {
         }
       })
       .catch((err) => {
-        res.status(500).send(err);
-      });
+        res.status(500).send({
+          error: true,
+          data: [],
+          message:
+            err.errors.map((e) => e.message) || process.env.GENERAL_ERROR_MSG,
+        });
+      })
 };

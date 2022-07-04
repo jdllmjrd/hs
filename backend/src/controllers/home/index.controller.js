@@ -3,7 +3,7 @@
 const db = require('../../models/');
 const Dentist = db.Dentists;
 const nodemailer = require("nodemailer");
-const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = require('../../helpers/helper.controller');
+const { dataResponse, errResponse } = require('../../helpers/helper.controller');
 
 // Get All Featured Dentist
 // For Featured Dentist section
