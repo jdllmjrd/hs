@@ -1,48 +1,50 @@
 // import modules/packages
 const express = require("express");
-// to access .env file
 const dotenv = require("dotenv").config();
-// Import all models
 const db = require("./backend/src/models");
 const jwt = require("jsonwebtoken");
 const path = require("path");
+
 //initialize app
 var app = express();
 
 // parse requests of content-type - application/json
 app.use(express.json()); 
 
-app.use(
-    express.urlencoded({
-        extended: true,
-    })
-);
+app.use(express.urlencoded({extended: true,}));
+
 // For token secret
 // console.log(require("crypto").randomBytes(64).toString("hex"));
 
-//This is to check if db connects 
 db.sequelize
   .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully!');
-  }).catch((error) => {
-    console.error('Unable to connect to database:', err);
-  })
+  .then(() => {console.log('Connection has been established successfully!');
+  }).catch((error) => {console.error('Unable to connect to database:', error);})
 
   if (process.env.ALLOW_SYNC === "true"){
     // database synch
-    db.sequelize.sync({alter: true })
-      .then(() => console.log('Done adding/updating database based on the models'))
-  }
+    db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', { raw: true })
+    .then (() =>{
+        db.sequelize.sync ({ alter: true})
+        .then(() => console.log('Done adding/updating database based on the models'))
+        .catch((error) => {console.log("Unable to add/update", error);})
+        })
+    .catch((error) => {console.log("Unable to connect", error);})
+    }
 
+  
+//   Check PORT
+const PORT = process.env.PORT || 5600;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}.`);
+});
 // all request will go here first (middleware)
 app.use((req, res, next) => {
-    // Check SESSION or JWT
     console.log("Request has been sent to " + req.url);
     next();
   });
 
-  // Example part
+// Example part
 app.get("/", (req, res) =>{
     res.json({message: "HappySmile"});
 });
@@ -71,9 +73,7 @@ const authenticateToken = (req, res, next) => {
    });
 };
 
-/**
- * ROUTES
- */
+/*** ROUTES*/
 // Images
 app.use("/users-profile-pic", express.static(path.join(__dirname + "./backend/src/public/users_profile_pic")));
 app.use("/featured_dentist", express.static(path.join(__dirname + "./backend/src/public/featured_dentist")));
@@ -96,8 +96,3 @@ app.use(`${process.env.API_VERSION}/services`, require ("./backend/src/routes/se
 /** Admin user route*/
 app.use(`${process.env.API_VERSION}/admin`, authenticateToken , require("./backend/src/routes/admin.routes"));
 
-// Set up PORT
-const PORT = process.env.PORT || 5600;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
-});

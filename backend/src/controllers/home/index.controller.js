@@ -13,6 +13,8 @@ exports.getALLDentist = (req, res, next) => {
     .then(data => dataResponse(res, data, "Featured Dentist Retrieved Successfully", "No featured dentist has been retrieved"))
     .catch(err => errResponse(res, err));
   };
+
+  
 // This will send an email for contact us section
 // exports.send = (req, res) => {
 // // async..await is not allowed in global scope, must use a wrapper

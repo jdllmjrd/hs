@@ -2,9 +2,6 @@
 const {
   Model
 } = require('sequelize');
-
-const PROTECTED_ATTRIBUTES = ["users_password", "users_birthdate"];
-
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**
@@ -14,78 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-
-      // Only the admin can create a user account; thus,
-      // An Admin can add many user account
-      // But a user account can only be added by one admin
-      // One to Many, This is fix because admin-user only have 
-      // the power to add/update to other user excludes password. 
-
-      this.belongsTo(Users, {
-        as: "created" ,
-        foreignKey: "users_created_by",
-      });
-      this.belongsTo(Users, {
-        as: "updated",
-        foreignKey: "users_updated_by",
-      });
-      // users - service created
-      this.hasMany(models.Services, {
-        as: "admin_added_service",
-        foreignKey: "services_created_by",
-      });
-      // users - service updated
-      this.hasMany(models.Services, {
-        as: "admin_updated_service",
-        foreignKey: "services_updated_by",
-      });
-       // users - branch created
-       this.hasMany(models.Branches, {
-        as: "admin_added_branch",
-        foreignKey: "branches_created_by",
-      });
-      // users - branch updated
-      this.hasMany(models.Branches, {
-        as: "admin_updated_branch",
-        foreignKey: "branches_updated_by",
-      });
-
-      // users - Dentist created
-      this.hasMany(models.Dentists, {
-        as: "admin_added_dentist",
-        foreignKey: "dentists_created_by",
-      });
-      // users - Dentist updated
-      this.hasMany(models.Dentists, {
-        as: "admin_updated_dentist",
-        foreignKey: "dentists_updated_by",
-      });
-      // this.hasMany(Users, {
-      //   as: "user_added_by_admin",
-      //   foreignKey: "users_created_by",
-      // });
-
-      //One to Many -- DentistSced to users_dentist
-      // this.hasMany(models.Dentists_schedules,{
-      // });
-      
-    }
-
-    // This part will protect some attributes
-    toJSON(){
-      const attributes = {...this.get()};
-
-      for(const a of PROTECTED_ATTRIBUTES){
-        delete attributes[a];
-      }
-      return attributes;
     }
   }
-  
   Users.init({
-    id: {
+    users_id: {
       type : DataTypes.UUID,
-      field: 'users_id',
       primaryKey : true, 
       defaultValue : DataTypes.UUIDV4,
       comment: "This contains IDs for users"
@@ -187,7 +117,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     users_type :{
       type : DataTypes.STRING,
-      allowNull : true,
+      allowNull : false,
       defaultValue : 'Patient',
       validate: {
         isIn :{
@@ -212,32 +142,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     comment: "This contains if the user is deactivated or not",
     },
-    users_created_by: {
-    type: DataTypes.UUID,
-    allowNull: true,
-    references: {
-      model: Users,
-      key: "users_id",
-    },
-  },
-    users_updated_by: {
-    type: DataTypes.UUID,
-    references: {
-      model: Users,
-      key: "users_id",
-    },
-  },
-},
-
+  }, 
+  
   {
     sequelize,
     timestamps: true,
     createdAt: "users_created_at",
     updatedAt: "users_updated_at",
     modelName: 'Users',
-
-    
   });
-
   return Users;
 };

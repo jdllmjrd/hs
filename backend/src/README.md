@@ -38,7 +38,7 @@ npm install express --save
 }
 
 # Run app by development
-$ npm run dev
+$ npm run start
 
 # To create database
 $ sequelize db:create
@@ -48,3 +48,11 @@ $ sequelize db:drop
 
 # To create model
 $ sequelize model:generate --name Model_Name --attributes column:string
+
+$ sequelize model:generate --name Services --attributes services_id:string
+$ sequelize model:generate --name Invoices_services --attributes inser_id:string
+$ sequelize model:generate --name Invoices --attributes invoices_id:string
+$ sequelize model:generate --name Dentists --attributes dentists_id:string
+$ sequelize model:generate --name Dentists_schedules --attributes schedule_id:string
+$ sequelize model:generate --name Branches --attributes branches_id:string
+$ sequelize model:generate --name Appointments --attributes appointments_id:string
