@@ -12,47 +12,47 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(Users, {
-        as: "created" ,
         foreignKey: "users_created_by",
+        as: "created"
       });
       this.belongsTo(Users, {
-        as: "updated",
         foreignKey: "users_updated_by",
+        as: "updated"
       });
        // users - service created
        this.hasMany(models.Services, {
-        as: "admin_added_service",
         foreignKey: "services_created_by",
+        as: "admin_added_service"
       });
       // users - service updated
       this.hasMany(models.Services, {
-        as: "admin_updated_service",
         foreignKey: "services_updated_by",
+        as: "admin_updated_service"
       });
        // users - branch created
        this.hasMany(models.Branches, {
-        as: "admin_added_branch",
         foreignKey: "branches_created_by",
+        as: "admin_added_branch"
       });
       // users - branch updated
       this.hasMany(models.Branches, {
-        as: "admin_updated_branch",
         foreignKey: "branches_updated_by",
+        as: "admin_updated_branch"
       });
       // users - Dentist created
       this.hasMany(models.Dentists, {
-        as: "admin_added_dentist",
         foreignKey: "dentists_created_by",
+        as: "admin_added_dentist"
       });
       // users - Dentist updated
       this.hasMany(models.Dentists, {
-        as: "admin_updated_dentist",
         foreignKey: "dentists_updated_by",
+        as: "admin_updated_dentist"
       });
       //One to Many -- Dentist Sched to users_dentist
       this.hasMany(models.Dentists_schedules,{
-        as: "dentist_sched",
         foreignKey: "schedule_dentist",
+        as: "dentist_sched"
       });
     }
   }
@@ -193,7 +193,7 @@ module.exports = (sequelize, DataTypes) => {
         key: "users_id",
       },
     },
-      users_updated_by: {
+    users_updated_by: {
       type: DataTypes.UUID,
       references: {
         model: Users,

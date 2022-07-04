@@ -170,7 +170,6 @@ upload(req, res, function (err) {
 };
 
 
-
 // For Dashboard
 // // Counter
 const adminInfoController = require("../controllers/admin/admin_info.controller");
@@ -209,17 +208,17 @@ router.get("/branch/get-all-branches", branchesController.getAllBranches);
 router.delete("/branch/:branches_id", branchesController.deleteBranch); // destroy
 
 // /** Appointments LISTS */
-// const appointmentController = require("../controllers/admin/appointments.controller");
-// router.post("/add-appointment", appointmentController.createAppointment); // insert
-// router.put("/:appointment_id", appointmentController.updateAppointment); // update // Can approve appointment
-// router.get("/get-all-appointment", appointmentController.findAllAppointment);
-// router.delete("/:appointment_id", appointmentController.deleteAppointment); // deactivate appointment
+const appointmentController = require("../controllers/admin/appointments.controller");
+router.post("/appointment/add-appointment", appointmentController.createAppointment); // insert
+router.put("/appointment/:appointments_id", appointmentController.updateAppointment); // update // Can approve appointment
+router.get("/appointment/get-all-appointment", appointmentController.findAllAppointment);
+router.delete("/appointment/:appointments_id", appointmentController.deleteAppointment); // Cancel appointment
 
 /** Schedules of Dentists */
-// const scheduleController = require("../controllers/admin/sched.controller");
-// router.post("/schedule", scheduleController.createSchedule); // insert
-// router.put("/:schedule_id", scheduleController.updateSchedule); // update
-// router.get("/get-all-schedule", scheduleController.findAllSchedule);
-// router.delete("/:schedule_id", scheduleController.deleteSchedule); // delete as in delete
+const scheduleController = require("../controllers/admin/sched.controllers");
+router.post("/schedule/add-schedule", scheduleController.createSchedule); // insert
+router.put("/schedule/:schedule_id", scheduleController.updateSchedule); // update
+router.get("/schedule/get-all-schedule", scheduleController.findAllSchedule);
+router.delete("/schedule/:schedule_id", scheduleController.deleteSchedule); // delete as in delete
 
 module.exports = router;

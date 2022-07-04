@@ -44,11 +44,6 @@ app.use((req, res, next) => {
     next();
   });
 
-// Example part
-app.get("/", (req, res) =>{
-    res.json({message: "HappySmile"});
-});
-
 // Authentication for TOKEN
 // next - is for next function to run
 const authenticateToken = (req, res, next) => {

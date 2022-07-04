@@ -1,90 +1,87 @@
+
 /**
- * CONTROLLERS FOR SCHEDULE DENTIST
+ * 
+ * CONTROLLER SCHEDULE
  */
-// const db = require('../../models');
-// const Users = db.Users;
-// const Schedule = db.Dentists_schedules;
-// const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = require('../../helpers/helper.controller');
-
-// // Get all Sched
-// exports.findAllSchedule= (req, res, next) => {
-    
-//     // Check authorization first
-//     checkAuthorization(req, res, 'Admin')
-
-//     Schedule
-//         .findAll()
-//         .then(data => dataResponse(res, data, "Schedules are retrieved successfully", "No Schedule Available"))
-//         .catch(err => errResponse(res, err));
-// }
-// // Create Schedule for dentist
-// exports.createSchedule = (req, res) => {
-//     checkAuthorization(req, res, "Admin")
+ const db = require('../../models');
+ const Schedule= db.Dentists_schedules;
+ const Users= db.Users;
+ const { dataResponse, checkAuthorization, emptyDataResponse, errResponse } = require('../../helpers/helper.controller');
  
-//     req.body.sched_dentist = req.user.users_id;
-//     Schedule.create(req.body, { include: ["created", "sched_dentist", "sched_branch"] })
-//         .then((data) => {
-//           Schedule.findByPk(data.id, { include: ["created","sched_dentist", "sched_branch"], }).then(
-//             (result) => {
-//             res.send({
-//                 error: false,
-//                 data: result,
-//                 message: [process.env.SUCCESS_CREATE],
-//             });
-//             }
-//         );
-//         })
-//         .catch((err) => {
-//         res.status(500).send(err);
-//         });
-// };
-// // Delete Sched
-// exports.deleteSchedule = (req, res) => {
-//     const body = { users_status: "Inactive" };
-//     const users_id = req.params.users_id;
-    
-//     // Check authorization first
-//     checkAuthorization(req, res, "Admin");
-
-//     Users.update(body, {
-//         where: { users_id: users_id },
-//       })
-//         .then(result => {
-//             if(result) emptyDataResponse(res, "User record is successfully deactivated")
-//         })
-//         .catch(err => errResponse(res, err));
-// };
-// // updateAccount
-// exports.updateSchedule = async (req, res) => {
-
-//     // Check authorization first
-//    checkAuthorization(req, res, "Admin");
-//     const users_id = req.params.users_id;
-//     req.body.users_full_name = "";
-//     req.body.users_updated_by = req.user.users_id;
-  
-  
-//     Users.update(req.body, { where: { users_id: users_id }}, { include: ["updated"] })
-//       .then((result) => {
-//         console.log(req.body);
-//         if (result) {
-//           // retrieve updated details
-//           Users.findByPk(users_id, { include: ["updated"] }).then((result) => {
-//             res.send({
-//               error: false,
-//               data: result,
-//               message: [process.env.SUCCESS_UPDATE],
-//             });
-//           });
-//         } else {
-//           res.status(500).send({
-//             error: true,
-//             data: [],
-//             message: ["Error in updating a record"],
-//           });
-//         }
-//       })
-//       .catch((err) => {
-//         res.status(500).send(err);
-//       });
-// };
+ //create Sched
+ exports.createSchedule = (req, res) => {
+     
+     req.body.schedule_created_by = req.user.users_id;
+     // Check users-type if valid
+     checkAuthorization(req, res, "Admin");
+        
+     // Create featured dentist
+     Schedule
+         .create(req.body)
+         .then((data) => dataResponse(res, data, "Schedule created Successfully", "Schedule not created"))
+         .catch((err) => errResponse(res, err)); 
+ 
+ };
+ // Update Sched
+ exports.updateSchedule = (req, res) => {
+     // Check if user-status is valid
+     // note: always check authorization using users_type
+     checkAuthorization(req, res, "Admin")
+     const schedule_id = req.params.schedule_id;
+     req.body.schedule_updated_by = req.user.users_id;
+      
+     featuredDentist.update(req.body, { where: { schedule_id: schedule_id }}, { include: ["updated"] })
+     .then((result) => {
+       console.log(req.body);
+       if (result) {
+         // retrieve updated details
+         Users.findByPk(data.users_id, { include: ["updated"] }).then((result) => {
+           res.send({
+             error: false,
+             data: result,
+             message: [process.env.SUCCESS_UPDATE],
+           });
+         });
+       } else {
+         res.status(500).send({
+           error: true,
+           data: [],
+           message: ["Error in updating a record"],
+         });
+       }
+     })
+     .catch((err) => {
+       res.status(500).send({
+         error: true,
+         data: [],
+         message:
+           err.errors.map((e) => e.message) || process.env.GENERAL_ERROR_MSG,
+       });
+     });
+ };
+ // Get all Schedule
+ exports.findAllSchedule = (req, res, next) => {
+     
+     // Check authorization first
+     checkAuthorization(req, res, "Admin")
+     Schedule
+         .findAll()
+         .then(data => dataResponse(res, data, "Schedules Retrieved Successfully", "No featured dentist has been retrieved"))
+         .catch(err => errResponse(res, err));
+ };
+ // Disapprove Schedule
+ exports.deleteSchedule = (req, res) => {
+   const body = { schedule_status: "Disapproved" };
+   const schedule_id = req.params.schedule_id;
+   
+   // Check authorization first
+   checkAuthorization(req, res, "Admin");
+ 
+   Schedule.update(body, {
+       where: { schedule_id : schedule_id },
+     })
+       .then(result => {
+           if(result) emptyDataResponse(res, "Schedule successfully disapproved")
+       })
+       .catch(err => errResponse(res, err)
+ )};  

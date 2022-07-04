@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
         file.fieldname + "-" + Date.now() + path.extname(file.originalname)
       );
     },
-  });
+});
   const uploadImage = (req, res, next) => {
     let upload = multer({
       storage: storage,
@@ -58,10 +58,8 @@ const storage = multer.diskStorage({
       }
       next();
     });
-  };
+};
 // registration form
-router.post("/", uploadImage, registerController.register);
-
-
+router.post("/add", uploadImage, registerController.register);
 
 module.exports = router;

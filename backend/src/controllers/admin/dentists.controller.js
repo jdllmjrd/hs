@@ -71,7 +71,6 @@ exports.getAll = (req, res, next) => {
     
     // Check authorization first
     checkAuthorization(req, res, "Admin")
-
     featuredDentist
         .findAll()
         .then(data => dataResponse(res, data, "Featured Dentist Retrieved Successfully", "No featured dentist has been retrieved"))

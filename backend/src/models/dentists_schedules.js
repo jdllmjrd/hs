@@ -12,17 +12,33 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
 
+      this.belongsTo(models.Users, {
+        foreignKey  : "schedule_created_by",
+        as          : "created",
+        onDelete    : 'CASCADE'
+      });
+
+      this.belongsTo(models.Users, {
+        foreignKey  : "schedule_updated_by",
+        as          : "updated",
+        onDelete    : 'CASCADE'
+      });
       // Schedule has a branch
       this.belongsTo(models.Branches, {
         foreignKey  : "schedule_branch",
         as          : "sched_branch",
-        onDelete    : 'RESTRICT'
+        onDelete    : 'CASCADE'
       });
       //One to Many -- Appointments and Schedule
       this.hasMany(models.Appointments, {
         foreignKey: "appointments_sched",
         as        : "app_sched",
-        onDelete  : 'RESTRICT'
+        onDelete  : 'CASCADE'
+      });
+      //One to Many -- Schedule to Dentists use
+      this.belongsTo(models.Users, {
+        foreignKey: "schedule_dentist",
+        onDelete  : 'CASCADE'
       });
     }
   }
@@ -31,14 +47,17 @@ module.exports = (sequelize, DataTypes) => {
       type        : DataTypes.UUID,
       primaryKey  : true, 
       defaultValue: DataTypes.UUIDV4,
-      comment     : 'This contains UUIDV4 for schedules ID',
+      comment     : "This contains UUIDV4 for schedules ID",
     },
     // Foreign Key - DENTIST 
     // ID but can view name of dentists
     schedule_dentist: {
-      type: DataTypes.UUID,
-      allowNull: true,
-      comment: "This column is for available dentist selected by user-staff and admin"
+      type          : DataTypes.UUID,
+      allowNull     : false,
+      references    : sequelize.Users,
+      referencesKey : 'users_id',
+      onDelete      : 'cascade',
+      comment       : "This column is for available dentist selected by user-staff and admin"
       
     },
     // Foreign key -- BRANCH    
@@ -77,7 +96,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         comment: "This is where end time schedule for dentist created by staff/admin",
       },
-
       // Concatenated Dentist name, Date, and time
       // We have to convert date and time in to STRING
     schedule_dentist_datetime :{
@@ -103,14 +121,14 @@ module.exports = (sequelize, DataTypes) => {
       },
       comment: "This contains if the schedule is approved or disapproved by the dentist",
     },
-    // schedule_created_by: {
-    //   type: DataTypes.UUID,
-    //   allowNull: true,
-    // },
-    // schedule_updated_by: {
-    //   type: DataTypes.UUID,
-    //   allowNull: true,
-    // },
+    schedule_created_by: {
+      type: DataTypes.UUID,
+      allowNull: true,
+    },
+    schedule_updated_by: {
+      type: DataTypes.UUID,
+      allowNull: true,
+    },
   }, 
   
   {
