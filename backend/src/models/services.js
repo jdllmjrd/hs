@@ -11,6 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
+      // User can create many services
+      // but a service can only have one user
+      // One to One
+      this.belongsTo(models.Users, {
+        as: 'created',
+        foreignKey: "services_created_by",
+      });
+      // User can update many services
+      // but a service can only have one user
+      // One to One
+      this.belongsTo(models.Users, {
+        as: "updated",
+        foreignKey: "services_updated_by",
+      });
     }
   }
   Services.init({
@@ -51,14 +66,22 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue : 'Active'
     },
-    // services_created_by: {
-    //   type: DataTypes.UUID,
-    //   allowNull: true,
-    // },
-    // services_updated_by: {
-    //   allowNull: true,
-    //   type: DataTypes.UUID,
-   // },
+    services_created_by: {
+      type: DataTypes.UUID,
+      allowNull: true,
+      references: {
+        model: sequelize.Users,
+        key: "users_id",
+      },
+    },
+    services_updated_by: {
+      allowNull: true,
+      type: DataTypes.UUID,
+      references: {
+        model: sequelize.Users,
+        key: "users_id",
+      },
+    },
   },
   
   {

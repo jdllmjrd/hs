@@ -10,7 +10,20 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      
+      this.belongsTo(models.Appointments, {
+        foreignKey : 'invoices_appointments'
+      });
+      // Association to Users table
+      // One to Many
+      this.belongsTo(models.Users, {
+        foreignKey : 'invoices_issued_to',
+        otherKey: "invoices_created_by",
+      });
+      this.hasMany(models.Invoices_services, {
+        as: "dump_invoice",
+        foreignKey: "inser_invoice_id"
+      });
     }
   }
   Invoices.init({
@@ -21,9 +34,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     // Create an invoice only for those patients
     // that has a successful appointment
-     invoices_appointments: {
-      type: DataTypes.UUID,
-      allowNull: true,
+    invoices_appointments: {
+    type: DataTypes.UUID,
+    allowNull: false,
     },
     invoices_issued_to: {
       type: DataTypes.UUID,

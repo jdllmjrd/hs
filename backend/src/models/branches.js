@@ -12,18 +12,18 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
 
-      // // Many to One - Dentists_Schedule
-      // this.hasMany(models.Dentists_schedules, {
-      //   foreignKey  : "schedule_branch",
-      //   as          : "sched_branch",
-      //   onDelete    : 'RESTRICT'
-      // });
-      // //Many to One - Appointments table
-      // this.hasMany(models.Appointments, {
-      //   foreignKey: "appointments_branch",
-      //   as        : "app_branch",
-      //   onDelete  : 'RESTRICT'
-      // });
+      // Many to One - Dentists_Schedule
+      this.hasMany(models.Dentists_schedules, {
+        foreignKey  : "schedule_branch",
+        as          : "sched_branch",
+        onDelete    : 'RESTRICT'
+      });
+      //Many to One - Appointments table
+      this.hasMany(models.Appointments, {
+        foreignKey: "appointments_branch",
+        as        : "app_branch",
+        onDelete  : 'RESTRICT'
+      });
     
     }
   }

@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      
       // One to Many
       this.belongsTo(models.Branches, {
         foreignKey  : 'appointments_branch',

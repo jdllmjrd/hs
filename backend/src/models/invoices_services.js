@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.Invoices, {
+        foreignKey: 'inser_invoice_id',
+        as: "dump"
+      });
     }
   }
   Invoices_services.init({
@@ -19,11 +23,15 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey : true, 
       defaultValue : DataTypes.UUIDV4
     },
-     inser_invoice_id: {
+    inser_invoice_id: {
       type: DataTypes.UUID,
       allowNull: false,
+      references :{
+        model: sequelize.Invoices,
+        key: "invoices_id"
+      }
     },
-     inser_service_name: {
+    inser_service_name: {
       type : DataTypes.STRING,
       allowNull: false,
       validate: {
