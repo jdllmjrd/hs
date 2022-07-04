@@ -74,7 +74,7 @@ app.use("/users-profile-pic", express.static(path.join(__dirname + "./backend/sr
 app.use("/featured_dentist", express.static(path.join(__dirname + "./backend/src/public/featured_dentist")));
 app.use("/services", express.static(path.join(__dirname + "./backend/src/public/services")));
 // Home page
-app.use(`${process.env.API_VERSION}/home`, require ("./backend/src/routes/home.routes"));
+app.use(`${process.env.API_VERSION}/`, require ("./backend/src/routes/home.routes"));
 // Register Page
 app.use(`${process.env.API_VERSION}/register`, require ("./backend/src/routes/register.routes"));
 // For log in page
