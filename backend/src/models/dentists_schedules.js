@@ -13,17 +13,17 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
 
       // Schedule has a branch
-      // this.belongsTo(models.Branches, {
-      //   foreignKey  : "schedule_branch",
-      //   as          : "sched_branch",
-      //   onDelete    : 'RESTRICT'
-      // });
-      // //One to Many -- Appointments and Schedule
-      // this.hasMany(models.Appointments, {
-      //   foreignKey: "appointments_sched",
-      //   as        : "app_sched",
-      //   onDelete  : 'RESTRICT'
-      // });
+      this.belongsTo(models.Branches, {
+        foreignKey  : "schedule_branch",
+        as          : "sched_branch",
+        onDelete    : 'RESTRICT'
+      });
+      //One to Many -- Appointments and Schedule
+      this.hasMany(models.Appointments, {
+        foreignKey: "appointments_sched",
+        as        : "app_sched",
+        onDelete  : 'RESTRICT'
+      });
     }
   }
   Dentists_schedules.init({

@@ -11,19 +11,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-
+      
       // One to Many
-      // this.belongsTo(models.Branches, {
-      //   foreignKey  : 'appointments_branch',
-      //   as          : "branch",
-      //   onDelete    : 'RESTRICT'
-      //  });
-      //  // One to Many
-      //  this.belongsTo(models.Dentists_schedules, {
-      //   foreignKey  : 'appointments_sched',
-      //   as          : "app_sched",
-      //   onDelete    : 'RESTRICT'
-      //  });
+      this.belongsTo(models.Branches, {
+        foreignKey  : 'appointments_branch',
+        as          : "branch",
+        onDelete    : 'RESTRICT',
+       });
+       // One to Many
+       this.belongsTo(models.Dentists_schedules, {
+        foreignKey  : 'appointments_sched',
+        as          : "app_sched",
+        onDelete    : 'RESTRICT'
+       });
     }
   }
   Appointments.init({
