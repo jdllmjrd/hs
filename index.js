@@ -4,6 +4,7 @@ const dotenv = require("dotenv").config();
 const db = require("./backend/src/models");
 const jwt = require("jsonwebtoken");
 const path = require("path");
+var cors = require('cors');
 
 //initialize app
 var app = express();
@@ -25,7 +26,7 @@ db.sequelize
     // database synch
     db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', { raw: true })
     .then (() =>{
-        db.sequelize.sync ({ alter: true})
+        db.sequelize.sync ({ force: true})
         .then(() => console.log('Done adding/updating database based on the models'))
         .catch((error) => {console.log("Unable to add/update", error);})
         })
@@ -39,11 +40,11 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
 // all request will go here first (middleware)
+app.use(cors())
 app.use((req, res, next) => {
-    console.log("Request has been sent to " + req.url);
+    // console.log("Request has been sent to " + req.url);
     next();
   });
-
 
 
 // Authentication for TOKEN
@@ -75,8 +76,9 @@ const authenticateToken = (req, res, next) => {
 app.use("/users-profile-pic", express.static(path.join(__dirname + "./backend/src/public/users_profile_pic")));
 app.use("/featured_dentist", express.static(path.join(__dirname + "./backend/src/public/featured_dentist")));
 app.use("/services", express.static(path.join(__dirname + "./backend/src/public/services")));
+app.use("/branches", express.static(path.join(__dirname + "./backend/src/public/branches")));
 // Home page
-app.use("/home", require ("./backend/src/routes/home.routes"));
+app.use(`${process.env.API_VERSION}/home`, require("./backend/src/routes/home.routes"));
 // Register Page
 app.use(`${process.env.API_VERSION}/register`, require ("./backend/src/routes/register.routes"));
 // For log in page
