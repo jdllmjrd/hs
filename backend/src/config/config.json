@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "dcms",
-    "host": "127.0.0.1",
+    "username": "happysmile143",
+    "password": "c57be642",
+    "database": "happysmile_dcms",
+    "host": "85.10.205.173",
     "dialect": "mysql",
     "logging": false
   },
@@ -11,7 +11,7 @@
     "username": "happysmile143",
     "password": "c57be642",
     "database": "happysmile_dcms",
-    "host": "db4free.net:3306",
+    "host": "85.10.205.173",
     "dialect": "mysql",
     "logging": false
   },
