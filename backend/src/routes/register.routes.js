@@ -60,6 +60,6 @@ const storage = multer.diskStorage({
     });
 };
 // registration form
-router.post("/add", uploadImage, registerController.register);
+router.post("/", uploadImage, registerController.register);
 
 module.exports = router;

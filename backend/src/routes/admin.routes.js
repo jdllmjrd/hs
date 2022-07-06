@@ -169,12 +169,66 @@ upload(req, res, function (err) {
 });
 };
 
+// This part is for features dentist
+const storageBranches = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../public/branches"));
+  },
+
+  // By default, multer removes file extensions so let's add them back
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const uploadImageBranch = (req, res, next) => {
+let upload = multer({
+  storage: storageService,
+  fileFilter: helpers.imageFilter,
+}).single("branches_image");
+
+
+upload(req, res, function (err) {
+  // req.file contains information of uploaded file
+  // req.body contains information of text fields, if there were any
+
+  if (req.fileValidationError) {
+  return res.status(500).send({
+      error: true,
+      data: [],
+      message: [req.fileValidationError],
+  });
+  } else if (!req.file) {
+  return res.status(500).send({
+      error: true,
+      data: [],
+      message: ["Please select an image to upload"],
+  });
+  } else if (err instanceof multer.MulterError) {
+  return res.status(500).send({
+      error: true,
+      data: [],
+      message: [err],
+  });
+  } else if (err) {
+  return res.status(500).send({
+      error: true,
+      data: [],
+      message: [err],
+  });
+  }
+  next();
+});
+};
 
 // For Dashboard
 // // Counter
 const adminInfoController = require("../controllers/admin/admin_info.controller");
-router.get('/get-info' , adminInfoController.getAdminInfo);
-router.put("/:update-info" , adminInfoController.updateAdminInfo); 
+router.get('/profile/get-info' , adminInfoController.getAdminInfo);
+router.put("/profile/:users_id" , adminInfoController.updateAdminInfo); 
 
 /** For Registered Users CRUD */ 
  const usersController = require("../controllers/admin/users.controller");
@@ -202,8 +256,8 @@ router.delete("/service/:services_id", serviceController.deleteService); // dest
 
 /** For Branches CRUD */ 
 const branchesController = require("../controllers/admin/branches_controller");
-router.post("/branch/add-branch",branchesController.createBranches); // insert
-router.put("/branch/:branches_id", branchesController.updateBranches); // update
+router.post("/branch/add-branch",uploadImageBranch,branchesController.createBranches); // insert
+router.put("/branch/:branches_id", uploadImageBranch, branchesController.updateBranches); // update
 router.get("/branch/get-all-branches", branchesController.getAllBranches);
 router.delete("/branch/:branches_id", branchesController.deleteBranch); // destroy
 

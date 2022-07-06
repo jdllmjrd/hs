@@ -20,8 +20,6 @@ exports.create = async (req, res) => {
     })
 });
 };
-
-
 // Find an invoice only for those patient
 // that has a successful appointment
 exports.findOne = (req, res) => {

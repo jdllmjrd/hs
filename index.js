@@ -88,7 +88,7 @@ app.use(`${process.env.API_VERSION}/services`, require ("./backend/src/routes/se
 // Authenticated Routes
 //app.use(`${process.env.API_VERSION}/patient`, authenticateToken , require("./backend/src/routes/patient.routes"));
 //app.use(`${process.env.API_VERSION}/staff`, authenticateToken , require("./backend/src/routes/staff.routes"));
-//app.use(`${process.env.API_VERSION}/dentist`, authenticateToken , require("./backend/src/routes/dentist.routes"));
+app.use(`${process.env.API_VERSION}/dentist`, authenticateToken , require("./backend/src/routes/dentist.routes"));
 
 /** Admin user route*/
 app.use(`${process.env.API_VERSION}/admin`, authenticateToken , require("./backend/src/routes/admin.routes"));

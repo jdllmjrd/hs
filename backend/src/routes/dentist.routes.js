@@ -6,9 +6,10 @@
 var router = require("express").Router();
 
 /** Schedules of Schedules */
-router.post("/create-schedule", scheduleController.createSchedule); // insert
-router.put("/:schedule_id", scheduleController.updateSchedule); // update
-router.get("/get-schedule", scheduleController.findAllSchedule);
-router.delete("/:schedule_id", scheduleController.deleteSchedule); // Destroy
+
+const scheduleController = require("../controllers/dentist/schedule.controller");
+router.put("/schedule/:schedule_id", scheduleController.updateSchedule); // update
+router.get("/schedule/get-schedule", scheduleController.findAllSchedule);
+router.delete("/schedule/:schedule_id", scheduleController.deleteSchedule); // Destroy
 
 module.exports = router;

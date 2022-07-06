@@ -12,17 +12,29 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
 
+       // Many to One 
+       this.belongsTo(models.Users, {
+        as: "created" ,
+        foreignKey: "branches_created_by",
+        onDelete: 'RESTRICT'
+      });
+      // Many to One 
+      this.belongsTo(models.Users, {
+        as: "updated",
+        foreignKey: "branches_updated_by",
+        onDelete : 'RESTRICT'
+      });
       // Many to One - Dentists_Schedule
       this.hasMany(models.Dentists_schedules, {
         foreignKey  : "schedule_branch",
         as          : "sched_branch",
-        onDelete    : 'RESTRICT'
+        onDelete    : 'CASCADE'
       });
       //Many to One - Appointments table
       this.hasMany(models.Appointments, {
         foreignKey: "appointments_branch",
         as        : "app_branch",
-        onDelete  : 'RESTRICT'
+        onDelete  : 'CASCADE'
       });
     
     }
@@ -38,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull:{msg: 'Please enter branch name'},
-        notEmpty:{msg: 'This field is required'}
+        notEmpty:{msg: 'Branch name is required'}
       }
     },
     branches_contact_person: {
@@ -46,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull:{msg: 'Please enter branch contact person'},
-        notEmpty:{msg: 'This field is required'}
+        notEmpty:{msg: 'Contact person is required'}
       }
     },
     branches_phone_number: {
@@ -63,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull:{msg: 'Please enter branch description'},
-        notEmpty:{msg: 'This field is required'}
+        notEmpty:{msg: 'Description This field is required'}
       }
     },
     branches_google_map: {
@@ -82,11 +94,17 @@ module.exports = (sequelize, DataTypes) => {
       },
     branches_created_by: {
       type: DataTypes.UUID,
-      allowNull: true,
+      references :{
+        model: sequelize.Users,
+        key: "users_id"
+      }
     },
     branches_updated_by: {
       type: DataTypes.UUID,
-      allowNull: true,
+      references :{
+        model: sequelize.Users,
+        key: "users_id"
+      }
     },
   }, 
   

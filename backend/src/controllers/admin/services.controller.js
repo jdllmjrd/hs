@@ -78,7 +78,7 @@
  
      Services
          .findAll()
-         .then(data => dataResponse(res, data, "Featured Dentist Retrieved Successfully", "No featured dentist has been retrieved"))
+         .then(data => dataResponse(res, data, "Services Retrieved Successfully", "No Service has been retrieved"))
          .catch(err => errResponse(res, err));
  };
  // Deactivate Service in order to be not seen on frontend -- checked

@@ -15,13 +15,24 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Branches, {
         foreignKey  : 'appointments_branch',
         as          : "branch",
-        onDelete    : 'RESTRICT',
+        onDelete    : 'CASCADE',
        });
        // One to Many
        this.belongsTo(models.Dentists_schedules, {
         foreignKey  : 'appointments_sched',
         as          : "app_sched",
-        onDelete    : 'RESTRICT'
+        onDelete    : 'CASCADE'
+       });
+       this.belongsTo(models.Users, {
+        foreignKey  : 'appointments_created_by',
+        as          : "app_created",
+        onDelete    : 'CASCADE',
+       });
+       // One to Many
+       this.belongsTo(models.Users, {
+        foreignKey  : 'appointments_updated_by',
+        as          : "app_updated",
+        onDelete    : 'CASCADE'
        });
     }
   }
@@ -34,14 +45,20 @@ module.exports = (sequelize, DataTypes) => {
     },
     // Foreign Key -- BRANCH table
     appointments_branch: {
-      type      : DataTypes.UUID,
-      allowNull : true,
+      type: DataTypes.UUID,
+      references: {
+        model: sequelize.Branch,
+        key: "branches_id",
+      },
       comment   : "This column is for branch selected by the user"
     },
     // Foreign Key -- Dentists Schedules Table
     appointments_sched: {
-      type      : DataTypes.UUID,
-      allowNull : true,
+      type: DataTypes.UUID,
+      references: {
+        model: sequelize.Dentists_schedules,
+        key: "schedule_id",
+      },
       comment   : "This contain the preferred schedule base on branch"
     },
     appointments_purpose: {
@@ -85,6 +102,22 @@ module.exports = (sequelize, DataTypes) => {
         },
         comment  : "This is where a patient or staff will select what is the type of an appointment",
     },
+    appointments_created_by:{
+      type: DataTypes.UUID,
+      allowNull: false,
+      references :{
+        model: sequelize.Users,
+        key: "users_id"
+      }
+    },
+    appointments_updated_by:{
+      type: DataTypes.UUID,
+      allowNull: false,
+      references :{
+        model: sequelize.Users,
+        key: "users_id"
+      }
+    }
 
   }, 
   

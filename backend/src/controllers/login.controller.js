@@ -40,7 +40,7 @@ exports.login = (req, res) => {
                   data: data,
                   token: generateToken({
                 
-                    users_id: data.id,
+                    users_id: data.users_id,
                     users_full_name: data.users_full_name,
                     users_email: data.users_email,
                     users_type: data.users_type

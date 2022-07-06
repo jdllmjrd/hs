@@ -2,6 +2,9 @@
 const {
   Model
 } = require('sequelize');
+
+const PROTECTED_ATTRIBUTES = ["users_password", "users_birthdate"];
+
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**
@@ -54,8 +57,49 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "schedule_dentist",
         as: "dentist_sched"
       });
+      this.hasMany(models.Dentists_schedules,{
+        foreignKey: "schedule_created_by",
+        as: "sched_created"
+      });
+      this.hasMany(models.Dentists_schedules,{
+        foreignKey: "schedule_updated_by",
+        as: "sched_updated"
+      });
+
+      // INVOICE
+      this.hasMany(models.Invoices,{
+        foreignKey: "invoices_issued_to",
+        as: "invoice_to"
+      });
+      this.hasMany(models.Invoices,{
+        foreignKey: "invoices_created_by",
+        as: "invoice_created"
+      });
+      this.hasMany(models.Invoices,{
+        foreignKey: "invoices_updated_by",
+        as: "invoice_updated"
+      });
+      // Appointments table
+      this.hasMany(models.Appointments,{
+        foreignKey: "appointments_created_by",
+        as: "app_created"
+      });
+      this.hasMany(models.Appointments,{
+        foreignKey: "appointments_updated_by",
+        as: "app_updated"
+      });
+    }
+     // This part will protect some attributes
+     toJSON(){
+      const attributes = {...this.get()};
+
+      for(const a of PROTECTED_ATTRIBUTES){
+        delete attributes[a];
+      }
+      return attributes;
     }
   }
+  
   Users.init({
     users_id     : {
     type         : DataTypes.UUID,

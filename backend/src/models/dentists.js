@@ -11,6 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.Users, {
+        foreignKey: "dentists_created_by",
+        as: "created",
+      });
+
+      // Users can update many featured dentist
+      // but featured dentist can only have one user
+      // One to Many
+      this.belongsTo(models.Users, {
+        foreignKey: "dentists_updated_by",
+        as: "updated"
+      });
     }
   }
   Dentists.init({

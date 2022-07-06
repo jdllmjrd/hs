@@ -12,7 +12,7 @@ exports.getAdminInfo = (req, res, next) => {
     // check if user is admin
     helper.checkAuthorization(req, res, "Admin");
     
-     Users.findOne({ where: { id: users_id } })
+     Users.findOne({ where: { users_id: users_id } })
     .then((data) => {
       res.send({
         error: false,

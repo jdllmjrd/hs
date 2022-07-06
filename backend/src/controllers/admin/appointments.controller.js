@@ -1,6 +1,5 @@
 
 
-
 const db = require('../../models');
 const Appointments = db.Appointments;
 const { dataResponse, checkAuthorization, emptyDataResponse, errResponse } = require('../../helpers/helper.controller');

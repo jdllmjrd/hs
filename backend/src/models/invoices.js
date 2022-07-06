@@ -11,15 +11,26 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       
-      this.belongsTo(models.Appointments, {
-        foreignKey : 'invoices_appointments'
-      });
       // Association to Users table
       // One to Many
       this.belongsTo(models.Users, {
         foreignKey : 'invoices_issued_to',
-        otherKey: "invoices_created_by",
+        as: 'invoice_to',
+        scope: {
+          users_type: 'Patient'
+        }
       });
+      // One to Many
+      this.belongsTo(models.Users, {
+        foreignKey : 'invoices_created_by',
+        as: 'invoice_created'
+      });
+      //One to Many
+      this.belongsTo(models.Users, {
+        foreignKey : 'invoices_updated_by',
+        as: 'invoice_updated'
+      });
+      //One to Many
       this.hasMany(models.Invoices_services, {
         as: "dump_invoice",
         foreignKey: "inser_invoice_id"
@@ -34,13 +45,18 @@ module.exports = (sequelize, DataTypes) => {
     },
     // Create an invoice only for those patients
     // that has a successful appointment
-    invoices_appointments: {
+    invoices_number: {
     type: DataTypes.UUID,
     allowNull: false,
+    defaultValue : DataTypes.UUIDV4
     },
     invoices_issued_to: {
       type: DataTypes.UUID,
       allowNull: false,
+      references :{
+        model: sequelize.Users,
+        key: "users_id"
+      }
     },
     invoices_description: {
       type : DataTypes.TEXT,
@@ -72,6 +88,22 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty:{msg: 'This field is required'}
       },
     },
+    invoices_created_by:{
+      type: DataTypes.UUID,
+      allowNull: false,
+      references :{
+        model: sequelize.Users,
+        key: "users_id"
+      }
+    },
+    invoices_updated_by:{
+      type: DataTypes.UUID,
+      allowNull: false,
+      references :{
+        model: sequelize.Users,
+        key: "users_id"
+      }
+    }
   }, 
   {
     sequelize,

@@ -10,6 +10,4 @@ const homeController = require('../controllers/index.controller');
 router.get('/', homeController.getALLDentist);
 // router.post('/', homeController.send);
 
-
-
 module.exports = router;

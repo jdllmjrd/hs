@@ -1,9 +1,10 @@
 const db = require("../../models");
 const Branches = db.Branches;
+const Users = db.Users;
 const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = require('../../helpers/helper.controller');
 
 
-//create and save new branch
+//create and save new branch -- checked
 exports.createBranches = (req, res) => {
 
    req.body.branches_created_by = req.user.users_id;
@@ -26,7 +27,7 @@ exports.createBranches = (req, res) => {
            }
        }) .catch(err => helper.errResponse(res, err));
 };
-// Update Branches
+// Update Branches -- checked
 exports.updateBranches = (req, res) => {
 
     // Check if user-status is valid
@@ -38,23 +39,23 @@ exports.updateBranches = (req, res) => {
             where: {
                branches_id: req.params.branches_id
             },
+            include: ["updated"]
         })
         .then(data => dataResponse(res, data, "Updated Successfully", "No updates happened"))
         .catch(err => errResponse(res, err))
 }
-// Get all Branches
+// Get all Branches -- checked
 exports.getAllBranches = (req, res, next) => {
     
     // Check authorization first
     checkAuthorization(req, res, "Admin")
 
     Branches
-        .findAll({ where: { branches_status: "Open"}})
+        .findAll()
         .then(data => dataResponse(res, data, "Branches Retrieved Successfully", "No Branch has been retrieved"))
         .catch(err => errResponse(res, err));
 }
-// Deactivate Branch in order to be not seen on frontend
-
+// Deactivate Branch -- checked
 exports.deleteBranch = (req, res) => {
     const body = { branches_status: "Close" };
     const branches_id = req.params.branches_id;
