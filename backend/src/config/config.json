@@ -8,10 +8,10 @@
     "logging": false
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
+    "username": "haappysmile143",
+    "password": "happyysmile14324",
+    "database": "happysmile_dcms",
+    "host": "db4free.net:3360",
     "dialect": "mysql"
   },
   "production": {
