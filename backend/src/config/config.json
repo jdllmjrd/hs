@@ -8,8 +8,8 @@
     "logging": false
   },
   "test": {
-    "username": "haappysmile143",
-    "password": "happyysmile14324",
+    "username": "happysmile143",
+    "password": "happysmile14324",
     "database": "happysmile_dcms",
     "host": "db4free.net:3360",
     "dialect": "mysql"
