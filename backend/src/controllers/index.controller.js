@@ -7,12 +7,12 @@ const { dataResponse, errResponse } = require('../helpers/helper.controller');
 
 // Get All Featured Dentist
 // For Featured Dentist section
-exports.getALLDentist = (req, res, next) => {
+exports.getDentist = (req, res, next) => {
   Dentist
     .findAll({ where: { dentists_status: "Active"}})
     .then(data => dataResponse(res, data, "Featured Dentist Retrieved Successfully", "No featured dentist has been retrieved"))
-    .catch(err => console.log(err));
-};
+    .catch(err => errResponse(res, err));
+}
 
 // This will send an email for contact us section
 exports.send = (req, res) => {

@@ -19,6 +19,7 @@
     "password": "c57be642",
     "database": "happysmile_dcms",
     "host": "85.10.205.173",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false
   }
 }
