@@ -9,10 +9,11 @@
   },
   "test": {
     "username": "happysmile143",
-    "password": "happysmile14324",
+    "password": "c57be642",
     "database": "happysmile_dcms",
-    "host": "db4free.net:3360",
-    "dialect": "mysql"
+    "host": "db4free.net:3306",
+    "dialect": "mysql",
+    "logging": false
   },
   "production": {
     "username": "root",
