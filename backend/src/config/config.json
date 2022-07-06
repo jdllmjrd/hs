@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "happysmile143",
-    "password": "c57be642",
-    "database": "happysmile_dcms",
-    "host": "85.10.205.173",
+    "username": "root",
+    "password": null,
+    "database": "dcms",
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "logging": false
   },
@@ -15,10 +15,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "happysmile143",
+    "password": "c57be642",
+    "database": "happysmile_dcms",
+    "host": "85.10.205.173",
     "dialect": "mysql"
   }
 }
