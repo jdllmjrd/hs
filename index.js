@@ -26,7 +26,7 @@ db.sequelize
     // database synch
     db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', { raw: true })
     .then (() =>{
-        db.sequelize.sync ({ force: true})
+        db.sequelize.sync ({ alter: true})
         .then(() => console.log('Done adding/updating database based on the models'))
         .catch((error) => {console.log("Unable to add/update", error);})
         })
