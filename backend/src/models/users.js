@@ -35,12 +35,7 @@ module.exports = (sequelize, DataTypes) => {
        // users - branch created
        this.hasMany(models.Branches, {
         foreignKey: "branches_created_by",
-        as: "admin_added_branch"
-      });
-      // users - branch updated
-      this.hasMany(models.Branches, {
-        foreignKey: "branches_updated_by",
-        as: "admin_updated_branch"
+        as: "added_branch"
       });
       // users - Dentist created
       this.hasMany(models.Dentists, {
