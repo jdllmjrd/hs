@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
        this.belongsTo(models.Users, {
         as: "created" ,
         foreignKey: "branches_created_by",
-        onDelete: 'RESTRICT'
+        onDelete: 'CASCADE'
       });
       // Many to One - Dentists_Schedule
       this.hasMany(models.Dentists_schedules, {

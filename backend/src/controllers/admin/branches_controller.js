@@ -39,7 +39,6 @@ exports.updateBranches = (req, res) => {
             where: {
                branches_id: req.params.branches_id
             },
-            include: ["updated"]
         })
         .then(data => dataResponse(res, data, "Updated Successfully", "No updates happened"))
         .catch(err => errResponse(res, err))
@@ -69,3 +68,4 @@ exports.deleteBranch = (req, res) => {
         })
         .catch(err => errResponse(res, err));
 }
+
