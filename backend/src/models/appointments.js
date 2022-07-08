@@ -63,11 +63,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     appointments_purpose: {
         type      : DataTypes.TEXT,
-        allowNull : false,
-        validate  : {
-          notNull :{msg: 'Please input your purpose'},
-          notEmpty:{msg: 'This field is required'}
-        },
+        allowNull : true,
         comment   : "This is where a user input his/her purpose",
     },
     appointments_comment: {
