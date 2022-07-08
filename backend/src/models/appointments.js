@@ -25,13 +25,13 @@ module.exports = (sequelize, DataTypes) => {
        });
        this.belongsTo(models.Users, {
         foreignKey  : 'appointments_created_by',
-        as          : "app_created",
+        as          : "created",
         onDelete    : 'CASCADE',
        });
        // One to Many
        this.belongsTo(models.Users, {
         foreignKey  : 'appointments_updated_by',
-        as          : "app_updated",
+        as          : "updated",
         onDelete    : 'CASCADE'
        });
     }
@@ -104,7 +104,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     appointments_created_by:{
       type: DataTypes.UUID,
-      allowNull: false,
       references :{
         model: sequelize.Users,
         key: "users_id"
@@ -112,7 +111,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     appointments_updated_by:{
       type: DataTypes.UUID,
-      allowNull: false,
       references :{
         model: sequelize.Users,
         key: "users_id"

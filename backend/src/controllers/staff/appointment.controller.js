@@ -11,10 +11,22 @@ exports.createAppointment = (req, res) => {
     // Check users-type if valid
     checkAuthorization(req, res, "Staff");
        
-    // Create featured dentist
-    Appointments.create(req.body)
-        .then((data) => dataResponse(res, data, "A new Appointment has been created", "Appointment is not added"))
-        .catch((err) => errResponse(res, err)); 
+    req.body.appointments_created_by = req.user.users_id;
+    // Create Appointment
+    Appointments.create(req.body, {
+      include: ["app_created"]
+    })
+    .then((data) => {
+      Users.findByPk(data.users_id, { include: ["created", "app_created"] }).then(
+        (result) => {
+          res.send({
+            error: false,
+            data: result,
+            message: [process.env.SUCCESS_CREATE],
+          });
+        }
+      );
+    }).catch((err) => errResponse(res, err)); 
 
 };
 // Update appointment
@@ -63,12 +75,17 @@ exports.updateAppointment = (req, res) => {
 // Get All appointment
 exports.findAllAppointment = (req, res, next) => {
     // Check authorization first
+    const users_id = req.user.users_id
     checkAuthorization(req, res, "Staff")
     Appointments
-        .findAll({include:{ 
-          model: Users,
-          as: 'app_created'
-        }})
+        .findAll({ where: {
+          appointments_created_by: users_id
+        },
+          include:{ 
+            model: Users,
+            as: 'app_created'
+          }
+       })
         .then(data => dataResponse(res, data, "Appointments Retrieved Successfully", "No Appointment has been retrieved"))
         .catch(err => errResponse(res, err));
 };
