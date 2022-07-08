@@ -27,12 +27,12 @@ module.exports = (sequelize, DataTypes) => {
       // users - branch updated
       this.belongsTo(models.Users, {
         foreignKey: "branches_updated_by",
-        as: "updated"
+        as: "updated_branch"
       });
       // users - Dentist created
       this.belongsTo(models.Users, {
         foreignKey: "branches_created_by",
-        as: "created"
+        as: "created_branch"
       });
     
     }
