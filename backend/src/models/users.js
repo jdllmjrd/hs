@@ -85,15 +85,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "invoices_updated_by",
         as: "invoice_updated"
       });
-      // Appointments table
-      this.hasMany(models.Appointments,{
-        foreignKey: "appointments_created_by",
-        as: "app_created"
-      });
-      this.hasMany(models.Appointments,{
-        foreignKey: "appointments_updated_by",
-        as: "app_updated"
-      });
     }
      // This part will protect some attributes
      toJSON(){
