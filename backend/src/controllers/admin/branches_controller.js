@@ -14,7 +14,7 @@ exports.createBranches = (req, res) => {
     // Create Branch
     Branches
         .create(req.body,{ 
-            include: ["created_branch"] 
+            include: ["added_branch"] 
         })
         .then((data) => {
             Users.findByPk(data.users_id, { 
