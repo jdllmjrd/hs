@@ -69,11 +69,7 @@ module.exports = (sequelize, DataTypes) => {
     
     schedule_date: {
         type     : DataTypes.DATEONLY,
-        allowNull: false,
-        validate : {
-          notNull:{msg: 'Please input your purpose'},
-          notEmpty:{msg: 'This field is required'}
-        },
+        allowNull: true,
         comment: "This is where schedule date for dentist created by staff/admin",
       },
       // Start time of a specific schedule
