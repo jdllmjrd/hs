@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey : true, 
       defaultValue : DataTypes.UUIDV4
     },
+    inser_count:{
+      type : DataTypes.INTEGER,
+      allowNull: false
+    },
     inser_invoice_id: {
       type: DataTypes.UUID,
       allowNull: false,

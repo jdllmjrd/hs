@@ -37,6 +37,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "branches_created_by",
         as: "added_branch"
       });
+      // users - branch updated
+      this.hasMany(models.Branches, {
+        foreignKey: "branches_updated_by",
+        as: "updated_branch"
+      });
       // users - Dentist created
       this.hasMany(models.Dentists, {
         foreignKey: "dentists_created_by",
@@ -170,12 +175,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     users_phone_number : {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        notNull: { args: true, msg: "You must enter Phone Number" },
-        len: { args: [11,11], msg: 'Phone Number is invalid should be 11 numbers' },
-        isInt: { args: true, msg: "You must enter Phone Number" },
-      },
+      allowNull: true,
       comment: "This will contain hashed password",
     },
     users_email :{

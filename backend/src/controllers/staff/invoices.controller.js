@@ -1,11 +1,12 @@
 //Invoices Controller
 const db = require("../../models");
 const Invoices = db.Invoices;
+const dump = db.Invoices_services
 
 // Create an invoice only for those patients
   // that has a successful appointment
 exports.create = async (req, res) => {
-  User.create(req.body).then((data) => {
+  Invoices.create(req.body).then((data) => {
     res.send({
         error : false,
         data : data,
@@ -25,7 +26,7 @@ exports.create = async (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
     
-    User.findByPk(id).then((data) => {
+    Invoices.findByPk(id).then((data) => {
         res.send({
             error: false,
             data: data,
@@ -43,7 +44,7 @@ exports.findOne = (req, res) => {
 };
 
 // Update an invoice status from successful appointment
- exports.update = async (req, res) => {
+ exports.update = (req, res) => {
   const id = req.params.id;
 
   User.update(req.body, {

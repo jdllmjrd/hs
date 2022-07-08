@@ -16,7 +16,13 @@ module.exports = (sequelize, DataTypes) => {
        this.belongsTo(models.Users, {
         as: "created" ,
         foreignKey: "branches_created_by",
-        onDelete: 'CASCADE'
+        onDelete: 'RESTRICT'
+      });
+      // Many to One 
+      this.belongsTo(models.Users, {
+        as: "updated",
+        foreignKey: "branches_updated_by",
+        onDelete : 'RESTRICT'
       });
       // Many to One - Dentists_Schedule
       this.hasMany(models.Dentists_schedules, {
@@ -87,6 +93,13 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue : 'Open' // Open or Close, it depends to the admin
       },
     branches_created_by: {
+      type: DataTypes.UUID,
+      references :{
+        model: sequelize.Users,
+        key: "users_id"
+      }
+    },
+    branches_updated_by: {
       type: DataTypes.UUID,
       references :{
         model: sequelize.Users,

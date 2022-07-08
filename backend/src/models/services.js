@@ -16,14 +16,14 @@ module.exports = (sequelize, DataTypes) => {
       // but a service can only have one user
       // One to One
       this.belongsTo(models.Users, {
-        as: 'created',
+        as: 'service_created',
         foreignKey: "services_created_by",
       });
       // User can update many services
       // but a service can only have one user
       // One to One
       this.belongsTo(models.Users, {
-        as: "updated",
+        as: "service_updated",
         foreignKey: "services_updated_by",
       });
     }

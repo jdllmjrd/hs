@@ -18,22 +18,26 @@ module.exports = (sequelize, DataTypes) => {
         as: 'invoice_to',
         scope: {
           users_type: 'Patient'
-        }
+        },
+        onDelete: 'CASCADE'
       });
       // One to Many
       this.belongsTo(models.Users, {
         foreignKey : 'invoices_created_by',
-        as: 'invoice_created'
+        as: 'invoice_created',
+        onDelete: 'CASCADE'
       });
       //One to Many
       this.belongsTo(models.Users, {
         foreignKey : 'invoices_updated_by',
-        as: 'invoice_updated'
+        as: 'invoice_updated',
+        onDelete: 'CASCADE'
       });
       //One to Many
       this.hasMany(models.Invoices_services, {
         as: "dump_invoice",
-        foreignKey: "inser_invoice_id"
+        foreignKey: "inser_invoice_id",
+        onDelete: 'CASCADE'
       });
     }
   }
