@@ -11,37 +11,27 @@ exports.createBranches = (req, res) => {
    // Check users-type if valid
    checkAuthorization(req, res, "Admin");
 
-   Branches
-       .findOne({ where: { branches_name: req.body.branches_name}})
-       .then(result => {
-           if(result) emptyDataResponse(res, "")
-           else {
-               // Set id
-               req.body.branches_id = req.branches_id;
-               
-               // Create Branch
-               Branches
-                   .create(req.body,{ 
-                        include: ["created_branch"] 
-                    })
-                    .then((data) => {
-                        Users.findByPk(data.users_id, { 
-                            include: 
-                                ["created_branch", "added_branch"]
-                         }).then(
-                          (result) => {
-                            res.send({
-                              error: false,
-                              data: result,
-                              message: [process.env.SUCCESS_CREATE],
-                            });
-                          }
-                        );
-                      }).catch((err) => errResponse(res, err)); 
-                  
-           }
-       })
-};
+    // Create Branch
+    Branches
+        .create(req.body,{ 
+            include: ["created_branch"] 
+        })
+        .then((data) => {
+            Users.findByPk(data.users_id, { 
+                include: 
+                    ["created_branch", "added_branch"]
+                }).then(
+                (result) => {
+                res.send({
+                    error: false,
+                    data: result,
+                    message: [process.env.SUCCESS_CREATE],
+                });
+                }
+            );
+            }).catch((err) => errResponse(res, err)); 
+        }
+
 // Update Branches -- checked
 exports.updateBranches = (req, res) => {
 
