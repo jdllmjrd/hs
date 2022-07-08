@@ -18,21 +18,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Invoices_services.init({
-    inser_id: {
+    id: {
       type : DataTypes.UUID,
       primaryKey : true, 
       defaultValue : DataTypes.UUIDV4
-    },
-    inser_count:{
-      type : DataTypes.INTEGER,
-      allowNull: false
     },
     inser_invoice_id: {
       type: DataTypes.UUID,
       allowNull: false,
       references :{
         model: sequelize.Invoices,
-        key: "invoices_id"
+        key: "id"
       }
     },
     inser_service_name: {

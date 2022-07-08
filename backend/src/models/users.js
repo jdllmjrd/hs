@@ -174,9 +174,10 @@ module.exports = (sequelize, DataTypes) => {
       comment: "This will contain the civil status of the users",
     },
     users_phone_number : {
-      type: DataTypes.BIGINT,
-      allowNull: true,
-      comment: "This will contain phone number",
+      type: DataTypes.INTEGER,
+      allowNull: false,
+
+      comment: "This will contain hashed password",
     },
     users_email :{
       type      : DataTypes.STRING,

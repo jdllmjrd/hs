@@ -9,11 +9,10 @@ const { dataResponse, checkAuthorization, emptyDataResponse, errResponse } = req
 exports.createAppointment = (req, res) => {
 
     // Check users-type if valid
-    checkAuthorization(req, res, "Admin");
+    checkAuthorization(req, res, "Staff");
        
     // Create featured dentist
-    Appointments
-        .create(req.body)
+    Appointments.create(req.body)
         .then((data) => dataResponse(res, data, "A new Appointment has been created", "Appointment is not added"))
         .catch((err) => errResponse(res, err)); 
 
@@ -22,15 +21,22 @@ exports.createAppointment = (req, res) => {
 exports.updateAppointment = (req, res) => {
     // Check if user-status is valid
     // note: always check authorization using users_type
-    checkAuthorization(req, res, "Admin")
-    const appointment_id = req.params.appointments_id;
+    checkAuthorization(req, res, "Staff")
+    const appointments_id = req.params.appointments_id;
 
-    Appointments.update(req.body, { where: { appointment_id: appointment_id }})
+    Appointments.update(req.body, { 
+      where: { 
+        appointments_id: appointments_id 
+      }})
     .then((result) => {
       console.log(req.body);
       if (result) {
         // retrieve updated details
-        Users.findByPk(data.appointment_id).then((result) => {
+        Users.findByPk(data.users_id,{ 
+          include: [
+            "app_updated", "userApp_updated"
+          ]
+        }).then((result) => {
           res.send({
             error: false,
             data: result,
@@ -57,7 +63,7 @@ exports.updateAppointment = (req, res) => {
 // Get All appointment
 exports.findAllAppointment = (req, res, next) => {
     // Check authorization first
-    checkAuthorization(req, res, "Admin")
+    checkAuthorization(req, res, "Staff")
     Appointments
         .findAll({include:{ 
           model: Users,
@@ -72,7 +78,7 @@ exports.deleteAppointment = (req, res) => {
   const appointments_id = req.params.appointments_id;
   
   // Check authorization first
-  checkAuthorization(req, res, "Admin");
+  checkAuthorization(req, res, "Staff");
 
   Appointments.update(body, {
       where: { appointments_id : appointments_id },

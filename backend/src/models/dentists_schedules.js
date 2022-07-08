@@ -63,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
     // Foreign key -- BRANCH    
     schedule_branch: {
       type      : DataTypes.UUID,
-      allowNull : false,
+      allowNull : true,
       comment   : "This column is for branch selected by the staff"
     },
     
@@ -123,17 +123,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     schedule_created_by: {
       type: DataTypes.UUID,
-      references :{
-        model: sequelize.Users,
-        key: "users_id"
-      }
+      allowNull: true,
     },
     schedule_updated_by: {
       type: DataTypes.UUID,
-      references :{
-        model: sequelize.Invoices,
-        key: "users_id"
-      }
+      allowNull: true,
     },
   }, 
   

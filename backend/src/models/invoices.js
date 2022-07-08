@@ -14,15 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       // Association to Users table
       // One to Many
       this.belongsTo(models.Users, {
-        foreignKey : 'invoices_issued_to',
-        as: 'invoice_to',
-        scope: {
-          users_type: 'Patient'
-        },
-        onDelete: 'CASCADE'
-      });
-      // One to Many
-      this.belongsTo(models.Users, {
         foreignKey : 'invoices_created_by',
         as: 'invoice_created',
         onDelete: 'CASCADE'
@@ -42,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Invoices.init({
-    invoices_id: {
+    id: {
       type : DataTypes.UUID,
       primaryKey : true, 
       defaultValue : DataTypes.UUIDV4
@@ -55,12 +46,8 @@ module.exports = (sequelize, DataTypes) => {
     defaultValue : DataTypes.UUIDV4
     },
     invoices_issued_to: {
-      type: DataTypes.UUID,
+      type: DataTypes.STRING,
       allowNull: false,
-      references :{
-        model: sequelize.Users,
-        key: "users_id"
-      }
     },
     invoices_description: {
       type : DataTypes.TEXT,
@@ -69,9 +56,6 @@ module.exports = (sequelize, DataTypes) => {
     invoices_discount: {
       type : DataTypes.INTEGER,
       allowNull: true,
-      validate: {
-        isInt:{msg: 'Must be a Number'},
-      }
     },
     total_after_discount: {
       type : DataTypes.DECIMAL,
