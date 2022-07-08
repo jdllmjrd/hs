@@ -186,7 +186,7 @@ const storageBranches = multer.diskStorage({
 
 const uploadImageBranch = (req, res, next) => {
 let upload = multer({
-  storage: storageService,
+  storage: storageBranches,
   fileFilter: helpers.imageFilter,
 }).single("branches_image");
 
