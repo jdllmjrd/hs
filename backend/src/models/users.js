@@ -68,10 +68,6 @@ module.exports = (sequelize, DataTypes) => {
 
       // INVOICE
       this.hasMany(models.Invoices,{
-        foreignKey: "invoices_issued_to",
-        as: "invoice_to"
-      });
-      this.hasMany(models.Invoices,{
         foreignKey: "invoices_created_by",
         as: "invoice_created"
       });
