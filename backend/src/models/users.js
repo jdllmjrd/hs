@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "sched_updated"
       });
 
-      // Apointments
+      // Appointments
       this.hasMany(models.Appointments,{
         foreignKey: "appointments_created_by",
         as: "app_created"

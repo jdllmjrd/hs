@@ -21,11 +21,23 @@ exports.createBranches = (req, res) => {
                
                // Create Branch
                Branches
-                   .create(req.body,{ include: ["created"] })
-                   .then((data) => dataResponse(res, data, "A new record has been added", "Record is not added"))
-                   .catch((err) => errResponse(res, err)); 
+                   .create(req.body,{ 
+                        include: ["created"] 
+                    })
+                    .then((data) => {
+                        Users.findByPk(data.users_id, { include: ["created", "added_branch"] }).then(
+                          (result) => {
+                            res.send({
+                              error: false,
+                              data: result,
+                              message: [process.env.SUCCESS_CREATE],
+                            });
+                          }
+                        );
+                      }).catch((err) => errResponse(res, err)); 
+                  
            }
-       }) .catch(err => helper.errResponse(res, err));
+       })
 };
 // Update Branches -- checked
 exports.updateBranches = (req, res) => {

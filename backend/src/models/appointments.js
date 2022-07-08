@@ -86,7 +86,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue  : 'Pending',
         validate      : {
             isIn      :{
-                args  :[["Pending","Approved", "Disapproved", "Cancelled"]], // for dropdown
+                args  :[["Pending","Approved", "Disapproved", "Canceled"]], // for dropdown
             },
         },
         comment       : "This is where a patient or staff will select what is the status of an appointment",

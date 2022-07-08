@@ -24,6 +24,16 @@ module.exports = (sequelize, DataTypes) => {
         as        : "app_branch",
         onDelete  : 'CASCADE'
       });
+      // users - branch updated
+      this.belongsTo(models.Users, {
+        foreignKey: "branches_updated_by",
+        as: "updated"
+      });
+      // users - Dentist created
+      this.belongsTo(models.Users, {
+        foreignKey: "branches_created_by",
+        as: "created"
+      });
     
     }
   }
@@ -80,14 +90,21 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue : 'Open' // Open or Close, it depends to the admin
       },
-    branches_created_by: {
-      type: DataTypes.UUID,
-      allowNull: true,
-    },
-    branches_updated_by: {
-      type: DataTypes.UUID,
-      allowNull: true,
-    },
+      branches_created_by: {
+        type: DataTypes.UUID,
+        allowNull: true,
+        references: {
+          model: sequelize.Users,
+          key: "users_id",
+        },
+      },
+      branches_updated_by: {
+        type: DataTypes.UUID,
+        references: {
+          model: sequelize.Users,
+          key: "sequelize.Users",
+        },
+      },
   }, 
   
   
