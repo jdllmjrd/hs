@@ -28,7 +28,7 @@ exports.createAccount = async (req, res) => {
         req.body.users_password,
         parseInt(process.env.SALT_ROUNDS),
     );
-    Users.create(req.body, { include: ["created"] })
+    Branches.create(req.body, { include: ["created"] })
         .then((data) => {
         Users.findByPk(data.users_id, { include: ["created"], }).then(
             (result) => {

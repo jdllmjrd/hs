@@ -25,7 +25,10 @@ exports.createBranches = (req, res) => {
                         include: ["created_branch"] 
                     })
                     .then((data) => {
-                        Users.findByPk(data.users_id, { include: ["created_branch", "added_branch"] }).then(
+                        Users.findByPk(data.users_id, { 
+                            include: 
+                                ["created_branch", "added_branch"]
+                         }).then(
                           (result) => {
                             res.send({
                               error: false,
