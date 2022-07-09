@@ -75,7 +75,7 @@ exports.deleteAppointment = (req, res) => {
       where: { appointments_id : appointments_id },
     })
       .then(result => {
-          if(result) emptyDataResponse(res, "Appointment is successfully deactivated")
+          if(result) emptyDataResponse(res, "Appointment is Disapproved")
       })
       .catch(err => errResponse(res, err)
 )};  
