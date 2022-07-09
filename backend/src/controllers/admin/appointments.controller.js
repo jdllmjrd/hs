@@ -30,7 +30,7 @@ exports.updateAppointment = (req, res) => {
       console.log(req.body);
       if (result) {
         // retrieve updated details
-        Users.findByPk(data.appointments_id).then((result) => {
+        Users.findByPk(data.users_id).then((result) => {
           res.send({
             error: false,
             data: result,
