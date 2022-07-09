@@ -81,10 +81,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       isUrl: true
     },
-    branches_image: {
-      type : DataTypes.STRING,
-      allowNull: true,
-    },
     branches_status :{
       type : DataTypes.STRING,
       allowNull: false,
@@ -92,7 +88,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       branches_created_by: {
         type: DataTypes.UUID,
-        allowNull: true,
         references: {
           model: sequelize.Users,
           key: "users_id",
