@@ -169,7 +169,7 @@ upload(req, res, function (err) {
 });
 };
 
-// This part is for features dentist
+// This part is for Branch
 const storageBranches = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, "../public/branches"));
