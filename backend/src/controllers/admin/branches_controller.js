@@ -11,21 +11,10 @@ exports.createBranches = (req, res) => {
    // Check users-type if valid
    checkAuthorization(req, res, "Admin");
 
-   Branches
-       .findOne({ where: { branches_name: req.body.branches_name}})
-       .then(result => {
-           if(result) emptyDataResponse(res, "")
-           else {
-               // Set id
-               req.body.branches_id = req.branches_id;
-               
-               // Create Branch
-               Branches
-                   .create(req.body,{ include: ["created"] })
-                   .then((data) => dataResponse(res, data, "A new record has been added", "Record is not added"))
-                   .catch((err) => errResponse(res, err)); 
-           }
-       }) .catch(err => helper.errResponse(res, err));
+    // Create Branch
+    Branches.create(req.body, { include: ["added_branch"] })
+        .then((data) => dataResponse(res, data, "A new branch has been added", "Record is not added"))
+        .catch((err) => errResponse(res, err)); 
 };
 // Update Branches
 exports.updateBranches = (req, res) => {
