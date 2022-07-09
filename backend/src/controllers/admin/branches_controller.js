@@ -8,25 +8,25 @@ const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = req
 exports.createBranches = (req, res) => {
 
    req.body.branches_created_by = req.user.users_id;
+   req.body.branches_image= req.file != undefined ? req.file.filename : "";
    // Check users-type if valid
    checkAuthorization(req, res, "Admin");
 
     // Create Branch
-    Branches
-        .create(req.body,{ 
+    Branches.create(req.body,{ 
             include: ["added_branch"] 
         })
         .then((data) => {
             Users.findByPk(data.users_id, { 
                 include: 
-                    ["created_branch", "added_branch"]
+                    ["added_branch"],
                 }).then(
-                (result) => {
-                res.send({
-                    error: false,
-                    data: result,
-                    message: [process.env.SUCCESS_CREATE],
-                });
+                    (result) => {
+                    res.send({
+                        error: false,
+                        data: result,
+                        message: [process.env.SUCCESS_CREATE],
+                     });
                 }
             );
             }).catch((err) => errResponse(res, err)); 
