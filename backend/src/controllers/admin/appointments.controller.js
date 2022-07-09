@@ -23,14 +23,14 @@ exports.updateAppointment = (req, res) => {
     // Check if user-status is valid
     // note: always check authorization using users_type
     checkAuthorization(req, res, "Admin")
-    const appointment_id = req.params.appointments_id;
+    const appointments_id = req.params.appointments_id;
 
-    Appointments.update(req.body, { where: { appointment_id: appointment_id }})
+    Appointments.update(req.body, { where: { appointments_id: appointments_id }})
     .then((result) => {
       console.log(req.body);
       if (result) {
         // retrieve updated details
-        Users.findByPk(data.appointment_id).then((result) => {
+        Users.findByPk(data.appointments_id).then((result) => {
           res.send({
             error: false,
             data: result,
