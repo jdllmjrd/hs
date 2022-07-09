@@ -33,20 +33,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     inser_service_name: {
       type : DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull:{msg: 'Service name is required'},
-        notEmpty:{msg: 'Service name is required'}
-      }
+      allowNull: true,
     },
     inser_service_price: {
       type : DataTypes.DECIMAL,
-      allowNull: false,
-      validate: {
-        notNull:{msg: 'Service price is required'},
-        notEmpty:{msg: 'Service price is required'},
-        isInt:{msg: 'Must be a Number'}
-      }
+      allowNull: true,
     },
   }, 
   {

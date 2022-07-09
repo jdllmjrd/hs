@@ -60,7 +60,7 @@
      });
  };
  // Get all Schedule
- exports.findAllSchedule = (req, res, next) => {
+ exports.findAllSchedule = (req, res) => {
      
      // Check authorization first
      checkAuthorization(req, res, "Admin")

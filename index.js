@@ -75,8 +75,7 @@ const authenticateToken = (req, res, next) => {
 // Images
 app.use("/users-profile-pic", express.static(path.join(__dirname + "./backend/src/public/users_profile_pic")));
 app.use("/featured_dentist", express.static(path.join(__dirname + "./backend/src/public/featured_dentist")));
-app.use("/services", express.static(path.join(__dirname + "./backend/src/public/services")));
-app.use("/branches", express.static(path.join(__dirname + "./backend/src/public/branches")));
+app.use("/services", express.static(path.join(__dirname + "./backend/src/public/services")))
 // Home page
 app.use(`${process.env.API_VERSION}/home`, require("./backend/src/routes/home.routes"));
 // Register Page

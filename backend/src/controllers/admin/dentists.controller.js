@@ -9,7 +9,7 @@ const Users = db.Users;
 const { dataResponse, checkAuthorization, emptyDataResponse, errResponse } = require('../../helpers/helper.controller');
 
 //create and save new featured dentist - checked
-exports.createDentist = (req, res) => {
+exports.createDentist = (req, res, next) => {
     
     req.body.dentists_created_by = req.user.users_id;
     req.body.dentists_image = req.file != undefined ? req.file.filename : "";
@@ -25,7 +25,7 @@ exports.createDentist = (req, res) => {
 
 };
 // Update featured Dentist - checked
-exports.updateDentist = (req, res) => {
+exports.updateDentist = (req, res, next) => {
     // Check if user-status is valid
     // note: always check authorization using users_type
     checkAuthorization(req, res, "Admin")

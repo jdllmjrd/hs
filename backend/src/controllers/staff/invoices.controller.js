@@ -42,7 +42,6 @@ exports.findOne = (req, res) => {
     });
     });
 };
-
 // Update an invoice status from successful appointment
  exports.update = (req, res) => {
   const id = req.params.id;

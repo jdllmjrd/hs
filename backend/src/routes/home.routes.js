@@ -8,6 +8,7 @@ const router = require("express").Router();
 // contact us using nodemailer controller, bottom section
 const homeController = require('../controllers/index.controller');
 router.get('/', homeController.getDentist);
-// router.post('/', homeController.send);
+router.get('/dentist', homeController.findOneDentist);
+router.post('/', homeController.send);
 
 module.exports = router;

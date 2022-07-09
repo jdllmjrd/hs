@@ -14,6 +14,15 @@ exports.getDentist = (req, res, next) => {
     .catch(err => errResponse(res, err));
 }
 
+exports.findOneDentist = (req, res) => {
+  const dentists_id = req.params.dentists_id
+  Dentist
+    .findByPk({ where: { dentists_id: dentists_id}})
+    .then(data => dataResponse(res, data, "Featured Dentist Retrieved Successfully", "No featured dentist has been retrieved"))
+    .catch(err => errResponse(res, err));
+}
+
+
 // This will send an email for contact us section
 exports.send = (req, res) => {
 // async..await is not allowed in global scope, must use a wrapper

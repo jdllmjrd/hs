@@ -60,12 +60,13 @@
      });
  };
  // Get all Schedule
- exports.findAllSchedule = (req, res, next) => {
+ exports.findAllSchedule = (req, res) => {
      
+  const sched_dentist = req.user.users_id;
      // Check authorization first
      checkAuthorization(req, res, "Staff")
      Schedule
-         .findAll()
+         .findAll({where: {schedule_created_by:sched_dentist }})
          .then(data => dataResponse(res, data, "Schedules Retrieved Successfully", "No featured dentist has been retrieved"))
          .catch(err => errResponse(res, err));
  };

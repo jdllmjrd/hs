@@ -7,7 +7,6 @@ const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = req
 exports.createBranches = (req, res) => {
 
    req.body.branches_created_by = req.user.users_id;
-   req.body.branches_image = req.file != undefined ? req.file.filename : "";
    // Check users-type if valid
    checkAuthorization(req, res, "Admin");
 
@@ -20,7 +19,6 @@ exports.createBranches = (req, res) => {
 exports.updateBranches = (req, res) => {
 
     req.body.branches_updated_by = req.user.users_id;
-    req.body.branches_image = req.file != undefined ? req.file.filename : "";
     // Check if user-status is valid
     // note: always check authorization using users_type
     checkAuthorization(req, res, "Admin")
@@ -35,13 +33,13 @@ exports.updateBranches = (req, res) => {
         .catch(err => errResponse(res, err))
 }
 // Get all Branches
-exports.getAllBranches = (req, res, next) => {
+exports.getAllBranches = (req, res) => {
     
     // Check authorization first
     checkAuthorization(req, res, "Admin")
 
     Branches
-        .findAll({ where: { branches_status: "Open"}})
+        .findAll()
         .then(data => dataResponse(res, data, "Branches Retrieved Successfully", "No Branch has been retrieved"))
         .catch(err => errResponse(res, err));
 }

@@ -73,7 +73,7 @@ exports.updateAppointment = (req, res) => {
     });
 };
 // Get All appointment
-exports.findAllAppointment = (req, res, next) => {
+exports.findAllAppointment = (req, res) => {
     // Check authorization first
     const users_id = req.user.users_id
     checkAuthorization(req, res, "Staff")

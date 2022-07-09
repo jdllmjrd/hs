@@ -55,7 +55,7 @@ exports.updateAppointment = (req, res) => {
     });
 };
 // Get All appointment
-exports.findAllAppointment = (req, res, next) => {
+exports.findAllAppointment = (req, res) => {
     // Check authorization first
     checkAuthorization(req, res, "Admin")
     Appointments
