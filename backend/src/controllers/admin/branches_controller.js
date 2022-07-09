@@ -1,6 +1,5 @@
 const db = require("../../models");
 const Branches = db.Branches;
-const Users = db.Users
 const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = require('../../helpers/helper.controller');
 
 
@@ -8,27 +7,27 @@ const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = req
 exports.createBranches = (req, res) => {
 
    req.body.branches_created_by = req.user.users_id;
+
    req.body.branches_image = req.file != undefined ? req.file.filename : "";
    // Check users-type if valid
    checkAuthorization(req, res, "Admin");
 
-    // Create Branch
-    Branches.create(req.body, { include: ["added_branch"] })
-        .then((data) => {
-        Users.findByPk(data.branches_id, { include: ["created_branch", "added_branch"], }).then(
-            (result) => {
-            res.send({
-                error: false,
-                data: result,
-                message: [process.env.SUCCESS_CREATE],
-            });
-          }
-        );
-        })
-        .catch((err) => {
-          res.status(500).send(err);
-        });
-    }
+   Branches
+       .findOne({ where: { branches_name: req.body.branches_name}})
+       .then(result => {
+           if(result) emptyDataResponse(res, "")
+           else {
+               // Set id
+               req.body.branches_id = req.branches_id;
+               
+               // Create Branch
+               Branches
+                   .create(req.body,{ include: ["created"] })
+                   .then((data) => dataResponse(res, data, "A new record has been added", "Record is not added"))
+                   .catch((err) => errResponse(res, err)); 
+           }
+       }) .catch(err => helper.errResponse(res, err));
+};
 // Update Branches
 exports.updateBranches = (req, res) => {
 
@@ -41,7 +40,7 @@ exports.updateBranches = (req, res) => {
             where: {
                branches_id: req.params.branches_id
             },
-            include: ["updated"]
+            include: ["created"]
         })
         .then(data => dataResponse(res, data, "Updated Successfully", "No updates happened"))
         .catch(err => errResponse(res, err))
