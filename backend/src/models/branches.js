@@ -45,36 +45,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     branches_name: {
       type : DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull:{msg: 'Please enter branch name'},
-        notEmpty:{msg: 'This field is required'}
-      }
+      allowNull: true,
     },
     branches_contact_person: {
       type : DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull:{msg: 'Please enter branch contact person'},
-        notEmpty:{msg: 'This field is required'}
-      }
+      allowNull: true
     },
     branches_phone_number: {
-      type : DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: { args: true, msg: "You must enter Phone Number" },
-        len: { args: [11,11], msg: 'Phone Number is invalid should be 11 numbers' },
-        isInt: { args: true, msg: "You must enter Phone Number" },
-      }
+      type : DataTypes.BIGINT,
+      allowNull: true,
     },
     branches_description: {
       type : DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        notNull:{msg: 'Please enter branch description'},
-        notEmpty:{msg: 'This field is required'}
-      }
+      allowNull: true,
     },
     branches_google_map: {
       type : DataTypes.TEXT,
