@@ -13,10 +13,22 @@ exports.createBranches = (req, res) => {
    checkAuthorization(req, res, "Admin");
 
     // Create Branch
-    Branches.create(req.body)
-        .then((data) => dataResponse(res, data, "A new branch has been added", "Record is not added"))
-        .catch((err) => errResponse(res, err)); 
-};
+    Branches.create(req.body, { include: ["added_branch"] })
+        .then((data) => {
+        Users.findByPk(data.branches_id, { include: ["created_branch", "added_branch"], }).then(
+            (result) => {
+            res.send({
+                error: false,
+                data: result,
+                message: [process.env.SUCCESS_CREATE],
+            });
+          }
+        );
+        })
+        .catch((err) => {
+          res.status(500).send(err);
+        });
+    }
 // Update Branches
 exports.updateBranches = (req, res) => {
 
