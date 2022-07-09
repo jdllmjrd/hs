@@ -8,11 +8,12 @@ const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = req
 exports.createBranches = (req, res) => {
 
    req.body.branches_created_by = req.user.users_id;
+   req.body.branches_image = req.file != undefined ? req.file.filename : "";
    // Check users-type if valid
    checkAuthorization(req, res, "Admin");
 
     // Create Branch
-    Branches.create(req.body, { include: ["added_branch"] })
+    Branches.create(req.body)
         .then((data) => dataResponse(res, data, "A new branch has been added", "Record is not added"))
         .catch((err) => errResponse(res, err)); 
 };
