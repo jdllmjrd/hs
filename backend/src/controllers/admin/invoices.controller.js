@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const {
   checkAuthorization,
   dataResponse,
@@ -94,10 +95,19 @@ exports.findInvoice = async (req, res) => {
   try {
     checkAuthorization(req, res, "Admin");
     const { id } = req.body;
+    let invoice;
 
-    const invoice = await Invoices.findByPk(id, {
-      include: [{ model: InvoicesServices, as: "dump_invoice" }],
-    });
+    // If no id where given -> display all invoices
+    if (!id) {
+      invoice = await Invoices.findAll({
+        where: { invoices_status: { [Op.not]: "Deleted" } },
+        include: [{ model: InvoicesServices, as: "dump_invoice" }],
+      });
+    } else {
+      invoice = await Invoices.findByPk(id, {
+        include: [{ model: InvoicesServices, as: "dump_invoice" }],
+      });
+    }
 
     return dataResponse(res, invoice, "Invoice retreived successfully");
   } catch (error) {
@@ -105,15 +115,19 @@ exports.findInvoice = async (req, res) => {
   }
 };
 
-exports.deleteInvoice = (req, res) => {
-  checkAuthorization(req, res, "Admin");
+exports.deleteInvoice = async (req, res) => {
+  try {
+    checkAuthorization(req, res, "Admin");
 
-  const body = { invoices_status: "Deleted" };
-  const id = req.params.invoice_id;
+    const body = { invoices_status: "Deleted" };
+    const id = req.params.invoice_id;
 
-  Invoices.update(body, { where: { id } })
-    .then((result) => {
-      if (result) emptyDataResponse(res, "Invoice successfully deleted");
-    })
-    .catch((err) => errResponse(res, err));
+    await Invoices.update(body, { where: { id } });
+
+    await InvoicesServices.destroy({ where: { inser_invoice_id: id } });
+
+    return emptyDataResponse(res, "Invoice successfully deleted");
+  } catch (error) {
+    return errResponse(res, error);
+  }
 };
