@@ -122,7 +122,11 @@ app.use(
 /** FOR FOUR USER TYPES ROUTEs */
 // Authenticated Routes
 //app.use(`${process.env.API_VERSION}/patient`, authenticateToken , require("./backend/src/routes/patient.routes"));
-//app.use(`${process.env.API_VERSION}/staff`, authenticateToken , require("./backend/src/routes/staff.routes"));
+app.use(
+  `${process.env.API_VERSION}/staff`,
+  authenticateToken,
+  require("./backend/src/routes/staff.routes")
+);
 app.use(
   `${process.env.API_VERSION}/dentist`,
   authenticateToken,
