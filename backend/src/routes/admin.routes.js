@@ -10,7 +10,7 @@ const helpers = require("../helpers/image.helper");
 // This part is for image users profile picture
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../../public/users_profile_pic"));
+    cb(null, path.join(__dirname, "../public/users_profile_pic"));
   },
 
   // By default, multer removes file extensions so let's add them back
