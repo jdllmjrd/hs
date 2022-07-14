@@ -1,9 +1,9 @@
+require("dotenv").config();
+
 // import modules/packages
 const express = require("express");
 const db = require("./src/models");
 const cors = require("cors");
-
-require("dotenv").config();
 
 // For token secret
 // console.log(require("crypto").randomBytes(64).toString("hex"));
