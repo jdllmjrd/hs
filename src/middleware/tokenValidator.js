@@ -4,6 +4,7 @@ const excludeUrl = [
   "/users-profile-pic",
   "/featured_dentist",
   "/services",
+  `/${process.env.API_VERSION}/home`,
   `/${process.env.API_VERSION}/register`,
   `/${process.env.API_VERSION}/login`,
   `/${process.env.API_VERSION}/services`,

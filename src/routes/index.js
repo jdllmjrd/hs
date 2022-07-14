@@ -26,7 +26,7 @@ router.use(
 // For log in page
 router.use(`/${process.env.API_VERSION}/login`, require("./login.routes"));
 //Service page
-router.use(`${process.env.API_VERSION}/services`, require("./service.routes"));
+router.use(`/${process.env.API_VERSION}/services`, require("./service.routes"));
 
 router.use(`/${process.env.API_VERSION}/dentist`, require("./dentist.routes"));
 
