@@ -2,3 +2,8 @@ node_modules
 package-lock.json
 .env
 heroku.md
+Images
+Images/**
+public
+public/**
+.DS_Store
