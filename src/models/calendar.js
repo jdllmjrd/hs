@@ -14,7 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Calendar.init({
-    id: DataTypes.STRING
+    id: {
+      type : DataTypes.UUID,
+      primaryKey : true, 
+      defaultValue : DataTypes.UUIDV4
+    },
   }, {
     sequelize,
     modelName: 'Calendar',
