@@ -1,4 +1,14 @@
 node_modules
 package-lock.json
+<<<<<<< HEAD
 heroku.md
 .env
+=======
+.env
+heroku.md
+Images
+Images/**
+public
+public/**
+.DS_Store
+>>>>>>> remotes/origin/feat/update-code-and-directory
