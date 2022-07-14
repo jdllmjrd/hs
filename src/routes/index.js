@@ -35,6 +35,4 @@ router.use(`/${process.env.API_VERSION}/admin`, require("./admin.routes"));
 
 router.use(`/${process.env.API_VERSION}/staff`, require("./staff.routes"));
 
-app.use(`${process.env.API_VERSION}/staff`, require("./staff.routes"));
-
 module.exports = router;
