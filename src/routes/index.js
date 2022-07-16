@@ -1,5 +1,6 @@
-const router = require("express").Router();
+// If no id where given -> display all invoicesconst router = require("express").Router();
 const path = require("path");
+const router = require("./home.routes");
 const static = require("express").static;
 
 // Images
@@ -34,5 +35,11 @@ router.use(`/${process.env.API_VERSION}/dentist`, require("./dentist.routes"));
 router.use(`/${process.env.API_VERSION}/admin`, require("./admin.routes"));
 
 router.use(`/${process.env.API_VERSION}/staff`, require("./staff.routes"));
+
+/** Calendar */
+router.use(
+  `/${process.env.API_VERSION}/calendar`,
+  require("./calendar.routes")
+);
 
 module.exports = router;

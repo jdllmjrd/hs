@@ -68,6 +68,7 @@ exports.findInvoice = async (req, res) => {
   try {
     checkAuthorization(req, res, "Staff");
     const { users_id } = req.user;
+    console.log(req.user);
     const { id } = req.body;
     let invoice;
 
@@ -131,6 +132,7 @@ exports.updateInvoice = async (req, res) => {
       }
     );
 
+    console.log(invoices_services);
     invoices_services.map(
       async (e) =>
         await InvoicesServices.update(
