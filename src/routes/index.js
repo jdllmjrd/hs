@@ -42,4 +42,7 @@ router.use(
   require("./calendar.routes")
 );
 
+/** Patient */
+router.use(`/${process.env.API_VERSION}/patient`, require("./patient.routes"));
+
 module.exports = router;
