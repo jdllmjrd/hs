@@ -63,7 +63,7 @@ const uploadImage = (req, res, next) => {
 // This part is for Featured Dentists
 const storageDentist = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../public/featured_dentist"));
+    cb(null, path.join(__dirname, "../../public/featured_dentist"));
   },
 
   // By default, multer removes file extensions so let's add them back
@@ -117,7 +117,7 @@ const uploadDentist = (req, res, next) => {
 // This part is for features dentist
 const storageService = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../public/services"));
+    cb(null, path.join(__dirname, "../../public/services"));
   },
 
   // By default, multer removes file extensions so let's add them back
