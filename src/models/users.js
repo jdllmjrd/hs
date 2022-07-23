@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 
-const PROTECTED_ATTRIBUTES = ["users_password", "users_birthdate"];
+const PROTECTED_ATTRIBUTES = ["users_password"];
 
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
