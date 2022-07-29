@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         references: {
           model: sequelize.Branches,
-          key: "Branches",
+          key: "branches_id",
         },
       },
       invoices_issued_to: {
