@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
       });
       //One to Many
-      this.BelongsTo(models.Branches, {
+      this.belongsTo(models.Branches, {
         as: "invoice_branch",
         foreignKey: "invoices_branches",
         onDelete: "CASCADE",
