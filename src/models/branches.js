@@ -51,15 +51,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     branches_name: {
       type : DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     branches_contact_person: {
       type : DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     branches_phone_number: {
       type : DataTypes.BIGINT,
-      allowNull: false,
+      allowNull: true,
     },
     branches_description: {
       type : DataTypes.TEXT,
