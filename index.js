@@ -23,7 +23,7 @@ if (process.env.ALLOW_SYNC === "true") {
     .query("SET FOREIGN_KEY_CHECKS = 0", { raw: true })
     .then(() => {
       db.sequelize
-        .sync({ force: true })
+        .sync({ alter: true })
         .then(() =>
           console.log("Done adding/updating database based on the models")
         )
