@@ -34,6 +34,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "branches_created_by",
         as: "created_branch"
       });
+
+      // invoice 
+      this.hasMany(models.Invoices, {
+        foreignKey: "Invoices",
+        as: "branch_invoice"
+      });
     
     }
   }
@@ -45,15 +51,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     branches_name: {
       type : DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     branches_contact_person: {
       type : DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     branches_phone_number: {
       type : DataTypes.BIGINT,
-      allowNull: true,
+      allowNull: false,
     },
     branches_description: {
       type : DataTypes.TEXT,

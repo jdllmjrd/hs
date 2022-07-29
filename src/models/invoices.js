@@ -28,6 +28,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "inser_invoice_id",
         onDelete: "CASCADE",
       });
+      //One to Many
+      this.BelongsTo(models.Branches, {
+        as: "invoice_branch",
+        foreignKey: "invoices_branches",
+        onDelete: "CASCADE",
+      });
     }
   }
   Invoices.init(
@@ -41,8 +47,16 @@ module.exports = (sequelize, DataTypes) => {
       // that has a successful appointment
       invoices_number: {
         type: DataTypes.UUID,
-        allowNull: false,
+        allowNull: true,
         defaultValue: DataTypes.UUIDV4,
+      },
+      invoices_branches: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+          model: sequelize.Branches,
+          key: "Branches",
+        },
       },
       invoices_issued_to: {
         type: DataTypes.STRING,
