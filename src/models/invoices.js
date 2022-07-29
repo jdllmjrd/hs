@@ -30,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
       });
       //One to Many
       this.belongsTo(models.Branches, {
-        as: "invoice_branch",
         foreignKey: "invoices_branches",
+        as: "invoice_branch",
         onDelete: "CASCADE",
       });
     }

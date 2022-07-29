@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
 
       // invoice 
       this.hasMany(models.Invoices, {
-        foreignKey: "Invoices",
+        foreignKey: "invoices_branches",
         as: "branch_invoice"
       });
     
