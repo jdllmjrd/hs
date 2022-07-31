@@ -106,11 +106,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     users_fname  : {
       type       : DataTypes.STRING,
-      allowNull  : false,
-      validate   : {
-        notNull  :{msg: 'Please enter your first name'},
-        notEmpty :{msg: 'This field is required'}
-      },
+      allowNull  : true,
       comment    : "This will be the users' first name",
     },
     users_mname  : {
@@ -134,6 +130,14 @@ module.exports = (sequelize, DataTypes) => {
         this.users_fname+ " "+ this.users_mname+ " "+ this.users_lname);
       },
       comment: "This will be the full name part",
+    },
+    users_name_google : {
+      type             : DataTypes.STRING,
+      allowNull        : true,
+    },
+    users_google_id : {
+      type             : DataTypes.STRING,
+      allowNull        : true,
     },
     users_birthdate: {
       type         : DataTypes.DATEONLY,
@@ -188,12 +192,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     users_password :{
       type         : DataTypes.STRING,
-      allowNull : false,
-      validate  : {
-        notNull : { args: true, msg: "You must enter password" },
-        len     : { args: [8,60], msg: 'Password should atleast have 8 characters' },
-     },
-     comment: "This will contain hashed password",
+      allowNull    : true, // For sign in with google
+      comment: "This will contain hashed password",
     },
     users_type :{
       type     : DataTypes.STRING,
