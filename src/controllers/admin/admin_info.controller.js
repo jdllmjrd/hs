@@ -7,28 +7,27 @@ const bcrypt = require('bcrypt');
 
 // Admin info - checked
 exports.getAdminInfo = (req, res, next) => {
-    const users_id = req.user.users_id;
-    // Check a user if it is logged in 
-    // check if user is admin
-    helper.checkAuthorization(req, res, "Admin");
-    
-     Users.findOne({ where: { users_id: users_id } })
-    .then((data) => {
-      res.send({
-        error: false,
-        data: data,
-        message: [process.env.SUCCESS_RETRIEVED],
-      });
-    })
-    .catch((err) => {
-      res.status(500).send({
-        error: true,
-        data: [],
-        message:
-          err.errors.map((e) => e.message) || process.env.GENERAL_ERROR_MSG,
-      });
-    });
-};
+
+  helper.checkAuthorization(req, res, 'Admin');
+
+  db.Users
+      .findByPk(req.user.users_id, {
+          attributes: [
+              'users_fname',
+              'users_mname',
+              'users_lname',
+              'users_birthdate',
+              'users_gender',
+              'users_civil_status',
+              'users_phone_number',
+              'users_email',
+              'users_type',
+              'users_profile_pic'
+          ]
+      })   
+      .then((data) => helper.dataResponse(res, data, 'A Record has been identified', 'No Record has been identified'))
+      .catch((err) => helper.errResponse(res, err));
+}
 
 
 // Update admin information - checked
@@ -36,6 +35,10 @@ exports.getAdminInfo = (req, res, next) => {
 exports.updateAdminInfo = (req, res, next) => {
 
   helper.checkAuthorization(req, res, 'Admin');
+  req.body.users_full_name = "";
+
+  console.log(req.file.filename);
+  req.body.users_profile_pic = req.file != undefined ? req.file.filename : "";
 
   // Check if user ID is existed in database
   db.Users
