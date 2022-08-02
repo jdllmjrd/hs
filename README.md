@@ -3,9 +3,21 @@
 ## A Dental Clinic Management System	
 
 ## System Overview
-Happy Smile Dental Clinic Management System is intended to make the process of managing a dental clinic easier and more accesible to its users. The primary functions of the system include the appointment of dental services, maintenance of patient dental records, online viewing services, and dental supply inventories.
+Happy Smile Dental Clinic Management System is intended to make the process of managing a dental clinic easier and more accesible to its users. 
 
+The primary functions of the system include the following:
+
+* Schedule an appointment
+
++ Manage dentist's schedules
+
++ Maintenance of patient dental records 
+
++ Online viewing services
+
++ Create invoice
 &nbsp;
+
 ### Dependencies
 
 + Initialize Sequelize  `$ sequelize init`
