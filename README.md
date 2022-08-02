@@ -1,33 +1,51 @@
+### <img align="left" alt="Visual Studio Code" width="200px" src="https://github.com/eurus-eastwind/hs-web/blob/b7b013fd4a8723c944fc098d2d0029262a7774be/assets/images/HSBW.PNG" style="padding-right:10px; padding-top: 10px;" /> 
 
-# Initialize Sequelize
- $ sequelize init
+## A Dental Clinic Management System	
 
-# Express
-npm install express --save
+## System Overview
+Happy Smile Dental Clinic Management System is intended to make the process of managing a dental clinic easier and more accesible to its users. 
 
-# Sequelize
- $ npm install --save sequelize
+The primary functions of the system include the following:
 
-# Sequelize-cli
- $ npm install -g sequelize-cli
++ Schedule an appointment
 
-# MySQL Driver
- $ npm install --save mysql2
++ Manage dentist's schedules
 
-# Nodemon
- $ npm i -D nodemon
++ Maintenance of patient dental records 
 
-# Dotenv
- $ npm install dotenv
++ Online viewing services
 
-# brcypt
- $ npm install bcrypt
++ Create invoice
 
-# jsonwebtoken
- $ npm install jsonwebtoken
+&nbsp;
 
+## Dependencies
 
-# Edit config.json in config folder
++ Initialize Sequelize  `$ sequelize init`
+
++ Express `$ npm install express --save`
+
++ Sequelize `$ npm install --save sequelize`
+
++ Sequelize-cli ` $ npm install -g sequelize-cli`
+
+---
+
++ MySQL Driver  `$ npm install --save mysql2`
+
++ Nodemon ` $ npm i -D nodemon`
+
++ Dotenv `$ npm install dotenv`
+---
++ brcypt  `$ npm install bcrypt`
+
++  jsonwebtoken `$ npm install jsonwebtoken`
+
+---
+
+Edit config.json in config folder
+
+``` js
 {
   "development": {
     ...
@@ -36,23 +54,29 @@ npm install express --save
   },
   ...
 }
+```
+---
++ Run app by development `$ npm run start`
 
-# Run app by development
-$ npm run start
++ To create database `$ sequelize db:create`
 
-# To create database
-$ sequelize db:create
++ To drop database `$ sequelize db:drop`
 
-# To drop database
-$ sequelize db:drop
++ To create model: <details><summary>model list</summary>
 
-# To create model
-$ sequelize model:generate --name Model_Name --attributes column:string
+  + `$ sequelize model:generate --name Model_Name --attributes column:string`
 
-$ sequelize model:generate --name Services --attributes services_id:string
-$ sequelize model:generate --name Invoices_services --attributes inser_id:string
-$ sequelize model:generate --name Invoices --attributes invoices_id:string
-$ sequelize model:generate --name Dentists --attributes dentists_id:string
-$ sequelize model:generate --name Dentists_schedules --attributes schedule_id:string
-$ sequelize model:generate --name Branches --attributes branches_id:string
-$ sequelize model:generate --name Appointments --attributes appointments_id:string
+  + `$ sequelize model:generate --name Services --attributes services_id:string`
+
+  + `$ sequelize model:generate --name Invoices_services --attributes inser_id:string`
+
+  + `$ sequelize model:generate --name Invoices --attributes invoices_id:string`
+
+  + `$ sequelize model:generate --name Dentists --attributes dentists_id:string`
+
+  + `$ sequelize model:generate --name Dentists_schedules --attributes schedule_id:string`
+
+  + `$ sequelize model:generate --name Branches --attributes branches_id:string`
+
+  + `$ sequelize model:generate --name Appointments --attributes appointments_id:string`
+</details>
