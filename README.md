@@ -1,7 +1,8 @@
-#  <img align="left" alt="Visual Studio Code" width="200px" src="https://github.com/eurus-eastwind/hs-web/blob/b7b013fd4a8723c944fc098d2d0029262a7774be/assets/images/HSBW.PNG" style="padding-right:10px;" /> A Dental Clinic Management System	
+#  <img align="left" alt="Visual Studio Code" width="200px" src="https://github.com/eurus-eastwind/hs-web/blob/b7b013fd4a8723c944fc098d2d0029262a7774be/assets/images/HSBW.PNG" style="padding-right:10px;" /> 
+# A Dental Clinic Management System	
 
-### Brief Description:
-	This system's primary functions include the maintenance of patient dental records, online viewing services, and dental supply inventories.
+### Brief Description
+This system's primary functions include the maintenance of patient dental records, online viewing services, and dental supply inventories.
 
 # Initialize Sequelize
  $ sequelize init
