@@ -7,7 +7,7 @@ Happy Smile Dental Clinic Management System is intended to make the process of m
 
 The primary functions of the system include the following:
 
-* Schedule an appointment
++ Schedule an appointment
 
 + Manage dentist's schedules
 
@@ -16,9 +16,10 @@ The primary functions of the system include the following:
 + Online viewing services
 
 + Create invoice
+
 &nbsp;
 
-### Dependencies
+## Dependencies
 
 + Initialize Sequelize  `$ sequelize init`
 
