@@ -1,6 +1,5 @@
 const db = require("../../models");
 const Branches = db.Branches;
-const Users = db.Users;
 const { dataResponse, checkAuthorization, errResponse } = require('../../helpers/helper.controller');
 
 
