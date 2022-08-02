@@ -1,3 +1,7 @@
+#  HAPPY SMILE CLINIC: A Dental Clinic Management System	
+[<img align="left" alt="Visual Studio Code" width="26px" src="https://github.com/eurus-eastwind/hs-web/blob/004e01c66d7ad9afee0d1d0d4e6955a12668e83a/assets/images/123.png" style="padding-right:10px;" />]
+Brief Description:
+	This system's primary functions include the maintenance of patient dental records, online viewing services, and dental supply inventories.
 
 # Initialize Sequelize
  $ sequelize init
