@@ -32,45 +32,43 @@ exports.getAdminInfo = (req, res, next) => {
 
 
 // Update admin information - checked
-exports.updateAdminInfo = async (req, res) => {
-  const users_id = req.param.users_id;
-  // Check a user if it is logged in 
-  // check if user is admin
-  helper.checkAuthorization(req, res, "Admin");
+exports.updateAdminInfo = (req, res) => { 
+
+  // Check authorization first
+ checkAuthorization(req, res, "Admin");
+  const users_id = req.params.users_id;
   req.body.users_updated_by = req.user.users_id;
-  req.body.users_fname = req.user.users_fname;
+  req.body.users_full_name = "";
 
-    //console.log(req.file.filename);
-  req.body.profile_pic = req.file != undefined ? req.file.filename : "";
-  
-    if (req.body.users_password) {
-      req.body.users_password = await bcrypt.hash(
-        req.body.users_password,
-        parseInt(process.env.SALT_ROUNDS)
-      );
-    }
+  console.log(req.file.filename);
+  req.body.users_profile_pic = req.file != undefined ? req.file.filename : "";
 
-    Users.update(req.body, { where: { users_id: users_id,
-    }}, { include: ["updated"] })
-        .then((result) => {
-            if (result) {
-              // retrieve updated details
-              Users.findByPk(users_id, { include: ["updated"] }).then((result) => {
-                res.send({
-                  error: false,
-                  data: result,
-                  message: [process.env.SUCCESS_UPDATE],
-                });
-              });
-        } else {
-          res.status(500).send({
-            error: true,
-            data: [],
-            message: ["Error in updating a record"],
+  Users.update(req.body, { where: { users_id: users_id }}, { include: ["updated"] })
+    .then((result) => {
+      console.log(req.body);
+      if (result) {
+        // retrieve updated details
+        Users.findByPk(users_id, { include: ["updated"] }).then((result) => {
+          res.send({
+            error: false,
+            data: result,
+            message: [process.env.SUCCESS_UPDATE],
           });
-        }
-        })
+        });
+      } else {
+        res.status(500).send({
+          error: true,
+          data: [],
+          message: ["Error in updating a record"],
+        });
+      }
+    })
     .catch((err) => {
-    res.status(500).send(err);
-    });
-  };
+      res.status(500).send({
+        error: true,
+        data: [],
+        message:
+          err.errors.map((e) => e.message) || process.env.GENERAL_ERROR_MSG,
+      });
+    })
+};
