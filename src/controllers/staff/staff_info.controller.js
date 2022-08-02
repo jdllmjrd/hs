@@ -40,7 +40,7 @@ exports.updateStaffInfo = async (req, res) => {
   req.body.users_fname = req.user.users_fname;
 
     //console.log(req.file.filename);
-    //req.body.profile_pic = req.file != undefined ? req.file.filename : "";
+    req.body.profile_pic = req.file != undefined ? req.file.filename : "";
   
     if (req.body.users_password) {
       req.body.users_password = await bcrypt.hash(

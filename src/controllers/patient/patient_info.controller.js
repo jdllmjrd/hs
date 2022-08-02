@@ -31,17 +31,17 @@ exports.getPatientInfo = (req, res, next) => {
 };
 
 
-// Update admin information - checked
+// Update Patient information - checked
 exports.updatePatientInfo = async (req, res) => {
   const users_id = req.param.users_id;
   // Check a user if it is logged in 
-  // check if user is admin
+  // check if user is Patient
   helper.checkAuthorization(req, res, "Patient");
   req.body.users_updated_by = req.user.users_id;
   req.body.users_fname = req.user.users_fname;
 
     //console.log(req.file.filename);
-    //req.body.profile_pic = req.file != undefined ? req.file.filename : "";
+    req.body.profile_pic = req.file != undefined ? req.file.filename : "";
   
     if (req.body.users_password) {
       req.body.users_password = await bcrypt.hash(
