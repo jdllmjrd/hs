@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 exports.getDentistInfo = (req, res, next) => {
     const users_id = req.user.users_id;
     // Check a user if it is logged in 
-    // check if user is admin
+    // check if user is dentist
     helper.checkAuthorization(req, res, "Dentist");
     
      Users.findOne({ where: { users_id: users_id } })
@@ -31,7 +31,7 @@ exports.getDentistInfo = (req, res, next) => {
 };
 
 
-// Update admin information - checked
+// Update Dentist information - checked
 exports.updateDentistInfo = async (req, res) => {
   const users_id = req.param.users_id;
   // Check a user if it is logged in 

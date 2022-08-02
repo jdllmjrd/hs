@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 exports.getStaffInfo = (req, res, next) => {
     const users_id = req.user.users_id;
     // Check a user if it is logged in 
-    // check if user is admin
+    // check if user is Staff
     helper.checkAuthorization(req, res, "Staff");
     
      Users.findOne({ where: { users_id: users_id } })

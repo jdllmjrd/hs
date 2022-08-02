@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 exports.getPatientInfo = (req, res, next) => {
     const users_id = req.user.users_id;
     // Check a user if it is logged in 
-    // check if user is admin
+    // check if user is Patient
     helper.checkAuthorization(req, res, "Patient");
     
      Users.findOne({ where: { users_id: users_id } })
