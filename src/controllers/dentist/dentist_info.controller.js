@@ -31,45 +31,39 @@ exports.getDentistInfo = (req, res, next) => {
 };
 
 
-// Update Dentist information - checked
-exports.updateDentistInfo = (req, res) => { 
+// Update Dentist informatio(n - checked
+exports.updateDentistInfo =(req, res, next) => {
 
-  // Check authorization first
- checkAuthorization(req, res, "Dentist");
-  const users_id = req.params.users_id;
-  req.body.users_updated_by = req.user.users_id;
+  helper.checkAuthorization(req, res, 'Dentist');
   req.body.users_full_name = "";
 
   console.log(req.file.filename);
   req.body.users_profile_pic = req.file != undefined ? req.file.filename : "";
 
-  Users.update(req.body, { where: { users_id: users_id }}, { include: ["updated"] })
-    .then((result) => {
-      console.log(req.body);
-      if (result) {
-        // retrieve updated details
-        Users.findByPk(users_id, { include: ["updated"] }).then((result) => {
-          res.send({
-            error: false,
-            data: result,
-            message: [process.env.SUCCESS_UPDATE],
-          });
-        });
-      } else {
-        res.status(500).send({
-          error: true,
-          data: [],
-          message: ["Error in updating a record"],
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        error: true,
-        data: [],
-        message:
-          err.errors.map((e) => e.message) || process.env.GENERAL_ERROR_MSG,
-      });
-    })
-};
+  // Check if user ID is existed in database
+  db.Users
+      .findByPk(req.user.users_id)
+      .then((result) => {
 
+          // If no result return empty response
+          if(result == null) helper.emptyDataResponse(res, 'No Record has been identified');
+
+          // Update a Admin info
+          db.Users
+              .update(req.body, {
+                  where: {
+                      users_id: req.user.users_id
+                  }
+              })
+              .then(() => {
+
+                  // Get Admin info
+                  db.Users
+                      .findByPk(req.user.users_id)
+                      .then((data) => helper.dataResponse(res, data, 'A Record has been successfully updated', 'No changes in the record'))
+                      .catch((err) => helper.errResponse(res, err));
+              })
+              .catch((err) => helper.errResponse(res, err));
+  })
+  .catch((err) => helper.errResponse(res, err));
+}
