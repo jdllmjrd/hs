@@ -40,7 +40,7 @@ exports.findEvent = async (req, res) => {
       event = await Calendar.findByPk(id);
     }
 
-    return dataResponse(res, event, "Event retreived successfully");
+    return dataResponse(res, event, "Event retrieved successfully");
   } catch (error) {
     return errResponse(res, error);
   }
