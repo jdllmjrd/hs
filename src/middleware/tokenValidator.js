@@ -8,6 +8,7 @@ const excludeUrl = [
   `/${process.env.API_VERSION}/register`,
   `/${process.env.API_VERSION}/login`,
   `/${process.env.API_VERSION}/services`,
+  `/${process.env.API_VERSION}/general`,
 ];
 
 const isRequiredToken = (path) => {
