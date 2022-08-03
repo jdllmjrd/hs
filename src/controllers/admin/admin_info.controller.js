@@ -34,46 +34,36 @@ exports.getAdminInfo = (req, res, next) => {
 
 exports.updateAdminInfo = (req, res, next) => {
 
- if(req.user == null || req.user.users_type !== 'Admin') {
-  res.sendStatus(403);
-} else {
+  helper.checkAuthorization(req, res, 'Admin');
+  req.body.users_full_name = "";
+
+  console.log(req.file.filename);
+  req.body.users_profile_pic = req.file != undefined ? req.file.filename : "";
+
+  // Check if user ID is existed in database
   db.Users
       .findByPk(req.user.users_id)
       .then((result) => {
-          if (result) {
-              db.Users
-                  .update(req.body, {
-                      where: {
-                          users_id: req.user.users_id
-                      }
-                  })
-                  .then(() => {
-                      db.Users
-                          .findByPk(req.user.users_id)
-                          .then((data) => {
-                              res.send({
-                                  error: false,
-                                  data: data,
-                                  message: 'Admin record has been successfully updated'
-                              })
-                          })
-                          .catch((err) => {
-                              console.log(err);
-                          })
-                  })
-                  .catch((err) => {
-                      console.log(err);
-                  })
-              
-          } else {
-              res.send({
-                  error: true,
-                  message: 'No Admin has been identified'
+
+          // If no result return empty response
+          if(result == null) helper.emptyDataResponse(res, 'No Record has been identified');
+
+          // Update a Admin info
+          db.Users
+              .update(req.body, {
+                  where: {
+                      users_id: req.user.users_id
+                  }
               })
-          }
-      })
-      .catch((err) => {
-          console.log(err);
-      })
-}
+              .then(() => {
+
+                  // Get Admin info
+                  db.Users
+                      .findByPk(req.user.users_id)
+                      .then((data) => helper.dataResponse(res, data, 'A Record has been successfully updated', 'No changes in the record'))
+                      .catch((err) => helper.errResponse(res, err));
+              })
+              .catch((err) => helper.errResponse(res, err));
+  })
+  .catch((err) => helper.errResponse(res, err));
 }
