@@ -5,7 +5,11 @@ const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = req
 // Get all accounts - checked
 exports.getAllDentist = (req, res, next) => {
     Users
-        .findAll(body, { where: { users_type: "Dentist" }})
+        .findAll({ 
+            where: { 
+                users_type: 'Dentist' 
+            }
+        })
         .then(data => dataResponse(res, data, 'User accounts are retrieved successfully', 'No user account has been retrieved'))
         .catch(err => errResponse(res, err));
 }
