@@ -42,6 +42,11 @@ router.use(
   require("./calendar.routes")
 );
 
+/** Calendar */
+router.use(
+  `/${process.env.API_VERSION}/general`,
+  require("./general.routes")
+);
 /** Patient */
 router.use(`/${process.env.API_VERSION}/patient`, require("./patient.routes"));
 
