@@ -8,7 +8,7 @@
 
 
  // GET all the Dentist from DB
- const DentistController = require('../controllers/branches.controller');
+ const DentistController = require('../controllers/getAllDentist.controller');
  router.get('/dentist', DentistController.getAllDentist);
 
 
