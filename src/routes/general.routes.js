@@ -9,7 +9,7 @@
 
  // GET all the Dentist from DB
  const DentistController = require('../controllers/branches.controller');
- router.get('/featured-dentist', DentistController.getAllDentist);
+ router.get('/dentist', DentistController.getAllDentist);
 
 
  module.exports = router;
