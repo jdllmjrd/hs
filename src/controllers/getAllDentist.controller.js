@@ -1,5 +1,5 @@
 // Import required packages
-const db = require('../../models');
+const db = require('../models');
 const Users = db.Users;
 const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = require('../../helpers/helper.controller');
 // Get all accounts - checked

@@ -1,5 +1,5 @@
 // Import required packages
-const db = require('../../models');
+const db = require('../models');
 const Branches = db.Branches;
 const { dataResponse, emptyDataResponse, checkAuthorization, errResponse } = require('../../helpers/helper.controller');
 
