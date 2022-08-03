@@ -42,7 +42,7 @@ router.use(
   require("./calendar.routes")
 );
 
-/** Calendar */
+/** General */
 router.use(
   `/${process.env.API_VERSION}/general`,
   require("./general.routes")
