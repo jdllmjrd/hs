@@ -30,7 +30,6 @@
      checkAuthorization(req, res, "Admin")
      const schedule_id = req.params.schedule_id;
      req.body.schedule_updated_by = req.user.users_id;
-     req.body.schedule_dentist_datetime = "";
       
      featuredDentist.update(req.body, { where: { schedule_id: schedule_id }}, { include: ["updated"] })
      .then((result) => {
