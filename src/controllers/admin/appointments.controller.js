@@ -8,6 +8,7 @@ const { dataResponse, checkAuthorization, emptyDataResponse, errResponse } = req
 exports.createAppointment = (req, res) => {
 
     const users_id  = req.user.users_id
+    
     // Check users-type if valid
     checkAuthorization(req, res, "Admin");
        

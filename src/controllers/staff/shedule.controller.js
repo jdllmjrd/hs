@@ -16,7 +16,8 @@ const {
 exports.createSchedule = async (req, res) => {
   try {
     const { users_id } = req.user;
-
+    
+    req.body.schedule_dentist_datetime = "";
     // Check users-type if valid
     checkAuthorization(req, res, "Staff");
 
