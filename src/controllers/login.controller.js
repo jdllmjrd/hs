@@ -135,7 +135,7 @@ exports.newpw = (req, res) => {
 
   const hash = bcrypt.hashSync(password, parseInt(process.env.SALT_ROUND));
 
-  Users.update({hash}, {
+  Users.update({password: hash}, {
     where: email
   });
 
