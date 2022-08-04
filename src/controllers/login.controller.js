@@ -6,6 +6,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const db = require("../models");
+const nodemailer = require("nodemailer");;
 const Users = db.Users;
 const {
   errResponse,
@@ -79,4 +80,66 @@ exports.login = (req, res) => {
           err.errors.map((e) => e.message) || process.env.GENERAL_ERROR_MSG,
       });
     });
+};
+
+exports.recoverpw = (req, res) => {
+  const {email} = req.body;
+
+  if (String(email) === "" && email === null) {
+    res.status(400).body({
+      error: true,
+      message: process.env.GENERAL_ERROR_MSG
+    });
+    return;
+  }
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.AUTH_EMAIL,
+      pass: process.env.AUTH_PASSWORD 
+    }
+  });
+
+const link = "localhost/hs-web" || process.env.BASE_URL;
+
+const options = {
+  from: process.env.AUTH_EMAIL,
+  to: email,
+  subject: 'Recover Password',
+  text: `<p>Click the link to redirect to recover password <a href="${link}/Change/pages-changepw.php?email=${email}">Link</a></p>`
+};
+
+transporter.sendMail(options, (err, data) => {
+  if (err) {
+    res.status(500).body({
+      message: process.env.GENERAL_ERROR_MSG
+    });
+  } else {
+    console.log(data.response);
+  }
+});
+
+};
+
+exports.newpw = (req, res) => {
+  const {password, email} = req.body;
+
+  if (String(password) === "" && password === null) {
+    res.status(400).body({
+      error: true,
+      message: process.env.GENERAL_ERROR_MSG
+    });
+    return;
+  }
+
+  const hash = bcrypt.hashSync(password, parseInt(process.env.SALT_ROUND));
+
+  Users.update({hash}, {
+    where: email
+  });
+
+  res.status(200).body({
+    message: process.env.SUCCESS_CREATE
+  });
 };
