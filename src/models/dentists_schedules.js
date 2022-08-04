@@ -103,11 +103,13 @@ module.exports = (sequelize, DataTypes) => {
             "schedule_dentist_datetime",
             this.schedule_dentist +
               " " +
-              this.toString(users_fname) +
+              this.toString(users_full_name) +
+              " " +
+              this.toString(schedule_date) +
               " " +
               this.toString(schedule_start_time) +
               " - " +
-              this.toString(schedule_start_time)
+              this.toString(schedule_end_time)
           );
         },
         comment: "This will be the full name part",
