@@ -101,7 +101,7 @@ exports.recoverpw = (req, res) => {
     }
   });
 
-const link = "localhost/hs-web" || process.env.BASE_URL;
+const link = "https://happysmile-web.herokuapp.com" || process.env.BASE_URL;
 
 const options = {
   from: process.env.AUTH_EMAIL,
@@ -135,8 +135,10 @@ exports.newpw = (req, res) => {
 
   const hash = bcrypt.hashSync(password, parseInt(process.env.SALT_ROUND));
 
-  Users.update({password: hash}, {
-    where: email
+  Users.update({users_password: hash}, {
+    where: {
+      users_email: email
+    }
   });
 
   res.status(200).body({
