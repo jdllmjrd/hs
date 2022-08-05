@@ -127,12 +127,20 @@ module.exports = (sequelize, DataTypes) => {
       schedule_created_by: {
         type: DataTypes.UUID,
         allowNull: true,
+        references: {
+        model: Users,
+        key: "users_id",
       },
+    },
       schedule_updated_by: {
         type: DataTypes.UUID,
         allowNull: true,
+        references: {
+        model: Users,
+        key: "users_id",
       },
     },
+  },
 
     {
       sequelize,
