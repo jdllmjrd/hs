@@ -102,11 +102,11 @@ module.exports = (sequelize, DataTypes) => {
           this.setDataValue(
             "schedule_dentist_datetime",
             this.schedule_dentist +
-              this.toString(schedule_date) +
+              this.toString("schedule_date") +
               " " +
-              this.toString(schedule_start_time) +
+              this.toString("schedule_start_time") +
               " - " +
-              this.toString(schedule_end_time)
+              this.toString("schedule_end_time")
           );
         },
         comment: "This will be the full name part",
