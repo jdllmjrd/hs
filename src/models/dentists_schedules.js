@@ -101,7 +101,9 @@ module.exports = (sequelize, DataTypes) => {
         set(value) {
           this.setDataValue(
             "schedule_dentist_datetime",
-            this.schedule_dentist +
+              // Schedule dentist should be a name
+              this.schedule_dentist +
+              " " +
               this.schedule_date +
               " " +
               this.schedule_start_time +
