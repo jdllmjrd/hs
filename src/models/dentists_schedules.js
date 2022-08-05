@@ -10,17 +10,17 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
 
-      this.belongsTo(models.Users, {
-        foreignKey: "schedule_created_by",
-        as: "created",
-        onDelete: "CASCADE",
-      });
+      // this.belongsTo(models.Users, {
+      //   foreignKey: "schedule_created_by",
+      //   as: "created",
+      //   onDelete: "CASCADE",
+      // });
 
-      this.belongsTo(models.Users, {
-        foreignKey: "schedule_updated_by",
-        as: "updated",
-        onDelete: "CASCADE",
-      });
+      // this.belongsTo(models.Users, {
+      //   foreignKey: "schedule_updated_by",
+      //   as: "updated",
+      //   onDelete: "CASCADE",
+      // });
       // Schedule has a branch
       this.belongsTo(models.Branches, {
         foreignKey: "schedule_branch",
@@ -127,20 +127,12 @@ module.exports = (sequelize, DataTypes) => {
       schedule_created_by: {
         type: DataTypes.UUID,
         allowNull: true,
-        references: {
-        model: sequelize.Users,
-        key: "users_id",
       },
-    },
       schedule_updated_by: {
         type: DataTypes.UUID,
         allowNull: true,
-        references: {
-        model: sequelize.Users,
-        key: "users_id",
       },
     },
-  },
 
     {
       sequelize,

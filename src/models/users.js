@@ -57,14 +57,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "schedule_dentist",
         as: "dentist_sched"
       });
-      this.hasMany(models.Dentists_schedules,{
-        foreignKey: "schedule_created_by",
-        as: "sched_created"
-      });
-      this.hasMany(models.Dentists_schedules,{
-        foreignKey: "schedule_updated_by",
-        as: "sched_updated"
-      });
+      // this.hasMany(models.Dentists_schedules,{
+      //   foreignKey: "schedule_created_by",
+      //   as: "sched_created"
+      // });
+      // this.hasMany(models.Dentists_schedules,{
+      //   foreignKey: "schedule_updated_by",
+      //   as: "sched_updated"
+      // });
 
       // Appointments
       this.hasMany(models.Appointments,{
