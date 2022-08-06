@@ -35,7 +35,8 @@ module.exports = (sequelize, DataTypes) => {
       });
       //One to Many -- Schedule to Dentists use
       this.belongsTo(models.Users, {
-        foreignKey: "sched",
+        foreignKey: "schedule_dentist",
+        as: "sched",
         onDelete: "CASCADE",
       });
     }

@@ -69,7 +69,8 @@
      checkAuthorization(req, res, "Admin")
      Schedule
          .findAll( 
-          { include: {model: Users} })
+          { include: ["schedule_dentist"]
+        })
          .then(data => dataResponse(res, data, "Schedules Retrieved Successfully", "No featured dentist has been retrieved"))
          .catch(err => errResponse(res, err));
  };
