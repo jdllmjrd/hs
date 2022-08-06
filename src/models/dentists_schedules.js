@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         references: sequelize.Users,
         referencesKey: "users_id",
-        onDelete: "cascade",
+        onDelete: "CASCADE",
         comment:
           "This column is for available dentist selected by user-staff and admin",
       },

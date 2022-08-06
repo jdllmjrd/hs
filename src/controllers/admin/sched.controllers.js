@@ -18,7 +18,9 @@
         
      // Create featured dentist
      Schedule
-         .create(req.body)
+         .create(req.body, 
+          { include: ["schedule_dentist"]
+        })
          .then((data) => dataResponse(res, data, "Schedule created Successfully", "Schedule not created"))
          .catch((err) => errResponse(res, err)); 
  
@@ -66,8 +68,8 @@
      // Check authorization first
      checkAuthorization(req, res, "Admin")
      Schedule
-         .findAll({ 
-          include:"schedule_dentist" 
+         .findAll( 
+          { include: ["schedule_dentist"]
         })
          .then(data => dataResponse(res, data, "Schedules Retrieved Successfully", "No featured dentist has been retrieved"))
          .catch(err => errResponse(res, err));
