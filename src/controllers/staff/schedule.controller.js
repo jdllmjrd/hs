@@ -82,7 +82,7 @@ exports.findAllSchedule = (req, res) => {
   checkAuthorization(req, res, "Staff");
   Schedule.findAll({
     where: { schedule_created_by: sched_dentist },
-    include: { model: Users, as: "dentist" },
+    include: { model: Users, as: "dentist_sched" },
   })
     .then((data) =>
       dataResponse(
