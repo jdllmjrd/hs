@@ -45,5 +45,11 @@ exports.send = async (req, res) => {
     html: message.replace(/\r\n/g, '<br>'),
   });
 
-  res.status(200).json({ status: 'Ok' });
+  res.send({
+    error: false,
+    status: 'Ok'
+ })
+  .catch((err) => {
+    res.status(500).send(err);
+  });
 }
