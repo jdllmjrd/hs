@@ -80,16 +80,7 @@ exports.findAllSchedule = (req, res) => {
   const sched_dentist = req.user.users_id;
   // Check authorization first
   checkAuthorization(req, res, "Staff");
-  Schedule.findAll({ where: { schedule_created_by: sched_dentist } },
-    { include: [
-            {
-              model: Users,
-              as: "sched",
-              attributes: ["users_id", "users_full_name", "users_phone_number",
-                          "users_email", "users_profile_pic" ]
-            }
-          ]
-    })
+  Schedule.findAll({ where: { schedule_created_by: sched_dentist } })
     .then((data) =>
       dataResponse(
         res,
