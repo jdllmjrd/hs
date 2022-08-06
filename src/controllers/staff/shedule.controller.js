@@ -80,7 +80,9 @@ exports.findAllSchedule = (req, res) => {
   const sched_dentist = req.user.users_id;
   // Check authorization first
   checkAuthorization(req, res, "Staff");
-  Schedule.findAll({ where: { schedule_created_by: sched_dentist } })
+  Schedule.findAll({ where: { schedule_created_by: sched_dentist } },
+    { include:"schedule_dentist" 
+    })
     .then((data) =>
       dataResponse(
         res,
