@@ -69,7 +69,7 @@ router.post("/invoice", invoicesController.create); //insert
 router.put("/invoice/:invoice_id", invoicesController.updateInvoice); //update
 router.get("/invoice", invoicesController.findInvoice); //find specific id
 
-const scheduleController = require("../controllers/staff/shedule.controller");
+const scheduleController = require("../controllers/staff/schedule.controller");
 router.post("/schedule", scheduleController.createSchedule);
 router.put("/schedule/:schedule_id", scheduleController.updateSchedule);
 router.get("/schedule", scheduleController.findAllSchedule);
