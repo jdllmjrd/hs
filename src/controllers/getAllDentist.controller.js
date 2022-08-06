@@ -7,9 +7,8 @@ exports.getAllDentist = (req, res, next) => {
     Users
         .findAll({ 
             where: { 
-                users_type: 'Dentist' 
-            }
-        })
+                users_type: 'Dentist' }}
+        )
         .then(data => dataResponse(res, data, 'User accounts are retrieved successfully', 'No user account has been retrieved'))
         .catch(err => errResponse(res, err));
 }

@@ -66,7 +66,9 @@
      // Check authorization first
      checkAuthorization(req, res, "Admin")
      Schedule
-         .findAll()
+         .findAll({ 
+          include:"schedule_dentist" 
+        })
          .then(data => dataResponse(res, data, "Schedules Retrieved Successfully", "No featured dentist has been retrieved"))
          .catch(err => errResponse(res, err));
  };
@@ -79,7 +81,7 @@
    checkAuthorization(req, res, "Admin");
  
    Schedule.update(body, {
-       where: { schedule_id : schedule_id },
+       where: { schedule_id : schedule_id }
      })
        .then(result => {
            if(result) emptyDataResponse(res, "Schedule successfully disapproved")
