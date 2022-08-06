@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       // Many to One - Dentists_Schedule
       this.hasMany(models.Dentists_schedules, {
         foreignKey  : "schedule_branch",
-        as          : "sched_branch",
+        as          : "branch_sched",
         onDelete    : 'CASCADE'
       });
       //Many to One - Appointments table

@@ -87,7 +87,7 @@ exports.findAllSchedule = (req, res) => {
               as: "sched",
               attributes: ["users_id", "users_full_name", "users_phone_number",
                           "users_email", "users_profile_pic" ]
-              }
+            }
           ]
     })
     .then((data) =>

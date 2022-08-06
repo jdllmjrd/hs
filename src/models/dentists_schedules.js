@@ -64,6 +64,9 @@ module.exports = (sequelize, DataTypes) => {
       schedule_branch: {
         type: DataTypes.UUID,
         allowNull: true,
+        references: sequelize.Branches,
+        referencesKey: "branches_id",
+        onDelete: "CASCADE",
         comment: "This column is for branch selected by the staff",
       },
 
