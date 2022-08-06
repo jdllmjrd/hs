@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
       // ID but can view name of dentists
       schedule_dentist: {
         type: DataTypes.UUID,
-        allowNull: false,
+        allowNull: true,
         references: sequelize.Users,
         referencesKey: "users_id",
         onDelete: "CASCADE",
