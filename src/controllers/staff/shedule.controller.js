@@ -83,7 +83,7 @@ exports.findAllSchedule = (req, res) => {
   Schedule.findAll({ where: { schedule_created_by: sched_dentist } },
     { include: ["sched", 
           {model: Dentists_schedules,
-           as: "schedule_dentist",
+           as: "dentist_sched",
           include: [
           {
             model: Users,
