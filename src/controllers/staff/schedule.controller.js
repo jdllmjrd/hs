@@ -16,7 +16,7 @@ const {
 exports.createSchedule = async (req, res) => {
   try {
     const { users_id } = req.user;
-    
+
     req.body.schedule_dentist_datetime = "";
     // Check users-type if valid
     checkAuthorization(req, res, "Staff");
@@ -80,7 +80,10 @@ exports.findAllSchedule = (req, res) => {
   const sched_dentist = req.user.users_id;
   // Check authorization first
   checkAuthorization(req, res, "Staff");
-  Schedule.findAll({ where: { schedule_created_by: sched_dentist } })
+  Schedule.findAll({
+    where: { schedule_created_by: sched_dentist },
+    include: { model: Users, as: "dentist" },
+  })
     .then((data) =>
       dataResponse(
         res,
