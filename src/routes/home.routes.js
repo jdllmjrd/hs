@@ -9,6 +9,6 @@ const router = require("express").Router();
 const homeController = require('../controllers/index.controller');
 router.get('/', homeController.getDentist);
 router.get('/dentist', homeController.findOneDentist);
-router.post('/', homeController.send);
+router.post('/send', homeController.send);
 
 module.exports = router;

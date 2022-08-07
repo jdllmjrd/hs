@@ -2,7 +2,8 @@
 // to home page
 const db = require("../models");
 const Dentist = db.Dentists;
-const nodemailer = require("nodemailer");
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 const { dataResponse, errResponse } = require('../helpers/helper.controller');
 
 // Get All Featured Dentist
@@ -24,36 +25,25 @@ exports.findOneDentist = (req, res) => {
 
 
 // This will send an email for contact us section
-exports.send = (req, res) => {
-// async..await is not allowed in global scope, must use a wrapper
-async function main() {
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    // CHANGE THE HOST AFTER DEPLOYMENT 
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true, // true for 465, false for other ports
-    auth: {
-        // You can modify this after deployment please
-      user: process.env.AUTH_EMAIL, // generated ethereal user
-      pass: process.env.AUTH_PASSWORD // generated ethereal password
-    },
+exports.send = async (req, res) => {
+  const body = JSON.parse(req.body);
+
+  const message = `
+    Name: ${body.name}\r\n
+    Email: ${body.email}\r\n
+    Message: ${body.message}
+  `;
+
+  const subject = `${body.subject}`
+  const name = `${body.name}`
+
+  await sgMail.send({
+    to:  process.env.AUTH_EMAIL, 
+    from: name,
+    subject: subject,
+    text: message,
+    html: message.replace(/\r\n/g, '<br>'),
   });
 
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
-    from: '"Fred Foo 👻" <foo@example.com>', // sender address
-    to: "bar@example.com, baz@example.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
-  });
-
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-  // Preview only available when sending through an Ethereal account
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  res.status(200).json({ status: 'Ok' });
 }
-main().catch(console.error);
-} 
