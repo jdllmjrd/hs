@@ -2,6 +2,7 @@ const db = require("../../models");
 const Appointments = db.Appointments;
 const Users = db.Users;
 const Schedule = db.Dentists_schedules;
+const Branches = db.Branches;
 const {
   dataResponse,
   checkAuthorization,
