@@ -5,6 +5,7 @@
 const db = require("../../models");
 const Schedule = db.Dentists_schedules;
 const Users = db.Users;
+const Branches = db.Branches;
 const {
   dataResponse,
   checkAuthorization,
@@ -85,7 +86,7 @@ exports.findAllSchedule = (req, res) => {
     include: { 
       model: [
         {
-          Dentists_schedules, as: "app_sched",
+          Users, as: "sched",
           Branches, as : "sched_branch"
         }]
   }
