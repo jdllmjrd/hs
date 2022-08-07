@@ -1,6 +1,7 @@
 const db = require("../../models");
 const Appointments = db.Appointments;
 const Users = db.Users;
+const Schedule = db.Dentists_schedules;
 const {
   dataResponse,
   checkAuthorization,
@@ -60,6 +61,13 @@ exports.findAllAppointment = (req, res) => {
     where: {
       appointments_created_by: users_id,
     },
+    include: { 
+      model: [
+        {
+          Schedule, as: "app_sched",
+          Branches, as : "branch"
+        }]
+  }
   })
     .then((data) =>
       dataResponse(

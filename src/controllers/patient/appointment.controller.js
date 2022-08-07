@@ -60,6 +60,13 @@ exports.findAllAppointment = (req, res) => {
     where: {
       appointments_created_by: users_id,
     },
+    include: { 
+      model: [
+        {
+          Schedule, as: "app_sched",
+          Branches, as : "branch"
+        }]
+  }
   })
     .then((data) =>
       dataResponse(
