@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
     services_status :{
       type : DataTypes.STRING,
       allowNull: false,
-      defaultValue : 'Active'
+      defaultValue : 'Available'
     },
     services_created_by: {
       type: DataTypes.UUID,
