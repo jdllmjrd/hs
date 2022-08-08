@@ -2,7 +2,7 @@
  *
  * CONTROLLER SCHEDULE
  */
- const db = require("../../models");
+ const db = require("../models");
  const Schedule = db.Dentists_schedules;
  const Users = db.Users;
  const Branches = db.Branches;
@@ -11,7 +11,7 @@
    checkAuthorization,
    emptyDataResponse,
    errResponse,
- } = require("../../helpers/helper.controller");
+ } = require("../helpers/helper.controller");
  
 
 // Get all Schedule
