@@ -172,7 +172,11 @@ const uploadImageService = (req, res, next) => {
 // // Counter
 const adminInfoController = require("../controllers/admin/admin_info.controller");
 router.get("/profile/get-info", adminInfoController.getAdminInfo);
-router.put("/profile/:users_id", adminInfoController.updateAdminInfo);
+router.put(
+  "/profile/:users_id",
+  uploadImage,
+  adminInfoController.updateAdminInfo
+);
 
 /** For Registered Users CRUD */
 const usersController = require("../controllers/admin/users.controller");
@@ -252,5 +256,8 @@ router.post("/invoices/add-invoice", invvoicesController.createInvoice);
 router.put("/invoices/:invoice_id", invvoicesController.updateInvoice);
 router.get("/invoices/get-invoice", invvoicesController.findInvoice);
 router.delete("/invoices/:invoice_id", invvoicesController.deleteInvoice);
+
+const userCounterController = require("../controllers/admin/users_counter.controller");
+router.get("/user-counter", userCounterController.getUsersCount);
 
 module.exports = router;
