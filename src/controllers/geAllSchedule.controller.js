@@ -16,9 +16,8 @@
 
 // Get all Schedule
 exports.findAllSchedule = (req, res, next) => {
-    const dentist_id = req.user.users_id;
     Schedule.findAll({
-      where: { schedule_dentist: dentist_id },
+      where: { schedule_status: "Approved" },
       include: [
         {
           model: Users, as: "sched"
