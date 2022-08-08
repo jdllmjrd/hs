@@ -4,8 +4,9 @@
  * CONTROLLER SCHEDULE
  */
  const db = require('../../models');
- const Schedule= db.Dentists_schedules;
- const Users= db.Users;
+ const Schedule = db.Dentists_schedules;
+const Users = db.Users;
+const Branches = db.Branches;
  const { dataResponse, checkAuthorization, emptyDataResponse, errResponse } = require('../../helpers/helper.controller');
  
  //create Sched
@@ -63,17 +64,33 @@
      });
  };
  // Get all Schedule
- exports.findAllSchedule = (req, res) => {
-     
-     // Check authorization first
-     checkAuthorization(req, res, "Admin")
-     Schedule
-         .findAll( 
-          { include: ["schedule_dentist"]
-        })
-         .then(data => dataResponse(res, data, "Schedules Retrieved Successfully", "No featured dentist has been retrieved"))
-         .catch(err => errResponse(res, err));
- };
+
+exports.findAllSchedule = (req, res) => {
+  const sched_dentist = req.user.users_id;
+  // Check authorization first
+  checkAuthorization(req, res, "Admin");
+  Schedule.findAll({
+    where: { schedule_created_by: sched_dentist },
+    include: [
+      {
+        model: Users, as: "sched"
+      },
+
+      {
+        model: Branches, as : "sched_branch"
+      },
+    ]
+  })
+    .then((data) =>
+      dataResponse(
+        res,
+        data,
+        "Schedules Retrieved Successfully",
+        "No featured dentist has been retrieved"
+      )
+    )
+    .catch((err) => errResponse(res, err));
+};
  // Disapprove Schedule
  exports.deleteSchedule = (req, res) => {
    const body = { schedule_status: "Disapproved" };

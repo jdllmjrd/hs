@@ -12,4 +12,9 @@
  router.get('/dentist', DentistController.getAllDentist);
 
 
+  // GET all the Dentist from DB
+  const schedController = require('../controllers/geAllSchedule.controller');
+  router.get('/schedule', schedController.findAllSchedule);
+
+
  module.exports = router;

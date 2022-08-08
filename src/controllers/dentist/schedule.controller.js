@@ -24,7 +24,6 @@ exports.findAllSchedule = (req, res, next) => {
       {
         model: Users, as: "sched"
       },
-
       {
         model: Branches, as : "sched_branch"
       },
