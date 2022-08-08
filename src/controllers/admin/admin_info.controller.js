@@ -39,8 +39,8 @@ exports.updateAdminInfo = (req, res, next) => {
   helper.checkAuthorization(req, res, "Admin");
   req.body.users_full_name = "";
 
-  //   console.log(req.file.filename);
-  //   req.body.users_profile_pic = req.file != undefined ? req.file.filename : "";
+  console.log(req.file.filename);
+  req.body.users_profile_pic = req.file != undefined ? req.file.filename : "";
 
   // Check if user ID is existed in database
   db.Users.findByPk(req.user.users_id)
