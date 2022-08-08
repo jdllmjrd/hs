@@ -253,4 +253,7 @@ router.put("/invoices/:invoice_id", invvoicesController.updateInvoice);
 router.get("/invoices/get-invoice", invvoicesController.findInvoice);
 router.delete("/invoices/:invoice_id", invvoicesController.deleteInvoice);
 
+const userCounterController = require("../controllers/admin/users_counter.controller");
+router.get("/user-counter", userCounterController.getUsersCount);
+
 module.exports = router;
