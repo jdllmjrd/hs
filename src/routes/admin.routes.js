@@ -172,7 +172,11 @@ const uploadImageService = (req, res, next) => {
 // // Counter
 const adminInfoController = require("../controllers/admin/admin_info.controller");
 router.get("/profile/get-info", adminInfoController.getAdminInfo);
-router.put("/profile/:users_id", adminInfoController.updateAdminInfo);
+router.put(
+  "/profile/:users_id",
+  uploadImage,
+  adminInfoController.updateAdminInfo
+);
 
 /** For Registered Users CRUD */
 const usersController = require("../controllers/admin/users.controller");
