@@ -64,12 +64,15 @@ exports.findAllAppointment = (req, res) => {
     },
     include: [
       {
-        model: Schedule, as: "app_sched"
+        model: Schedule,
+        as: "app_sched",
+        include: { model: Users, as: "sched" },
       },
       {
-        model: Branches, as : "branch"
+        model: Branches,
+        as: "branch",
       },
-    ]
+    ],
   })
     .then((data) =>
       dataResponse(
