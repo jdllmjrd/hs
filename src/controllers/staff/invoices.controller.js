@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 const {
   errResponse,
   dataResponse,
+  emptyDataResponse,
   checkAuthorization,
 } = require("../../helpers/helper.controller");
 const db = require("../../models");
@@ -200,3 +201,20 @@ exports.updateInvoice = async (req, res) => {
 //       });
 //     });
 // };
+
+exports.deleteInvoice = async (req, res) => {
+  try {
+    checkAuthorization(req, res, "Staff");
+
+    const body = { invoices_status: "Deleted" };
+    const id = req.params.invoice_id;
+
+    await Invoices.update(body, { where: { id } });
+
+    await InvoicesServices.destroy({ where: { inser_invoice_id: id } });
+
+    return emptyDataResponse(res, "Invoice successfully deleted");
+  } catch (error) {
+    return errResponse(res, error);
+  }
+};
