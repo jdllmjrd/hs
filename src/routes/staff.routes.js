@@ -59,8 +59,11 @@ const uploadImage = (req, res, next) => {
 
 const staffInfoController = require("../controllers/staff/staff_info.controller");
 router.get("/profile/get-info", staffInfoController.getStaffInfo);
-router.put("/profile/:users_id", uploadImage, staffInfoController.updateStaffInfo);
-
+router.put(
+  "/profile/:users_id",
+  uploadImage,
+  staffInfoController.updateStaffInfo
+);
 
 //import invoices controller
 const invoicesController = require("../controllers/staff/invoices.controller");
@@ -68,6 +71,7 @@ const invoicesController = require("../controllers/staff/invoices.controller");
 router.post("/invoice", invoicesController.create); //insert
 router.put("/invoice/:invoice_id", invoicesController.updateInvoice); //update
 router.get("/invoice", invoicesController.findInvoice); //find specific id
+router.delete("/invoices/:invoice_id", invoicesController.deleteInvoice);
 
 const scheduleController = require("../controllers/staff/schedule.controller");
 router.post("/schedule", scheduleController.createSchedule);
