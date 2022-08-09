@@ -46,4 +46,5 @@ exports.getUsersCount = (req, res) => {
       res.send({ users_count: usersCount });
     })
     .catch((err) => errResponse(res, err));
+    
 };

@@ -59,9 +59,6 @@ exports.findAllAppointment = (req, res) => {
   const users_id = req.user.users_id;
   checkAuthorization(req, res, "Staff");
   Appointments.findAll({
-    where: {
-      appointments_created_by: users_id,
-    },
     include: [
       {
         model: Schedule,
