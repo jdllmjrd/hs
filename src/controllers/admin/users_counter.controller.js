@@ -37,10 +37,10 @@ exports.getUsersCount = (req, res) => {
         usersCount.all += c;
 
         // Get count per user
-        if (at.user_type === "Patient") usersCount.Patient = c;
-        if (at.user_type === "Staff") usersCount.Staff = c;
-        if (at.user_type === "Dentist") usersCount.Dentist = c;
-        if (at.user_type === "Admin") usersCount.Admin = c;
+        if (at.users_type === "Patient") usersCount.Patient = c;
+        if (at.users_type === "Staff") usersCount.Staff = c;
+        if (at.users_type === "Dentist") usersCount.Dentist = c;
+        if (at.users_type === "Admin") usersCount.Admin = c;
       });
       // Respond the userCount object
       res.send({ users_count: usersCount });

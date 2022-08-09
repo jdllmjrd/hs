@@ -50,7 +50,7 @@ exports.login = (req, res) => {
             res.status(500).send({
               error: true,
               data: [],
-              message: ["Invalid username and Password."],
+              message: ["Invalid username or Password."],
             });
           }
         } else {
@@ -83,7 +83,7 @@ exports.login = (req, res) => {
                 res.status(500).send({
                   error: true,
                   data: [],
-                  message: ["Invalid username and Password."],
+                  message: ["Invalid username or Password."],
                 });
               }
             }
